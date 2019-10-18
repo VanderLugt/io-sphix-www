@@ -1,0 +1,30 @@
+﻿<div class="form-group mb-4" id="ArticleComment">
+    <div class="row">
+        <div class="col-md-12">
+            <textarea class="form-control" style="height:80px"  placeholder="Start the discussion..." id="txtArticleComment" message="comment text is a required field." required ></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right article-main-comment">
+            @if(ViewBag.Id!=0){
+            <button type="submit" onclick="AddArticleComment();" id="btnArticlePost" disabled class="btn btn-primary">COMMENT</button>
+            }
+            else{
+                <b>What are your thoughts? Log in  or Sign up</b>
+            }
+        </div>
+    </div>
+</div>
+<script>
+ $(document).ready(function () {
+    $('#txtArticleComment').keyup(function () {
+        //alert('dfd');
+        if (this.value.length > 0) {
+           $("#btnArticlePost").removeAttr("disabled");
+        }
+        else {
+             $("#btnArticlePost").attr("disabled", true);
+        }
+    });
+});
+</script>

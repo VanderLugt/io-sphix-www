@@ -1,0 +1,777 @@
+@charset "utf-8";
+/* CSS Document */
+@media only screen and (max-width: 1360px) {
+	.brolio-banner-block .carousel-inner .carousel-item .container .carousel-caption {
+		right: 10%;
+		top: 195px;
+		left: auto;
+	}
+	.brolio-banner-block .carousel-inner .carousel-item{
+		height: 100vh;
+	}
+	.brolio-banner-block .carousel-inner .carousel-item > img{
+		height: 100%;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+		------------------ */
+	.brolio-dashboard-search{
+		 width: 50%!important;
+	}
+	.select-dropdown,
+	.dashboard-workboard-options label{
+		width: 100%;
+	}
+	.workboard-filters .select-dropdown:last-child {
+		margin-right: 0;
+	}
+	.workboard-filters .select-dropdown {
+		width: 23.5%;
+		margin-right: 1%;
+	}
+	.dashboard-task-block table tr th, 
+	.dashboard-task-block table tr td{
+		padding: 18px 10px;
+	    font-size: 13px;
+		vertical-align: middle;
+	}
+}
+@media only screen and (max-width: 1280px) {
+	/* -------------- 
+		DASHBOARD CSS
+		------------------ */
+	.profile-block{
+		display:flex;
+	}
+	.dashboard-contact-overview table tr td, 
+	.dashboard-contact-overview table tr th{
+		font-size: 14px;
+		padding: 10px;
+	}
+}
+@media only screen and (max-width: 1199px) {
+	#hexagon-circle{
+		width: 97px;
+		height: 170px;		
+	}
+	.register-step-col .brolio-step-content p{
+		text-overflow: ellipsis;
+		overflow: hidden;
+		height: 60px;		
+	}
+	.faq-ques-ans-block .accordion .card .card-header h5 button{
+		white-space:normal;
+	}
+	.brolio-left-support-col .support-blocks{
+		margin-top: 200px;
+	}
+	.brolio-support-right-col-inner{
+		margin-bottom: 150px;
+    	margin-top: 50px;
+		padding-left: 70px;	
+	}
+	.support-blocks{
+		width: 100%;
+	}
+	.brolio-support-inner .brolio-support-right-col{
+		margin-top:130px;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.brolio-dashboard a.navbar-brand span{
+		display: block;
+    	margin-top: 5px;
+		margin-left:0px;
+	}
+	.brolio-dashboard .sidebar-sticky ul li a{
+		font-size:14px;
+	}
+	.dashboard-deal-col{
+		min-height: 200px;
+	}
+	.dashboard-task-block table tr th, 
+	.dashboard-task-block table tr td{
+		padding: 18px 5px;
+	}
+	.dashboard-task-block table tr td ul li a i{
+		font-size: 14px;
+	}
+	/* **********
+		company view page
+		******************** */
+	.company-view-tabs ul.tabs li{
+		padding: 15px 30px;
+	}
+	.dashboard-company-view .dashboard-filter-detail table tr td,
+	.dashboard-company-view .dashboard-filter-detail table tr th{
+		font-size: 14px;
+		padding: 15px 10px;
+	}
+}
+@media only screen and (max-width: 1065px) {
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.nav-right-block .profile-block-outer{
+		display:none;
+	}
+	.device-password,
+	.device-logout{
+		display:block;
+	}
+	.nav-right-block .nav-block-outer{
+		max-width: 100%;
+		display: inline-block;
+		flex: auto;
+		text-align: right;
+	}
+	.brolio-dashboard-search {
+		width: 100%!important;
+	}
+	.dashboard-task-block table tr th, 
+	.dashboard-task-block table tr td{
+		white-space: nowrap;
+	}
+	/* ************ 
+		contact overview page
+		************** */
+	.dashboard-contact-overview table tr td, 
+	.dashboard-contact-overview table tr th{
+		white-space:nowrap
+	}
+	
+}
+@media only screen and (max-width: 991px) {
+	.brolio-banner-block .carousel-inner .carousel-caption h1{
+		font-size: 46px;
+		padding-bottom: 0;
+	    line-height: 70px;
+	}
+	.navbar-toggler-icon:after {
+		content: "\f0c9";
+		/* background: #fff; */
+		display: inline-block;
+		font-family: FontAwesome;
+	}
+	.navbar-toggler-icon {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		vertical-align: middle;
+		content: "";
+		background: no-repeat center center;
+		background-size: 100% 100%;
+		background: #fff;
+		padding: 4px 8px;
+	}
+	.brolio-navigation-block a.navbar-brand img {
+		width: 50%;
+	}
+	.brolio-navigation-block a.navbar-brand{
+		margin-left: 1rem;
+		background: no-repeat;
+    	box-shadow: none;
+	}
+	.navbar-toggler:focus{
+		outline:none;
+	}
+	#hexagon-circle {
+		width: 72px;
+		height: 125px;
+	}
+	.register-step-col .brolio-step-content span img {
+		width: 20px;
+	}
+	.register-step-col .brolio-step-content p{
+		height: 45px;
+		padding-top: 10px;
+		line-height: 18px;
+	}
+	.why-block-left-col{
+		padding-top: 0;
+		padding-right: 0;
+		margin-bottom: 100px;
+		text-align: center;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 50px;
+	}
+	.why-block-right-col {
+		padding-top: 0;
+		padding-left: 0;
+		text-align: center;
+		margin-top: 80px;
+		border-top: 1px solid #ccc;
+		padding-top: 50px;
+	}
+	.why-block-description {
+		margin-top: 60px;
+	}
+	.faq-block .faq-title-block h1 br {
+		display: none;
+	}
+	.faq-title-block {
+		padding: 50px 0;
+	}
+	.faq-ques-ans-block .accordion .card .card-header h5 button{
+		white-space: normal;
+		display: flex;
+	}
+	.faq-ques-ans-block .accordion .card .card-header h5 button.btn.btn-link:before{
+		margin-right:10px;
+	}
+	.faq-ques-ans-block{
+		padding-left:0px;
+	}
+	.brolio-support-inner .brolio-support-left-col, 
+	.brolio-support-inner .brolio-support-right-col{
+		width:100%;
+	}
+	.brolio-left-support-col .support-blocks {
+		margin-top: 0;
+		margin-right: 0;
+	}
+	.brolio-left-support-col .support-blocks:before,
+	.brolio-support-right-col-inner:before,
+	.support-blocks:before{
+		display:none;
+	}
+	.brolio-support-inner .brolio-support-right-col {
+		margin-top: 0;
+		border: none;
+		margin-left: 0;			
+	}
+	.brolio-support-right-col-inner{
+		padding-left:0px;
+		margin-bottom: 0;
+	}
+	.brolio-support-right-col-inner.brolio-support-right-last-col-inner {
+		margin-bottom: 50px;
+	}
+	.brolio-left-support-col {
+		margin-top: 50px;
+	}
+	.support-heading-block h1,
+	.support-heading-block p,
+	.brolio-support-left-inner > span{
+		text-align:center;
+	}
+	.support-heading-block:after,
+	.support-heading-block h1:before{
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
+	.our-pricing-cols .card{
+		margin: 0 10px;
+	}
+	.our-pricing-cols .card-header h1{
+		font-size: 50px;
+	}
+	.our-price-block .card-header.left-card-header,
+	.our-price-block .card-header.middle-card-header,
+	.our-price-block .card-header.last-card-header{
+		height: 175px;
+	}
+	.our-pricing-cols .card-deck{
+		padding:0px;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.dashboard-deal-block .dashboard-deals .col {
+		flex-basis: auto;
+		margin-bottom: 20px;
+	}
+	.workboard-filters .select-dropdown{
+	    width: 23%;
+	}
+	.brolio-dashboard .sidebar-sticky ul li a label {
+		display: none;
+	}
+	.d-md-block.bg-light.sidebar {
+		max-width: 60px;
+	}
+	.brolio-dashboard-right-block{
+		margin-left: 10% !important;
+		max-width: 90%;
+		flex: 0 0 90%;
+	}
+	.brolio-dashboard .sidebar-sticky{
+		padding-top: 75px;
+	}
+	.d-md-block.bg-light.sidebar .sidebar-sticky ul li.nav-item a i{
+		font-size: 22px;
+	}
+	.brolio-dashboard .sidebar-sticky ul li a{
+		margin-bottom: 15px;
+	}
+	.view-all-deals table tr th, 
+	.view-all-deals table tr td, 
+	.NA-deal-outer .single-deal tr td, 
+	.NA-deal-outer .single-deal tr th{
+		white-space: nowrap;
+	}
+	.brolio-dashboard .sidebar-sticky ul li:after{
+		display:none;
+	}
+	
+	/* ************
+		company view page
+		***************** */
+	.company-view-tabs .tabs {
+		display: none;
+	}
+	.company-view-tabs .tab_drawer_heading {
+		font-family: 'Roboto', sans-serif;
+		background-color: #ccc;
+		color: #000;
+		margin: 0;
+		padding: 10px 20px;
+		display: block;
+		cursor: pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		font-size:25px;
+		font-weight:300;
+		position:relative;
+		margin-bottom: 5px;
+	}
+	.company-view-tabs .d_active {
+		background-color: #336699;
+		color: #fff;
+		margin-bottom: 0;
+	}
+	.company-view-tabs .tab_drawer_heading.d_active:after {
+		content: "\f068";
+		position: absolute;
+		right: 20px;
+		top: 17px;
+		font-family:FontAwesome;
+		font-size: 14px;
+	}
+	.company-view-tabs .tab_drawer_heading:after{
+		content: "\f067";
+		position: absolute;
+		right: 20px;
+		top: 17px;
+		font-family:FontAwesome;
+		font-size: 14px;
+	}
+	.dashboard-company-view .dashboard-filter-detail table tr td, 
+	.dashboard-company-view .dashboard-filter-detail table tr th{
+		white-space: nowrap;
+	}
+	/* ************
+		company view page
+		***************** */
+	.pagination-shorting ul li{
+		width: 8%;
+	}
+	.pagination-shorting ul li a{
+		font-size: 12px;
+		padding: 5px 0;
+	}
+	.pagination-shorting{
+		margin-top: 25px;
+		border-top: 1px solid #ccc;
+		padding-top: 25px;
+	}
+	
+}
+@media only screen and (max-width: 767px) {
+	.brolio-banner-block .carousel-inner .carousel-item {
+		height: auto;
+	}
+	.brolio-banner-block .carousel-inner .carousel-item > img {
+		height: auto;
+		width: 100%;
+	}
+	.upper-border,
+	.lower-border{
+		display:none;
+	}
+	.brolio-slider-content{
+		border-right:none;
+		width: 100%;
+	}
+	.brolio-slider-content-inner{
+		padding-right:0px;
+		padding-bottom:0px;
+	}
+	.brolio-banner-block .carousel-inner .carousel-item .container .carousel-caption {
+		right: 0;
+		top: 0;
+		position: relative;
+		text-align: center !important;
+	}
+	.brolio-banner-block .carousel-inner .carousel-caption h1 {
+		font-size: 30px;
+		padding-bottom: 0;
+		line-height: 40px;
+	}
+	.brolio-banner-block .carousel-inner .carousel-caption span{
+		font-size: 40px;
+	}
+	.brolio-navigation-block .navbar{
+		padding:0px;
+	}
+	.header-main-block{
+		position:relative;
+	}
+	.header-main-block .brolio-navigation-block{
+		background:#262626;
+		border-top: 1px solid #4B4B4B;
+	}
+	.top-header-inner {
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+	}
+	.top-header-inner .float-left, 
+	.top-header-inner .float-right {
+		float: none !important;
+		display: inline-block;
+		width: 100%;
+	}
+	.top-header-inner .float-left{
+		margin-bottom:10px;
+	}
+	.register-step-col .brolio-step-content p {
+		height: 38px;
+		padding-top: 10px;
+		line-height: 13px;
+		font-size: 12px;
+	}
+	#hexagon-circle {
+		width: 54px;
+		height: 95px;
+	}
+	.support-step-col:first-child {
+		margin-right: 0;
+		margin-bottom:30px;
+	}
+	.brolio-support-desc p br{
+		display:none;
+	}
+	.register-step-col .brolio-step-content{
+		top: 13px;
+	}
+	.our-pricing-cols .card {
+		margin:0px;
+		flex: none;
+		width: 100%;
+	}
+	.our-price-block .card-header.left-card-header, 
+	.our-price-block .card-header.middle-card-header, 
+	.our-price-block .card-header.last-card-header{
+		border-radius:0px;
+	}
+	.footer-left-block, 
+	.footer-right-block {
+		float: left;
+		width: 100%;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.brolio-dashboard-search {
+		width: 85%!important;
+		margin-left: 15px;
+	}
+	.nav-right-block{
+		width: 12%!important;
+	}
+	.brolio-dashboard .sidebar-sticky {
+		padding-top: 144px;
+		top: 0;
+	}
+	.nav-right-block .overview-dropdown .dropdown-menu{
+		top: 52px;
+	}
+	.brolio-dashboard-right-block{
+		padding-top: 20px !important;
+	}
+	.brolio-dashboard .sidebar-sticky{
+		height: calc(100vh - 0px);
+	}
+	.brolio-dashboard a.navbar-brand{
+		text-align: center;
+		width: 100%;
+		max-width: 100%;
+		flex: auto
+	}
+	/* **********
+		company view 
+		************** */
+	.brolio-dashboard-right-block .dashboard-company-view h1{
+		font-size: 22px;
+	}
+	.dashboard-company-view button.complete-support-btn{
+		font-size:14px;
+	}
+	/* **********
+		contact overview 
+		************** */
+	.pagination-shorting ul li{
+		width: 12%;
+	}
+	.filter-selection-pagination .float-left, .filter-selection-pagination .float-right {
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+	}
+	.filter-selection-pagination .float-left {
+		margin: 15px 0;
+	}
+	.contact-overview-pagination > a.pagination-prev,
+	.contact-overview-pagination > a.pagination-next {
+		margin: 15px 0;
+		width: 100%;
+	}
+	.register-company-block .register-form-fields .form-group,
+	.register-user-data-block .register-form-fields .form-group {
+		margin-bottom: 1rem !important;
+	}
+	.register-banner-block .brolio-register-sub-titles p{
+		font-size: 20px;
+	}
+	.register-banner-block{
+		padding: 125px 0px;
+	}
+	.inner-footer-left-block,
+	.inner-footer-right-block{
+		width:100%;
+	}
+	/* ******* 
+		login page 
+		************* */
+	.login-container{
+		max-width:90%;
+	}
+	.login-banner-block h1{
+		font-size: 36px;
+	}
+	.login-banner-block span{
+		font-size: 40px
+	}
+	.login-banner-block .brolio-login-sub-titles p{
+		font-size: 18px;
+	}
+	.login-banner-block{
+		padding: 110px 0 187px;
+	}
+	.client-overview-data table{
+		width: 750px;
+	}
+	
+}
+@media only screen and (max-width: 540px) {
+	.brolio-register-step-block{
+		display:inline-block;
+	}
+	.register-step-col{
+		max-width:100%;
+	}
+	#hexagon-circle {
+		width: 106px;
+		height: 185px;
+	}
+	.register-step-col .brolio-step-content p {
+		height: auto;
+		padding-top: 10px;
+		line-height: 24px;
+		font-size: 13px;
+		padding: 0 10px;
+	}
+	.register-step-col .brolio-step-content span img {
+		width: auto;
+	}
+	.register-step-col .brolio-step-content {
+		top: 43px;
+	}
+	.register-step-row{
+		margin-bottom: 20px;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.nav-right-block{
+		margin-right: 15px;
+	}
+	.brolio-dashboard-search{
+		width: 80%!important;
+	}
+	.brolio-dashboard-right-block {
+		margin-left: 15% !important;
+		max-width: 85%;
+		flex: 0 0 85%;
+	}
+	/* **********
+		company view 
+		************** */
+	.company-view-filter h1{
+		width:100%;
+	}
+	.brolio-dashboard-right-block .dashboard-company-view h1 {
+		font-size: 16px;
+		font-weight: 400;
+	}
+	.dashboard-company-view button.complete-support-btn {
+		font-size: 11px;
+	}
+}
+@media only screen and (max-width: 479px) {
+	.brolio-banner-block .carousel-inner .carousel-caption h1,
+	.brolio-banner-block .carousel-inner .carousel-caption span{
+		font-size: 20px;
+		line-height:30px;
+	}
+	.brolio-banner-block .carousel-inner .carousel-caption p{
+		font-size: 14px;
+	}
+	.header-email-phone-detail ul li:first-child {
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+	.support-heading-block h1:before {
+		top: -20px;
+		font-size: 50px;
+	}
+	.brolio-support-block{
+		padding: 50px 0;
+	}
+	.brolio-testimonial-slides #owl-demo .item{
+		padding-left: 15px;
+		padding-right: 15px;	
+	}
+	.faq-block .faq-title-block h1{
+		font-size: 40px;
+		line-height: 55px;
+	}
+	.faq-block{
+		padding: 0 0 50px;
+	}
+	.our-price-block{
+		padding: 0 0 40px;
+	}
+	.header-email-phone-detail ul li {
+		width: 100%;
+	}
+	/* -------------- 
+		DASHBOARD CSS
+	------------------ */
+	.workboard-filters .select-dropdown {
+		width: 100%;
+		margin-right: 0;
+		margin-bottom: 15px;
+	}
+	.deal-buttons button.btn{
+		width: 100%;
+	}
+	.deal-buttons button.btn.collapse-btn{
+		margin-left: 0;
+		margin-top:15px;
+	}
+	.nav-right-block .overview-dropdown .dropdown-menu{
+		right: 0;
+		top: 38px;
+	}
+	.brolio-dashboard a.navbar-brand{
+		text-align:center;
+		margin-bottom: 5px;
+	}
+	.brolio-dashboard-search {
+		width: 75%!important;
+	}
+	.nav-right-block .nav-block-outer .dropdown.overview-dropdown {
+		display: inline;
+		width: 50px;
+	}
+	.nav-right-block .nav-block-outer .dropdown.overview-dropdown button {
+		padding: 0;
+		margin-top: 0;
+	}
+	.nav-right-block .nav-block-outer{
+		padding-right:0px;
+	}
+	/* **********
+		company view 
+		************** */
+	.dashboard-company-view	> .float-left,
+	.dashboard-company-view	> .float-right{
+		width:100%;
+		text-align:center;
+	}
+	.company-view-tabs .tab_content .float-right,
+	.company-view-tabs .tab_content .float-right input[type="text"] {
+		width: 100%;
+	}
+	.pagination-shorting ul li {
+		width: 18%;
+	}
+	.register-company-block h1, 
+	.register-user-data-block h1{
+		font-size: 24px;
+	}
+	.register-banner-block h1{
+		font-size: 40px;
+	}
+	.brolio-register-sub-titles{
+		margin-top: 40px;
+	}
+	.register-banner-block .brolio-register-sub-titles p {
+		font-size: 14px;
+	}
+	
+	/* ******* 
+		login page 
+		************* */
+	
+	.login-form-fields input[type="text"]::-webkit-input-placeholder{
+		font-size:12px;
+	}
+	.login-form-fields input[type="text"]::-moz-placeholder{
+		font-size:12px;
+	}
+	.borlio-password-field:after{
+		font-size:12px;
+		right: 10px;
+    	top: 21px;
+		display:none;
+	}
+	.login-remember-forgot .forgot-password a,
+	.login-remember-forgot .form-check label{
+		font-size: 13px;
+	}
+	.brolio-login-btn label{
+		font-size:14px;
+	}
+	.login-remember-forgot .form-check input[type="checkbox"] {
+		margin-top: .2rem;
+	}
+	.login-form-fields .input-group-text i{
+		font-size:24px;
+	}
+	.login-remember-forgot .float-left, 
+	.login-remember-forgot .float-right {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 7px;
+	}
+	.login-remember-forgot .float-right{
+		margin-bottom:0px;
+	}
+	
+}
+@media only screen and (max-width: 360px) {
+	.brolio-dashboard-right-block {
+		margin-left: 20% !important;
+		max-width: 80%;
+		flex: 0 0 80%;
+	}
+}

@@ -1,0 +1,180 @@
+﻿<div style="height:500px;overflow-x:hidden;overflow-y:scroll;">
+    <input type="hidden" value="@ViewBag.Id" id="hdnCommunityGrooupId" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+               
+                <p>@Model[0].Title</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <p class="btn btn-primary">@Model[0].CommunityName</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <b>Targeted Groups:</b><br />
+                @foreach (var item in Model[0].TargetedGroups.Split('|'))
+                {
+                    <label class="btn btn-info" style="margin-top:5px;">@item</label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <b>Themes:</b>  <br />
+                @foreach (var item in Model[0].Themes.Split('|'))
+                {
+                    <label class="btn btn-info" style="margin-top:5px;">@item</label>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" style="height:200px;overflow-x:hidden;overflow-y:scroll;">
+                @Html.Raw(Model[0].Description)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <video width="400" controls>
+                    <source src="@Model[0].DescriptionVideoUrl">
+                    Your browser does not support HTML5 video.
+                    @Model[0].DescriptionVideoUrl
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <hr />
+                <h5>Open Office Hours</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Model[0].OpenOfficeHours.OTitle
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Model[0].OpenOfficeHours.OName
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group" style="height:200px;overflow-x:hidden;overflow-y:scroll;">
+                @Html.Raw(Model[0].OpenOfficeHours.ODescription)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                Frequency: <label style="text-transform: capitalize;">@Model[0].OpenOfficeHours.OFrequency</label>
+            </div>
+        </div>
+    </div>
+    @*Events*@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <hr />
+                <h5>Events</h5>
+            </div>
+        </div>
+    </div>
+    <div class="accordion" id="accordionExample">
+        @foreach (var item in Model[0].liveEvents)
+        {
+            string _heading = "heading" + item.Id;
+            string _collapse = "collapse" + item.Id;
+            <div class="card z-depth-0 bordered">
+                <div class="card-header" id="@_heading">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#@_collapse"
+                                aria-expanded="false" aria-controls="@_collapse">
+                            @item.ETitle | @item.EFromDate.ToString("MM/dd/yyyy") to @item.EToDate.ToString("MM/dd/yyyy")
+                        </button>
+                    </h5>
+                </div>
+                <div id="@_collapse" class="collapse" aria-labelledby="@_heading"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        @Html.Raw(item.EDescription)
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    @*Articles*@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <hr />
+                <h5>Articles</h5>
+            </div>
+        </div>
+    </div>
+    <div class="accordion" id="accordionArticles">
+        @foreach (var item in Model[0].articles)
+        {
+            string _heading = "articleHeading" + item.Id;
+            string _collapse = "articleCollapse" + item.Id;
+            <div class="card z-depth-0 bordered">
+                <div class="card-header" id="@_heading">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#@_collapse"
+                                aria-expanded="false" aria-controls="@_collapse">
+                            @item.ArticleTitle
+                        </button>
+                    </h5>
+                </div>
+                <div id="@_collapse" class="collapse" aria-labelledby="@_heading"
+                     data-parent="#accordionArticles">
+                    <div class="card-body">
+                        @Html.Raw(item.ArticleDescription)
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-submit-btn modal-footer">
+                @if (Model[0].IsPublish)
+                {
+                    <button type="submit" onclick="PublishCommuntyGroup(false);" class="btn btn-primary">Un-Publish</button>
+                }
+                else
+                {
+                    <button type="submit" onclick="PublishCommuntyGroup(true);" class="btn btn-primary">Publish</button>
+                }
+
+                <button type="button" data-dismiss="modal" class="btn btn-info">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

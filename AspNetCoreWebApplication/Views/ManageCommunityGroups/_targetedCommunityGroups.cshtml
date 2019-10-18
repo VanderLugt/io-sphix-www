@@ -1,0 +1,140 @@
+﻿@model Sphix.ViewModels.User.SignUpStep3ViewModel
+
+    <div class="form-group mb-4">
+        <p>Which Groups <a href='#' class="atooltip" data-toggle="tooltip" title="Targeted Community Groups indicates how this group will be classified as it relates to finding appropriate connections and matches with targeted community members. A match is made for a user to be able to join this community group, when they also indicate a matching interest in this group. If you select all, this group will be made public and all platform members will be able to access this group."> <i class="fas fa-info-circle"></i></a></p>
+        <div class="btn-group-toggle" data-toggle="buttons">
+            @if (Model.GroupsList.Count() > 0)
+            {
+                <label class="btn btn-secondary">
+                    All
+                    <input type="checkbox" class="chkAddGroups1" id="chkAllCheck" change="CheckAddGroupsAll();" autocomplete="off">
+                    <span class="checkmark"></span>
+                </label>
+                foreach (var item in Model.GroupsList)
+                {
+                    <label class="btn btn-secondary">
+                        @item.Text
+                        <input type="checkbox" class="chkAddGroups" id="@item.Value" autocomplete="off">
+                        <span class="checkmark"></span>
+                    </label>
+                }
+            }
+            else
+            {
+                <input type="checkbox" class="chkAddGroups" id="0" checked style="display:none;" autocomplete="off">
+            }
+        </div>
+        
+        @if (Model.Association.Count() > 0)
+        {<p>Associations <a href='#' class="atooltip" data-toggle="tooltip" title="Targeted Associations indicates how members identifiy or associate with those groups. For example, forming a group for parents of middle school students would be expected to be geared towards and would thus attract different community members based on those community members matching associations"> <i class="fas fa-info-circle"></i></a></p>
+            <div class="form-group mb-4">
+                <select id="drpAssociation" class="form-control"
+                        asp-items="@(new SelectList(Model.Association,"Value", "Text"))"></select>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" id="drpAssociation" value="0" />
+        }
+        
+        @if (Model.Type1List.Count() > 0)
+        {<p>Type 1: <a href='#' class="atooltip" data-toggle="tooltip" title="Similar to the type of a community, identifying interests further helps to make stronger connections to members with the same interests. The higher the specificity of the match to the members’ selected interests, the more likely that member will see and join this community group."> <i class="fas fa-info-circle"></i></a></p>
+            <div class="form-group mb-4">
+                <select id="drpType1" class="form-control"
+                        asp-items="@(new SelectList(Model.Type1List,"Value", "Text"))"></select>
+            </div>
+        }
+        else
+        {<input type="hidden" id="drpType1" value="0" />}
+
+        @if (Model.Type2List.Count() > 0)
+        {
+            <p>Type 2: <a href='#' class="atooltip" data-toggle="tooltip" title="Further identifying association specificity helps make stronger connections to members with the same associations. The higher the specificity of the match to the members’ selected associations, the more likely that member will see and join this community group."> <i class="fas fa-info-circle"></i></a></p>
+            <div class="form-group mb-4">
+                <select id="drpType2" class="form-control"
+                        asp-items="@(new SelectList(Model.Type2List,"Value", "Text"))"></select>
+            </div>
+        }
+        else
+        {<input type="hidden" id="drpType2" value="0" />}
+
+        <div class="form-group mb-4">
+
+            <div class="btn-group-toggle" data-toggle="buttons">
+                @if (Model.Interests.Count() > 0)
+                {
+                <p>Interests: <a href='#' class="atooltip" data-toggle="tooltip" title="Similar to the type of a community, identifying interests further helps to make stronger connections to members with the same interests. The higher the specificity of the match to the members’ selected interests, the more likely that member will see and join this community group."> <i class="fas fa-info-circle"></i></a></p>
+                    foreach (var item in Model.Interests)
+                    {
+                        <label class="btn btn-secondary">
+                            @item.Text
+                            <input type="checkbox" class="chkInterests" id="@item.Value" autocomplete="off">
+                            <span class="checkmark"></span>
+                        </label>
+                    }
+                }
+                else
+                {
+                    <input type="checkbox" class="chkInterests" id="0" checked style="display:none;" autocomplete="off">
+                }
+            </div>
+        </div>
+    </div>
+
+<style>
+    .btn-group-toggle > .btn, .btn-group-toggle > .btn-group > .btn {
+        margin: 1px;
+    }
+</style>
+
+<script>
+    $('#chkAllCheck').change(function () {
+        var status = this.checked; // "select all" checked status
+        _targetedIds = '';
+            $('.chkAddGroups').each(function () { //iterate all listed checkbox items
+                this.checked = status; //change ".checkbox" checked status
+                _targetedIds += _targetedIds + ',';
+            });
+    });
+
+    function setCheckedTargetedtIds() {
+        _targetedIds = '';
+        $('.chkAddGroups').each(function () { //iterate all listed checkbox items
+            if (this.checked) {
+                _targetedIds += $(this).attr('Id') + ',';
+                } 
+            });
+    }
+    $(document).ready(function () {
+
+        var stuffArray = $('#hdnTargetedCommunityGroups').val().split(","); 
+        $('.chkAddGroups').each(function (index) {
+               if (stuffArray.indexOf($(this).attr("id"))!=-1) {
+                    this.checked = true;
+                }
+        });
+
+          var interestsArray = $('#hdnTargetedCommunityInterests').val().split(","); 
+        $('.chkInterests').each(function (index) {
+               if (interestsArray.indexOf($(this).attr("id"))!=-1) {
+                    this.checked = true;
+                }
+        });
+        $("#drpAssociation").val($('#hdnTargetedCommunityAssociationIds').val());
+        $("#drpType1").val($('#hdnTargetedCommunityType1Ids').val());
+        $("#drpType2").val($('#hdnTargetedCommunityType2Ids').val());
+    })
+
+        function setCheckedTargetedtInterestsIds() {
+        _interestIds = '';
+        $('.chkInterests').each(function () { //iterate all listed checkbox items
+            if (this.checked) {
+                _interestIds += $(this).attr('Id') + ',';
+                } 
+            });
+    }
+
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>

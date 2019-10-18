@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js"></script>
+<script src="http://media.twiliocdn.com/sdk/js/video/releases/1.19.2/twilio-video.min.js" type="text/javascript"></script>
+
+<script>
+
+    $(document).ready(function () {
+      
+        var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJpc3MiOiJTSzQxYTY4M2FmZTdlMmY3OTAxZmQyNjgzNjAzNjU3MjQ3IiwiZXhwIjoxNTY5MzE2MTkyLCJqdGkiOiJTSzQxYTY4M2FmZTdlMmY3OTAxZmQyNjgzNjAzNjU3MjQ3LTE1NjkzMTI1OTIiLCJzdWIiOiJBQzdlMTBmZWNiNzAxZDcwNmMxODEzZTQ1NjRkYjk4NmE0IiwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidXNlcjEiLCJ2aWRlbyI6e319fQ.g7mrT393UzfATMnBZPXamD1rU51Cij19F_J5Pe7bSc8';
+       // console.log(token);
+        var Video = require('twilio-video');
+
+        // Connect with audio-only
+        Video.connect(token, {
+            name: 'TestRoom1',
+            audio: true
+        }).then(function (room) {
+            room.on('participantConnected', function (participant) {
+                console.log(participant.identity + ' has connected');
+            });
+
+            room.once('disconnected', function () {
+                console.log('You left the Room:', room.name);
+            });
+        });
+    });
+</script>

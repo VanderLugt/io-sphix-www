@@ -1,0 +1,48 @@
+﻿<nav class="navbar sticky-top flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-3" href="#">
+        <img src="@Model.ProfilePicture" width="40" />
+        <span>@Model.FirstName @Model.LastName</span>
+        @if (Model.Roles.ToUpper() == "ADMIN")
+                    {
+        <span><i class="fas fa-crown"></i> @Model.Roles.ToUpper()</span>
+                    }
+                    else
+                    {
+        <span><i class="fas fa-user-tie"></i> @Model.Roles.ToUpper()</span>
+                    }
+    </a>
+   
+    @*<div class="brolio-dashboard-search w-75">
+            <i class="icon-search"></i>
+            <input class="form-control" type="text" placeholder="Search Contact" aria-label="Search">
+        </div>*@
+    <div class="navbar-nav px-3 w-25 nav-right-block">
+        <div class="row">
+            <div class="col-md-9 profile-block-outer">
+                @*<div class="dropdown profile-block">
+                        <span><img src="images/profile-img.png" /></span>
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <span>Peter - Max Muster </span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="icon-unlock-alt"></i> Change Password</a>
+                            <a class="dropdown-item" href="#"><i class="icon-signout"></i> Logout</a>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="col-md-3 nav-block-outer">
+                <div class="dropdown overview-dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="overview-block-icon"><i class="icon-th"></i></span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><i class="icon-user"></i> Contacts Overview</a>
+                        <a class="dropdown-item" href="#"><i class="icon-comment"></i> Support</a>
+                        <a class="dropdown-item device-password" href="#"><i class="icon-unlock-alt"></i> Change Password</a>
+                        <a class="dropdown-item device-logout" href="#"><i class="icon-signout"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

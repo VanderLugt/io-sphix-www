@@ -1,0 +1,99 @@
+﻿@model Sphix.ViewModels.User.UserProfileViewModel
+<div class="dashboad-inner">
+    <div class="dashboard-heading">
+        <h2>My Account</h2>
+        <p>View and edit your personal info below.</p>
+    </div>
+    <div class="dashboad-form-block">
+        <div id="UpdateUserProfile">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="firstname">Login Email:</label>
+                        <input type="hidden" id="hdnProfileId" value="@Model.Id" />
+                        <p>
+                            <b> @Model.EmailAddress</b>
+                            @if (Model.IsVerified)
+                            {
+                                <span><a href="#" title="verified"><i class="fas fa-check-circle"></i></a></span>
+                            }
+                            else
+                            {
+                                <i class="fas fa-info-circle"></i>
+                                <a href="#" data-tip="click on this link for account verification" onclick="ReSendVerification();" style="color:#ff0000">Not Verified</a>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="firstname">Your Community Page URL:</label>
+                            <p class="field-tagline">This is your own personalised URL that other members can see</p>
+                            <p> <a id="profileLink" href="@ViewBag.HostUrl/@Model.ProfileLink" target="_blank">@ViewBag.HostUrl/@Model.ProfileLink</a> </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text" maxlength="50" class="form-control" id="txtProfileLink" value="@Model.ProfileLink" message="Profile link is a required field" required>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="txtProfileFirstName" value="@Model.FirstName" message="First name is a required field" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="form-control" id="txtProfileLastName" value="@Model.LastName" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="firstname">Contact Email</label>
+                            </div>
+                            @*<div class="col-md-2 text-right">
+                                    <span><a href="#"><i class="fas fa-plus-circle"></i></a></span>
+                                </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="email" class="form-control" maxlength="50" id="txtProfileEmail" value="@Model.EmailAddress" message="Email address is a required field" required />
+                            </div>
+                            <div class="col-md-2  text-right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastname">Phone:</label>
+                        <input type="text" class="form-control" maxlength="30" id="txtProfilePhone" value="@Model.PhoneNumber" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-submit-btn col-md-12 text-center">
+                @if (Model.IsVerified)
+                {
+                    <button type="submit" class="btn btn-primary" id="btnUpdateUserProfile">Update Info</button>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/js/User/UpdateProfile.js"></script>

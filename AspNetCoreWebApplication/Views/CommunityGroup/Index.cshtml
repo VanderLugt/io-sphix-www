@@ -1,0 +1,328 @@
+﻿@model Sphix.ViewModels.CommunityGroupsFroentEnd.CmmunityGroupDetailViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+@if (!string.IsNullOrEmpty(Model.Title))
+{
+    <div class="dashboad-outer">
+        <div class="container" id="divContainer">
+            <div class="d-flex justify-content-center align-items-center community-outer">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="from-group col-md-12">
+                            <div class="row">
+                                <div class="community-category">
+                                    @Model.Title
+                                    <p>Weekly Scheduled | Peer to Peer Live Networking | Can I ask you a quick question</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4  col-md-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 community-main-body">
+
+                                    <div class="community-icons">
+                                        <div style="text-align:center;">
+                                            <a href="#" onclick="ShowDetail(@Model.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="communit-title">
+                                        <a href="#">
+                                        </a>
+                                    </div>
+                                    <div class="community-icons">
+
+                                        <div class="float-left icon-texts">
+                                            <p style="cursor:help;" title="create new table in open hours meeting" onclick="CreateNewTable();">Create New</p>
+                                            <a href="#" title="Other times" onclick="ShowOtherTimes();">
+                                                <i class="far fa-clock"></i>
+                                            </a>
+                                        </div>
+                                        <div class="float-right icon-texts">
+                                            <p>@Model.OpenOfficeHours.OTime <span id="spanTimeZone">@Model.OpenOfficeHours.OTimeZone</span></p>
+                                            <a href="#" onclick="LoadOpenHoursDetail();">
+                                                @*<i class="fas fa-sign-in-alt" title="RSVP"></i>*@
+                                                RSVP
+                                            </a>
+                                        </div>
+                                        <div class="timeoptions">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="button" value="PST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime PST
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="button" value="CST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime CST
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="button" value="HST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime HST
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="button" value="EST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime EST
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <ul class="nav nav-tabs" style="margin-top:20px;">
+                                        <li><a class="classTabMenu">Invite a friend: </a></li>
+                                        <li><a data-toggle="tab" class="classTabMenu active show" href="#toGroup">To This Group</a></li>
+                                        @*<li><a data-toggle="tab" class="classTabMenu" href="#toSphix">To Sphix</a></li>*@
+                                    </ul>
+                                    <div class="tab-content">
+                                        <br />
+                                        <div id="toGroup" class="tab-pane active">
+                                            <input type="email" id="txtInviteToGroupEmails" onkeyup="InviteToGroupWordCount();" class="form-control" placeholder="Email Address" message="Email address is a required field." required  />
+                                            <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToGroupEmail" value="SEND" onclick="sendInvitationToGroup();" />
+                                        </div>
+                                        @*<div id="toSphix" class="tab-pane">
+                                            <input type="text" id="txtInviteToSphixEmails" onkeyup="InviteToSphixWordCount();" class="form-control" placeholder="Email Address" />
+                                            <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToSphixEmail" value="SEND" />
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4  col-md-12">
+                            <div class="row">
+                                <div class="col-md-12" id="divCommunityGroupEvnts">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4  col-md-12">
+                            <div class="row">
+                                <div class="col-md-12" id="divCommunityGroupArticles">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <partial name="~/Views/Shared/_NoData.cshtml" />
+}
+<input type="hidden" id="hdnCommunityGroupId" value="@ViewBag.CId" />
+<partial name="_joinThisCommunityPopUp.cshtml" />
+<partial name="_registerOpenOfficeHoursMeetingPopUp.cshtml" />
+<partial name="_singleEventPopUp.cshtml" />
+<partial name="_registerForEventPopUp.cshtml" />
+<partial name="_addArticelPopUp.cshtml" />
+<partial name="_articleDetailPopUp.cshtml" />
+@*<partial name="_createNewOpenHoursPopUp.cshtml" />*@
+@await Html.PartialAsync("_createNewOpenHoursPopUp", Model.OpenOfficeHours)
+<style>
+    .icon-texts {
+        text-align: center;
+    }
+
+        .icon-texts p {
+            margin: 0;
+            color: #fff;
+        }
+    /*.community-outer {
+        padding: 10px;
+        background: rgba(0,0,0,0.5);
+    }*/
+
+    .community-icons {
+        display: inline-block;
+        width: 100%;
+        margin-top: 30px;
+        padding: 10px;
+        position: relative;
+    }
+
+        .community-icons a {
+            display: inline-block;
+            background: #4D0B0A;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            color: #fff;
+        }
+
+    .rsvp-icons {
+        display: inline-block;
+        background: #4D0B0A;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 50%;
+        color: #fff;
+        float: right;
+        margin-right: 5px;
+    }
+
+    .community-main-body {
+        margin-bottom: 10px;
+        background-image: url('/img/backdrop/1.png');
+        background-size: cover;
+        min-height: 250px;
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+        position: relative;
+        background-position: center center;
+    }
+
+    .communit-title {
+        padding: 10px;
+        text-align: center;
+        margin-top: 0;
+        color: #fff;
+        font-size: large;
+        /*font-weight:bold;*/
+    }
+
+        .communit-title a {
+            color: #fff;
+        }
+
+    .community-category {
+        background: #4D0B0A;
+        color: #ffffff;
+        padding: 10px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .community-category-bottom {
+        margin-top: 0;
+        text-align: left;
+        color: #fff;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding-left: 15px;
+        padding-bottom: 15px;
+    }
+
+    .classTabMenu {
+        color: #fff !important;
+        padding: 10px;
+    }
+
+    a.classTabMenu.active {
+        color: #ea9c0c !important;
+    }
+
+    .timeoptions {
+        z-index: 9999;
+        background-color: #4D0B0A;
+        position: relative;
+        height: 80px;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        color: #fff;
+        display: none;
+    }
+
+    .timeOptionButton {
+        background-color: blue;
+        border-radius: 10px;
+        border: 0px;
+        margin: 2px;
+        color: #fff;
+    }
+</style>
+<link href="~/css/slick.css" rel="stylesheet" />
+<link href="~/css/slick-theme.css" rel="stylesheet" />
+<script src="~/js/User/JoinUserCommunityGroup.js"></script>
+<script src="~/js/CommunityGroups/CommunityGroupsSteps.js"></script>
+<script src="~/js/Comments/ArticleComment.js"></script>
+<script src="~/js/CommunityGroups/CommunityOpenOfficeHours.js"></script>
+<script src="~/js/Comments/EventComment.js"></script>
+<script src="~/js/CommunityGroups/SendEmailInvitation.js"></script>
+<script>
+        var _liveEventFromDate = '';
+    var _liveEventToDate = '';
+    var _liveEventDayName = '';
+    var _liveEventTime = '';
+    var _liveEventTimeZone = '';
+    function ShowDetail(Id) {
+        //   $('#hdnCommunityGroupId').val(Id);
+        $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
+        $('#modelCommunityDetail').modal('toggle');
+    }
+    function hideCummunityModel() {
+        $('#modelCommunityDetail').modal('hide');
+    }
+    function ShowOtherTimes() {
+       $('.timeoptions').attr('style','display: inline-block;');
+
+    }
+    function CreateNewTable() {
+             $('#modelCreateOpenHours').modal('toggle');
+    }
+    function LoadOpenHoursDetail() {
+                $('#divRegisterOpenOfficeHours').load('/CommunityGroupSubSections/OpenOfficeHoursTables?Id=' +@ViewBag.CId+"&TimeZone="+$('#spanTimeZone').html());
+                $('#modelRegisterOpenOfficeHours').modal('toggle');
+    }
+    function LoadEventDetail(Eid) {
+                $('#divEventDetail').load('/CommunityGroupSubSections/RegisterForEvent?Id=' +Eid+"&TimeZone="+$('#spanTimeZone').html());
+                $('#modelEventDetail').modal('toggle');
+    }
+    function LoadArticleDetail(id) {
+                $('#divArticleDetail').load('/CommunityGroupSubSections/ArticleDetail?Id=' +id);
+                $('#modelArticleDetail').modal('toggle');
+    }
+    function SingleEventetail() {
+                $('#divSingleEvent').load('/CommunityGroupSubSections/SingleEvent');
+                $('#modelSingleEvent').modal('toggle');
+    }
+    function AddArticel(Id,CommunityGroupId) {
+        $("#divArticleEvent").load('../ManageCommunityGroups/CommunityGroupArticleEdit?Id=' + Id+'&CommunityGroupId='+CommunityGroupId);
+        $('#updateArticle').modal('toggle');
+    }
+    function InviteToGroupWordCount() {
+    if ($('#txtInviteToGroupEmails').val().length > 0) {
+        $("#btnInviteToGroupEmail").removeAttr("disabled");
+    }
+    else {
+        $("#btnInviteToGroupEmail").attr("disabled", true);
+    }
+    }
+    function InviteToSphixWordCount() {
+    if ($('#txtInviteToSphixEmails').val().length > 0) {
+        $("#btnInviteToSphixEmail").removeAttr("disabled");
+    }
+    else {
+        $("#btnInviteToSphixEmail").attr("disabled", true);
+    }
+}
+
+</script>
+@section Scripts{
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/Comments/Comment.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#divCommunityGroupEvnts').load('/CommunityGroupSubSections/CommunityGroupEvents/' +@ViewBag.CId);
+            $('#divCommunityGroupArticles').load('/CommunityGroupSubSections/CommunityGroupArticels/' +@ViewBag.CId);
+
+            $(".timeOptionButton").click(function () {
+                // alert($(this).val());
+                $('#spanTimeZone').html($(this).val());
+                $('.timeoptions').attr('style','display: none;');
+            });
+
+
+        });
+
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿@model Sphix.ViewModels.UserCommunities.OpenOfficeHoursViewModel
+@{
+    ViewData["Title"] = "ActiveNextSession";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center container ">
+    <div class="row ">
+        <div class="center-form-block">
+            @if (Model.IsMeetingTokenUsed)
+            {
+                <h4 class="text-left mb-4 themetextTitle">
+                    You have already created the next week meeting session! Thanks
+                </h4>
+            }
+            else
+            {
+                <h4 class="text-left mb-4 themetextTitle">Meeting session has been created successfully! Thanks</h4>
+            }
+        </div>
+    </div>
+</div>
+
+

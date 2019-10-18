@@ -1,0 +1,70 @@
+﻿@model Sphix.ViewModels.UserCommunities.LiveEventViewModel
+
+<div class="row">
+    <div class="col-md-12" style="background-color:#4D0B0A;color:#fff;">
+
+        <p>@Model.EName</p>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        Title: @Model.ETitle<br />
+        Created by : Sphix
+    </div>
+    <div class="col-md-6">
+        Frequently: <span style="text-transform:capitalize;">@Model.EFrequency</span> <br />
+        Date: @Model.EFromDate.ToString("dd MMM yyyy") - @Model.EToDate.ToString("dd MMM yyyy")<br />
+        Time: @Model.ETime @ViewBag.TimeZone<br />
+        Who: @Model.MaxAttendees Members<br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="overflow-x:auto;height:200px;">
+        @Html.Raw(Model.EDescription)
+    </div>
+</div>
+<div id="divAddEventCommentBox">
+
+</div>
+<div id="divEventComments" class="divComments">
+
+</div>
+<script>
+    $('#divAddEventCommentBox').load('/EventComments/AddEventCommentPartial');
+   //$('#divComments').load('/ArticleComments/LoadArticleComments?articleId='+@Model.Id +'&parentId=0');
+    loadEventCommentsAjax(@Model.Id);
+</script>
+<input type="hidden" value="@Model.ETimeZone" id="hdnTimeZone" />
+<input type="hidden" value="@Model.Id" id="hdnEventId" />
+<fieldset>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-3" id="modelMeetingMessage">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Congratulations</h2>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <p>You have successfully reserved your spot for the upcoming Sphix meet. Your role will be a participant.</p>
+                                    <p>This role, you will be expected to join and participate in active discussions with other community members.</p>
+                                    <p>Please keep in mind that people will have different opinions. This is a good thing. The Sphix community can only flourish with feedback such as yours, which help identify and provide a pathway to making improvements.</p>
+                                </div>
+                            </div>
+                            <div class="form-submit-btn modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Okay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</fieldset>

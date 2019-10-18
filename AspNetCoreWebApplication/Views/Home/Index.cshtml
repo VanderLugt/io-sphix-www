@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
+
+    #selectable .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectable .ui-selected {
+        background: #E68F07;
+        color: white;
+    }
+
+    #selectable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #selectable li {
+            padding-left: 0.3em;
+            /*font-size: 1.4em;*/
+            height: 30px;
+            border-radius: 3px;
+            line-height: 28px;
+            cursor: pointer;
+        }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div id="LoginForm">
+    <partial name="~/Views/Home/_Login.cshtml" />
+</div>
+<div id="ForgotPassword">
+    <partial name="~/Views/Home/_RestPassword.cshtml" />
+</div>
+<div id="SignupForm">
+    <partial name="~/Views/Home/_SignUp.cshtml" />
+</div>
+@section Scripts {
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+    <script src="~/js/passwordscheck.js"></script>
+    <script src="~/js/SignUp/Login.js"></script>
+    <script src="~/js/SignUp/SignUp.js"></script>
+    <script>
+        var selectedCommunity = new Array();
+        var CommunityTitle = '';
+        $(function () {
+            // $("#selectable").selectable();
+            $("#selectable").selectable({
+                selected: function (event, ui) {
+                    selectedCommunity = new Array();
+
+                    $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected");
+                    CommunityTitle = $('.ui-selected').text();
+                    //alert( text);
+                    selectedCommunity.push(ui.selected.id);
+                }
+            });
+
+
+        });
+
+        $('#Password, #ConformPassword').on('keyup', function () {
+            if ($('#Password').val() == $('#ConformPassword').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Password not matching').css('color', 'red');
+        });
+
+        $(document).ready(function () {
+            $('#SignupForm').hide();
+            $('#LoginForm').show();
+            $('#ForgotPassword').hide();
+
+            $('#btnShowSignUp').click(function () {
+                $('#SignupForm').fadeIn();
+                $('#LoginForm').fadeOut();
+                $('#ForgotPassword').fadeOut();
+            });
+            $('#btnShowLogin').click(function () {
+                $('#SignupForm').fadeOut();
+                $('#LoginForm').fadeIn();
+                $('#ForgotPassword').fadeOut();
+            });
+            $('#btnResetShowLogin').click(function () {
+                $('#SignupForm').fadeOut();
+                $('#LoginForm').fadeIn();
+                $('#ForgotPassword').fadeOut();
+            });
+            $('#btnShowForgotPassword').click(function () {
+                $('#SignupForm').fadeOut();
+                $('#LoginForm').fadeOut();
+                $('#ForgotPassword').fadeIn();
+            });
+        });
+
+    </script>
+
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Sphix.ViewModels.SelectListItems>
+
+    <div class="form-group mb-4">
+        <p>Theme of community group <a href='#' class="atooltip" data-placement="top"  data-toggle="tooltip" data-container="body" title="The theme of the community group lets potential members better understand the context when meeting and discussing relevant topics. Members will have the option to change the theme; say from professional development, to environment, and which will adjust the selection of content in that the individual member will see."> <i class="fas fa-info-circle"></i></a></p><br />
+        <div class="btn-group-toggle" data-toggle="buttons">
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <label class="btn btn-secondary">
+                        @item.Text
+                        <input type="checkbox" class="chkThemes" id="@item.Value" autocomplete="off">
+                        <span class="checkmark"></span>
+                    </label>
+                }
+            }
+            else
+            {
+                <input type="checkbox" class="chkThemes" id="0" checked style="display:none;" autocomplete="off">
+            }
+        </div>
+    </div>
+
+<style>
+    .btn-group-toggle > .btn, .btn-group-toggle > .btn-group > .btn {
+        margin: 1px;
+    }
+    /*.tooltip-inner {
+        max-width: 450px !important;
+    }*/
+</style>
+<script>
+     function setCheckedThemeIds() {
+        _themesIds = '';
+        $('.chkThemes').each(function () { //iterate all listed checkbox items
+            if (this.checked) {
+                _themesIds += $(this).attr('Id') + ',';
+                } 
+            });
+    }
+       $(document).ready(function () {
+           var themesArray = $('#hdnTargetedThemes').val().split(",");
+           //alert(themesArray);
+        $('.chkThemes').each(function (index) {
+               if (themesArray.indexOf($(this).attr("id"))!=-1) {
+                    this.checked = true;
+                }
+        });
+
+       })
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>

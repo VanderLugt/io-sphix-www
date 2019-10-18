@@ -1,0 +1,34 @@
+﻿<fieldset>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-3" id="modelOpenHoursDetail">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <div class="form-group" id="divOpenHoursDetail">
+                                    Loading...
+                                </div>
+                            </div>
+                            <div class="form-submit-btn modal-footer">
+                                @if (Model.OpenOfficeHours.IsRegisterInMeeting)
+                                {
+                                    <h2>You have already joined this meeting</h2>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideCummunityModel();">Close</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-success" onclick="JoinCommunityOpenHoursMeeting();">SIGN UP</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideCummunityModel();">Close</button>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</fieldset>

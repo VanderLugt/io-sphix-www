@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Sphix.ViewModels.UserCommunities.OpenOfficeHoursTables>
+<ul class="nav nav-tabs" style="margin-top:20px;">
+
+    <li><a data-toggle="tab" class="classTabMenu active show" href="#toAddNewTable">Existing Tables</a></li>
+    <li><a data-toggle="tab" class="classTabMenu" href="#toAbout">About</a></li>
+</ul>
+<div class="tab-content" style="color:#ffffff">
+    <br />
+    <div id="toAddNewTable" class="tab-pane active">
+        <p>For this coming Thursday, find and reserve a seat below at one of the tables created by our members.</p>
+        <div class="row">
+            <table cellpadding="10" cellspacing="10">
+                <thead>
+                    <tr style="text-decoration:underline;">
+                        <td>Time slot</td>
+                        <td>Max guests</td>
+                        <td>Session date</td>
+                        <td>Remaining seats</td>
+                        <td>Register</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.OTime @item.OTimeZone</td>
+                        <td>@item.MaxAttendees</td>
+                        <td>@item.OFromDate</td>
+                       @if (item.MaxAttendees == item.BookedSeats)
+                       {
+                            <td>Full</td>
+                       }
+                       else
+                       {
+                        <td>
+                            @{
+                                int numberOfSeats = (item.MaxAttendees - item.BookedSeats);
+                                if (numberOfSeats > 1)
+                                {
+                                    <p style="color: #ea9c0c;text-decoration: underline;text-align:center;">@numberOfSeats open seats</p>
+                                }
+                                else
+                                {
+                                    <p style="color: #ea9c0c;text-decoration: underline;">@numberOfSeats open seat</p>
+                                }
+                            }
+                        </td>
+                        }
+                        @if (!item.HasExpired)
+                        {
+                            <td style="text-align:center;"><input type="radio" name="radioRegisterOpenOfficeHours" value="@item.Id" /></td>
+                        }
+                        else
+                        {
+                            <td>Closed</td>
+                        }
+                    </tr>
+
+                    
+                    }
+                </tbody>
+            </table>
+        </div>
+        <input type="hidden" value="@ViewBag.TimeZone" id="hdnTimeZone" />
+        <div class="float-lg-right">
+            <input type="button" class="btn btn-primary" onclick="JoinCommunityOpenHoursMeeting();" value="RSVP" />
+        </div>
+    </div>
+    <div id="toAbout" class="tab-pane">
+        <p>“Peer-to-Peer networking allows to you connect with other group members of the group to ask questions or to provide helpful feedback to other members. To understand how this work, think of this link a digital room. By Clicking on “create new”, you are adding a table to the room with empty chairs, and asking for members of this community to join you through an RSVP system. The integrated web conferencing solution will connect all of you together at the designated staring time for the group. Alternatively, you can join an existing table that some one has created by clicking on the RSVP button. Etiquette for group meetings is such that the person who creates the group is the person who will start off and lead meeting. At the end, please reserve enough time for 5 minute feedback session on the good, the not so good, and needs improvement. The leader will be responsible for asking the group feedback. At the conclusion of the meeting, the leader will be receive a notification button that will provide the option to continue the same discussion group another week.”</p>
+    </div>
+</div>
+<fieldset>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-3" id="modelOpenHoursMeetingMessage">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Congratulations</h2>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <p>You have successfully reserved your spot for the upcoming Sphix meet. Your role will be a participant.</p>
+                                    <p>This role, you will be expected to join and participate in active discussions with other community members.</p>
+                                    <p>Please keep in mind that people will have different opinions. This is a good thing. The Sphix community can only flourish with feedback such as yours, which help identify and provide a pathway to making improvements.</p>
+                                </div>
+                            </div>
+                            <div class="form-submit-btn modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Okay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,428 @@
+﻿<div class="d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-md-12 center-form-block" id="mainForm" style="margin:0px;min-width:900px;">
+            <a asp-controller="ManageCommunityGroups" asp-action="Index"><i class="far fa-list-alt"></i> << Back To Community Groups</a>
+            <div id="formAddCommunityGroupStep1">
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 1 of 4<span>: Defining your audience</span></h4>
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-6 p-white-color">
+                            <p>Organizations</p><br />
+                            <ol id="selectable">
+                                @foreach (var item in ViewBag.Communities)
+                                {
+                                    <li class="ui-widget-content mb-3" id="@item.Value" text="@item.Text">@item.Text</li>
+                                }
+                            </ol>
+                        </div>
+                        <div class="col-md-6 p-white-color">
+                            <div id="divTargetedCommunityGroups">
+                                <p style="color:#fff"><i> Loading...</i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 p-white-color">
+                            <div id="divTargetedCommunityThemes"><p style="color:#fff"><i> Loading...</i></p></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep2();">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formAddCommunityGroupStep2" style="display:none;">
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 2 of 4<span>: Tell us about this group</span><a href='#' class="atooltip" data-toggle="tooltip" title="In the second step of creating a community group, you tell relevant Sphix Community members about this group. Reminder, this is what members first see, when they decide whether nor not to check out the group, the connections, and content therein. Please see the information buttons for hints and advice for tips on how to best describe your community group."> <i class="fas fa-info-circle"></i></a></h4>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <p> Title <a href='#' class="atooltip" data-toggle="tooltip" title="The title is the tagline; a short memorable way to describe your community in precise and concrete way"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" value="" class="form-control" placeholder="community Title (50 characters)" id="txtEditCommunityGroupTitle" message="community title is a required field." required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <p>Description video <a href='#' class="atooltip" data-toggle="tooltip" title="While not required to publish your group, a 2 minute video is the best way to quickly engage your audience to tell them an authentic reason why you have created this group. Videos greatly increase your chance of recruiting new members to your group"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-8 p-white-color">
+                            <p>Upload short video clip up to 2 mins</p>
+                            <input type="file" id="fileCommunityGroupDescriptionVideo" />
+                            <video width="400" controls id="videoCommunityGroup" style="display:none;">
+                                <source id="video_here">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <p> Description <a href='#' class="atooltip" data-toggle="tooltip" title="The description is what your group members will read to better understand what this group is all about, and what this group will collectively trying to accomplish. For best practices on writing a community group description, see video tutorials here"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea id="txtGroupDescription" class="form-control" placeholder="Defining the community in group in 200 words or less" maxlength="200" style="width:100%;height:150px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep1();">Back</button><button type="submit" class="btn btn-primary" onclick="ShowStep3();">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="formAddCommunityGroupStep3" style="display:none;">
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 3 of 4<span>: Edit open office hours meetings</span></h4>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <a href="#" class="selected" id="aOpenHours" onclick="ShowContentAndStructureTabls(1)">Open Office Hours</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="divOpenOfficeHours">
+                    <partial name="~/Views/ManageCommunityGroups/_openOfficeHours.cshtml" />
+                    @*@Html.Partial("_openOfficeHours.cshtml", Model.OpenOfficeHours)*@
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep2();">Back</button><button type="submit" class="btn btn-primary" onclick="ReadyForPublish();">Publish</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <a asp-controller="ManageCommunityGroups" asp-action="Index"><i class="far fa-list-alt"></i> << Back To Community Groups</a>
+        </div>
+
+    </div>
+</div>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-1" id="divReadyToPublish"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Congratulations!
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <p>You are about to edit your community group.</p>
+                                        <p>We recommend watching a couple of video tutorials about best practices for maintaining great community groups, in your video content section.</p>
+                                        <p>Feel free to provide feedback at any time about how Sphix can make the experience a better one.</p>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="submit" onclick="EditCommunity();" class="btn btn-primary">Submit</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-1" id="divCommunitySuccessBox"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Congratulations!
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <p style="color: #ea9c0c;background: #000;padding: 10px;border-radius:8px;">Your Community group has been edited.</p>
+                                        <p>We recommend watching a couple of video tutorials about best practices for maintaining great community groups, in your video content section.</p>
+                                        <p>Feel free to provide feedback at any time about how Sphix can make the experience a better one.</p>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</div>
+<input type="hidden" value="0" id="hdnTargetedCommunityGroups" />
+<input type="hidden" value="0" id="hdnTargetedCommunityAssociationIds" />
+<input type="hidden" value="0" id="hdnTargetedCommunityType1Ids" />
+<input type="hidden" value="0" id="hdnTargetedCommunityType2Ids" />
+<input type="hidden" value="0" id="hdnTargetedCommunityInterests" />
+
+<input type="hidden" value="0" id="hdnTargetedThemes" />
+<input type="hidden" value="0" id="hdnOpenOfficeHoursId" />
+<input type="hidden" value="@ViewBag.Id" id="hdnCommunityId" />
+<script>
+    var _communityId = 0;
+    var _targetedIds = '';
+    var _themesIds = '';
+
+    var _openHoursFromDate = '';
+    var _openHoursToDate = '';
+    var _openHoursDayName = '';
+    var _openHoursTime = '';
+    var _openHoursTimeZone = '';
+    var _videoUrl = '';
+
+    var selectedCommunity = new Array();
+    // var vid = document.getElementById("videoCommunityGroup");
+    var myVideos = [];
+    $(function () {
+
+        // $("#selectable").selectable();
+        $("#selectable").selectable({
+            selected: function (event, ui) {
+                selectedCommunity = new Array();
+
+                $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected");
+                CommunityTitle = $('.ui-selected').text();
+                //alert( text);
+                selectedCommunity.push(ui.selected.id);
+                loadTargetedCommunityGroups();
+                loadTargetedCommunityThemes();
+            }
+        });
+
+
+
+        $('#fileCommunityGroupDescriptionVideo').on('change', function () {
+            //var filePath = $(this).val();
+            var $source = $('#video_here');
+            $source.onloadedmetadata = function () {
+                window.URL.revokeObjectURL(video.src);
+                var duration = video.duration;
+                myVideos[myVideos.length - 1].duration = duration;
+                updateInfos();
+            }
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            //vid.autoplay = true;
+            $source.parent()[0].load();
+
+            $('#videoCommunityGroup').show();
+        });
+    });
+    $(document).ready(function () {
+        $('#txtGroupDescription').summernote({
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+        loadDetail();
+
+        $('#idNextLiveEvents').hide();
+
+        function loadDetail() {
+                       $.ajax({
+                            type: 'GET',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            url: '/ManageCommunityGroups/getCommunityDetail?Id='+@ViewBag.Id ,
+                            //data: objectToPass,
+                           success: function (data) {
+                               
+                                           $('#txtEditCommunityGroupTitle').val(data.title);
+                                           $('#txtGroupDescription').summernote('code', data.description);
+                                           $('#hdnTargetedCommunityGroups').val(data.communityTargetedGroupId);
+                                           $('#hdnTargetedCommunityInterests').val(data.targetedInterestIds);
+                                            $('#hdnTargetedCommunityAssociationIds').val(data.associationId);
+                                            $('#hdnTargetedCommunityType1Ids').val(data.type1Id);
+                                            $('#hdnTargetedCommunityType2Ids').val(data.type2Id);
+                                           $('#hdnTargetedThemes').val(data.themesId);
+                                           _videoUrl = data.descriptionVideoUrl;
+
+                                           $('#hdnOpenOfficeHoursId').val(data.openOfficeHours.id);
+                                           $('#txtOpenOfficeHoursTitle').val(data.openOfficeHours.oTitle);
+                                           $('#txtOpenOfficeHoursName').val(data.openOfficeHours.oName);
+                                           $("#drpOpenOfficeHoursFrequency").val(data.openOfficeHours.oFrequency);
+                                           $("#drpOpenOfficeHoursMaxAttendees").val(data.openOfficeHours.maxAttendees);
+                                           $("#drpOpenOfficeHoursWhoCanAttend").val(data.openOfficeHours.whoCanAttend);
+                                           $('#txtOpenOfficeHoursDescription').summernote('code', data.openOfficeHours.oDescription);
+                                            
+                                           var fromDate = new Date(data.openOfficeHours.oFromDate);
+                                           var toDate = new Date(data.openOfficeHours.oToDate);
+                                            _openHoursFromDate = data.openOfficeHours.oFromDate;
+                                            _openHoursToDate = data.openOfficeHours.oToDate;
+                                           $('#txtOpenOfficeHoursFromAndToDate').val((fromDate.getMonth()+1)+"/"+fromDate.getDate()+"/"+fromDate.getFullYear()+"-"+(toDate.getMonth()+1)+"/"+toDate.getDate()+"/"+toDate.getFullYear());
+
+                                          // console.log(data.openOfficeHours.oFromDate);
+                                           //console.log(data.openOfficeHours.oToDate);
+
+                                           $('#hrefOpenOfficeHoursTime').html(data.openOfficeHours.oTimeDayName + ', ' + data.openOfficeHours.oTime + ' ' + data.openOfficeHours.oTimeZone);
+                                            _openHoursDayName =data.openOfficeHours.oTimeDayName;
+                                            _openHoursTime = data.openOfficeHours.oTime;
+                                           _openHoursTimeZone = data.openOfficeHours.oTimeZone;
+
+                                           $('#divLiveEvents').hide();
+                                           //DescriptionVideoUrl
+                                           //$('#videoCommunityGroup source').attr('src', data.descriptionVideoUrl);
+                                            var $source = $('#video_here');
+                                            $source[0].src = data.descriptionVideoUrl;
+                                            $source.parent()[0].load();
+                                           $('#videoCommunityGroup').show();
+                                           setSelelectedOrganization(data.ogranizationsId);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                    });
+        }
+        function setSelelectedOrganization(OId) {
+            $( "#selectable li").each(function( index ) {
+                //console.log(index + ": " + $(this).text());
+                if ($(this).attr("id") == OId) {
+                    $(this).addClass('ui-selected');
+                }
+                //console.log($(this).attr("id"));
+            });
+                selectedCommunity.push(OId);
+                loadTargetedCommunityGroups();
+                loadTargetedCommunityThemes();
+
+        }
+    });
+    function checkVideoDuration() {
+        if ($('#fileCommunityGroupDescriptionVideo').val() == '') {
+            return true;
+        }
+        var x = document.getElementById("videoCommunityGroup").duration;
+        //console.log(x);
+        // alert(Number.isNaN(x));
+        if (Number.isNaN(x) == true) {
+            swal("Sorry!", "Please select only video file", "warning");
+            return false;
+        }
+        var videoTime = secondsTimeSpanToHMS(x);
+
+        if (videoTime > secondsTimeSpanToHMS(120)) {
+            swal("Sorry!", "Video clip up to 2 mins is not allowed", "warning");
+            return false;
+        }
+        //else {
+        //    alert('good');
+        //}
+        return true;
+
+    }
+    function secondsTimeSpanToHMS(s) {
+        var h = Math.floor(s / 3600); //Get whole hours
+        s -= h * 3600;
+        var m = Math.floor(s / 60); //Get remaining minutes
+        s -= m * 60;
+        return h + ":" + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s); //zero padding on minutes and seconds
+    }
+    function ShowContentAndStructureTabls(_index) {
+        if (_index == 1) {
+            $('#divOpenOfficeHours').show();
+            $('#divLiveEventsHours').hide();
+            $('#divBlogs').hide();
+            $('#aOpenHours').attr('class', 'selected')
+            $('#aLiveEvents').attr('class', 'unselected')
+            $('#aBlogs').attr('class', 'unselected')
+        }
+        else if (_index == 2) {
+            //if (checkOpenHoursValidations() === false) {
+            //    return;
+            //}
+            $('#divOpenOfficeHours').hide();
+            $('#divLiveEventsHours').show();
+            $('#divBlogs').hide();
+            $('#aOpenHours').attr('class', 'unselected')
+            $('#aLiveEvents').attr('class', 'selected')
+            $('#aBlogs').attr('class', 'unselected')
+        }
+        else {
+            if (checkLiveEventValidations() === false) {
+                return;
+            }
+
+            $('#divOpenOfficeHours').hide();
+            $('#divLiveEventsHours').hide();
+            $('#divBlogs').show();
+            $('#aOpenHours').attr('class', 'unselected')
+            $('#aLiveEvents').attr('class', 'unselected')
+            $('#aBlogs').attr('class', 'selected')
+        }
+    }
+
+</script>
+
+
+

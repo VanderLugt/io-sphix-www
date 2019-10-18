@@ -1,0 +1,366 @@
+﻿<div class="d-flex justify-content-center align-items-center ">
+    <div class="row">
+        <div class="col-md-12 center-form-block" style="margin-top:0px;width:900px;" id="mainForm">
+            <div id="formAddCommunityGroupStep1">
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 1 of 4<span>: Defining your audience <a href='#' class="atooltip" data-toggle="tooltip" title="Defining your audience is the first step of creating a community group. This is a critical step as it tells the members of Sphix which of them would most likely be a good fit for this group. Specifically, through a set of sequential questions, you will restrictively select who will find and can access this group. Or if you feel all people are equally likely a good fit, you may enable everyone to find this group through “open to the public” options. Also please note that all groups will be reviewed by Sphix for appropriateness and adherence to the terms of conditions before final publication.."> <i class="fas fa-info-circle"></i></a></span></h4>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-6 p-white-color">
+                            <p>
+                                Which Commuity <a href='#' class="atooltip" data-placement="top" data-toggle="tooltip" title="By selecting the community, you are indicating which type of community that this group will belong to. In advance, please know there is strong crossover between groups. In other words, content and live meetings created within and for this group, will have the option when being published, to being shared to other groups not only within this community, but also to groups in other communities."> <i class="fas fa-info-circle"></i></a>
+                            </p><br />
+                            <ol id="selectable">
+                                @foreach (var item in ViewBag.Communities)
+                                {
+                                    <li class="ui-widget-content mb-3" id="@item.Value" text="@item.Text">@item.Text</li>
+                                }
+                            </ol>
+                        </div>
+                        <div class="col-md-6 p-white-color">
+                            <div id="divTargetedCommunityGroups"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 p-white-color">
+
+                            <div id="divTargetedCommunityThemes"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep2();">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formAddCommunityGroupStep2" style="display:none;">
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 2 of 4<span>: Tell us about this group</span><a href='#' class="atooltip" data-toggle="tooltip" title="In the second step of creating a community group, you tell relevant Sphix Community members about this group. Reminder, this is what members first see, when they decide whether nor not to check out the group, the connections, and content therein. Please see the information buttons for hints and advice for tips on how to best describe your community group."> <i class="fas fa-info-circle"></i></a></h4>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-3 p-white-color">
+                            <p> Title <a href='#' class="atooltip" data-toggle="tooltip" title="The title is the tagline; a short memorable way to describe your community in precise and concrete way"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="community Title (50 characters)" id="txtCommunityGroupTitle" message="community title is a required field." required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-3 p-white-color">
+                            <p>Description video <a href='#' class="atooltip" data-toggle="tooltip" title="While not required to publish your group, a 2 minute video is the best way to quickly engage your audience to tell them an authentic reason why you have created this group. Videos greatly increase your chance of recruiting new members to your group"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-9 p-white-color">
+                            <p>Upload short video clip up to 2 mins</p>
+                            <input type="file" id="fileCommunityGroupDescriptionVideo" />
+                            <video width="400" controls id="videoCommunityGroup" style="display:none;">
+                                <source id="video_here">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-3 p-white-color">
+                            <p> Description <a href='#' class="atooltip" data-toggle="tooltip" title="The description is what your group members will read to better understand what this group is all about, and what this group will collectively trying to accomplish. For best practices on writing a community group description, see video tutorials here"> <i class="fas fa-info-circle"></i></a></p>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea id="txtGroupDescription" class="form-control" placeholder="Defining the community in group in 200 words or less" maxlength="200" style="width:100%;height:150px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep1();">Back</button><button type="submit" class="btn btn-primary" onclick="ShowStep3();">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="formAddCommunityGroupStep3" style="display:none;">
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="text-center mb-3" style="text-align:left !important">Step 3 of 4<span>: Create meetings and content</span> <a href='#' class="atooltip" data-toggle="tooltip" title="Adding content and structure is the core engagement system of the community group. Through open office hours, live events, and content, you will be able to directly enable the members of your group to meet face to face through video web conferencing solutions, as well as directly engage with those members yourself through structured live events. Lastly, Content can be shared and explored within and between members through this community group."> <i class="fas fa-info-circle"></i></a></h4>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 ">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <a href="#" class="selected" id="aOpenHours" onclick="ShowContentAndStructureTabls(1)">Open Office Hours</a>
+                            <a href='#' class="atooltip" data-toggle="tooltip" title="Open Office Hours give the keys, instruction, and guidance, to your group members to form their own peer-to-peer networks.  You pick a day of the week, pick a time, and the maximum number of seats that members can hold meetings.   We supply a number of recommended structured meeting templates that you can supply to your group that will maximize the value of peer-to-peer networks."> <i class="fas fa-info-circle"></i></a>
+                        </div>
+                        <div class="col-md-4 p-white-color">
+                            <a href="#" class="unselected" id="aLiveEvents" onclick="ShowContentAndStructureTabls(2)">Live Events</a>
+                            <a href='#' class="atooltip" data-toggle="tooltip" title="Live Events” is how you directly engage with the members of this community group.  You pick the day, time, location (if there is a physical location of this meeting), and the number and types of participants. For participant type, you can select between, observer, participant, and attendee.  This enables you to seamlessly engage with group members, and attract new members through engagement with other community groups. For more information, click on live events where a number of hints and best practices are provided to ensure you are well prepared to successfully meet and grow your group."> <i class="fas fa-info-circle"></i></a>
+                        </div>
+                        <div class="col-md-4 p-white-color">
+                            <a href="#" class="unselected" id="aBlogs" onclick="ShowContentAndStructureTabls(3)">Contribute content</a>
+                            <a href='#' class="atooltip" data-toggle="tooltip" title="At present, content is the articles, pictures, and videos that you can share with members of the group.  Members can also submit their own content as well as comment and reply to previously posted content.  Content will eventually evolve into 3D content.  Information in the form of content that is submitted to Sphix, also contains a geographic location of submission. In it’s next evolution of product development, information will be aggregated, such as questions and answers from the community. This information will be visualized and be made accessible on a 3D globe, giving a new dimension to understanding content shared between community members."> <i class="fas fa-info-circle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="divOpenOfficeHours">
+                    <partial name="~/Views/ManageCommunityGroups/_openOfficeHours.cshtml" />
+                </div>
+                <div id="divLiveEventsHours" style="display:none">
+                    <partial name="~/Views/ManageCommunityGroups/_liveEvents.cshtml" />
+                </div>
+                <div id="divBlogs" style="display:none">
+                    <partial name="~/Views/ManageCommunityGroups/_Articles.cshtml" />
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12 form-submit-btn modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="ShowStep2();">Back</button><button type="submit" class="btn btn-primary" onclick="ReadyForPublish();">Publish</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-1" id="divReadyToPublish"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Congratulations!
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <p>You are about to publish a new community group.</p>
+                                        <p>We recommend watching a couple of video tutorials about best practices for maintaining great community groups, in your video content section.</p>
+                                        <p>Feel free to provide feedback at any time about how Sphix can make the experience a better one.</p>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="submit" onclick="SaveCommunity();" id="btnSaveCommunityGroup" class="btn btn-primary">Submit</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-1" id="divCommunitySuccessBox"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Congratulations!
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <p style="color: #ea9c0c;background: #000;padding: 10px;border-radius:8px;">Your Community group has been created. It should go live within 24 hrs after Sphix Reviews and Approves the community group.</p>
+                                        <p>We recommend watching a couple of video tutorials about best practices for maintaining great community groups, in your video content section.</p>
+                                        <p>Feel free to provide feedback at any time about how Sphix can make the experience a better one.</p>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</div>
+<input type="hidden" value="0" id="hdnTargetedCommunityGroups" />
+<input type="hidden" value="0" id="hdnTargetedThemes" />
+<input type="hidden" value="0" id="hdnCommunityId" />
+
+<script>
+    var _communityId = 0;
+    var _targetedIds = '';
+    var _themesIds = '';
+    var _interestIds = '';
+
+    var _openHoursFromDate = new Date();
+    var _openHoursToDate = new Date();
+    var _openHoursDayName = '';
+    var _openHoursTime = '';
+    var _openHoursTimeZone = '';
+
+    var _liveEventFromDate = '';
+    var _liveEventToDate = '';
+    var _liveEventDayName = '';
+    var _liveEventTime = '';
+    var _liveEventTimeZone = '';
+
+    var selectedCommunity = new Array();
+    // var vid = document.getElementById("videoCommunityGroup");
+    var myVideos = [];
+    $(function () {
+        // $("#selectable").selectable();
+        $("#selectable").selectable({
+            selected: function (event, ui) {
+                selectedCommunity = new Array();
+
+                $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected");
+                CommunityTitle = $('.ui-selected').text();
+                //alert( text);
+                selectedCommunity.push(ui.selected.id);
+                loadTargetedCommunityGroups();
+                loadTargetedCommunityThemes();
+            }
+        });
+
+
+
+        $('#fileCommunityGroupDescriptionVideo').on('change', function () {
+            //var filePath = $(this).val();
+            var $source = $('#video_here');
+            $source.onloadedmetadata = function () {
+                window.URL.revokeObjectURL(video.src);
+                var duration = video.duration;
+                myVideos[myVideos.length - 1].duration = duration;
+                updateInfos();
+            }
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            //vid.autoplay = true;
+            $source.parent()[0].load();
+
+            $('#videoCommunityGroup').show();
+        });
+    });
+    $(document).ready(function () {
+        $('#txtGroupDescription').summernote({
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+    });
+    function checkVideoDuration() {
+        if ($('#fileCommunityGroupDescriptionVideo').val() == '') {
+            return true;
+        }
+        var x = document.getElementById("videoCommunityGroup").duration;
+        //console.log(x);
+        // alert(Number.isNaN(x));
+        if (Number.isNaN(x) == true) {
+            swal("Sorry!", "Please select only video file", "warning");
+            return false;
+        }
+        var videoTime = secondsTimeSpanToHMS(x);
+
+        if (videoTime > secondsTimeSpanToHMS(120)) {
+            swal("Sorry!", "Video clip up to 2 mins is not allowed", "warning");
+            return false;
+        }
+        //else {
+        //    alert('good');
+        //}
+        return true;
+
+    }
+    function secondsTimeSpanToHMS(s) {
+        var h = Math.floor(s / 3600); //Get whole hours
+        s -= h * 3600;
+        var m = Math.floor(s / 60); //Get remaining minutes
+        s -= m * 60;
+        return h + ":" + (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s); //zero padding on minutes and seconds
+    }
+    function ShowContentAndStructureTabls(_index) {
+        if (_index == 1) {
+            $('#divOpenOfficeHours').show();
+            $('#divLiveEventsHours').hide();
+            $('#divBlogs').hide();
+            $('#aOpenHours').attr('class', 'selected')
+            $('#aLiveEvents').attr('class', 'unselected')
+            $('#aBlogs').attr('class', 'unselected')
+        }
+        else if (_index == 2) {
+            //if (checkOpenHoursValidations() === false) {
+            //    return;
+            //}
+            $('#divOpenOfficeHours').hide();
+            $('#divLiveEventsHours').show();
+            $('#divBlogs').hide();
+            $('#aOpenHours').attr('class', 'unselected')
+            $('#aLiveEvents').attr('class', 'selected')
+            $('#aBlogs').attr('class', 'unselected')
+        }
+        else {
+            if (checkLiveEventValidations() === false) {
+                return;
+            }
+
+            $('#divOpenOfficeHours').hide();
+            $('#divLiveEventsHours').hide();
+            $('#divBlogs').show();
+            $('#aOpenHours').attr('class', 'unselected')
+            $('#aLiveEvents').attr('class', 'unselected')
+            $('#aBlogs').attr('class', 'selected')
+        }
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>1e27e551-7134-4e96-9be7-24e94ca6be6a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.3.102.17" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="Twilio" Version="5.33.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AWSS3.Utility\AWSS3.Utility.csproj" />
+    <ProjectReference Include="..\CustomTwilioClient\CustomTwilioClient.csproj" />
+    <ProjectReference Include="..\Data.Context\Data.Context.csproj" />
+    <ProjectReference Include="..\Sphix.Service\Sphix.Service.csproj" />
+    <ProjectReference Include="..\Sphix.ViewModels\Sphix.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\SuperAdmin\Data\" />
+    <Folder Include="Areas\SuperAdmin\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\MoreCommunityGroups\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

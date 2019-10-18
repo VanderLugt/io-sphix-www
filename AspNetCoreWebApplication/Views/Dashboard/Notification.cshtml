@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Notification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboad-outer">
+    <div  id="divContainer">
+
+    </div>
+</div>
+
+
+<script src="~/js/CommunityGroups/CommunityGroupsSteps.js"></script>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            LoadSection('/Dashboard/Settings', 'Notification Settings');
+        });
+
+    </script>
+}

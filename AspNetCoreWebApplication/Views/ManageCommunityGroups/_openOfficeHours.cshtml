@@ -1,0 +1,252 @@
+﻿<div class="form-group mb-4">
+    <div class="row">
+        @*<div class="col-md-2 p-white-color">
+                Title
+            </div>*@
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="open office hours title (50 characters)" id="txtOpenOfficeHoursTitle" message="open office hours title is a required field." required />
+        </div>
+    </div>
+
+</div>
+<div class="form-group mb-4" style="display:none">
+    <div class="row">
+        @*<div class="col-md-2 p-white-color">
+                Name
+            </div>*@
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="open office hours name(50 characters)" id="txtOpenOfficeHoursName" message="open office hours name is a required field."  />
+        </div>
+    </div>
+</div>
+<div class="form-group mb-4">
+    <div class="row">
+        @*<div class="col-md-2 p-white-color">
+                Description
+            </div>*@
+        <div class="col-md-5">
+            <textarea class="form-control" style="height:230px" placeholder="Description" id="txtOpenOfficeHoursDescription"></textarea>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p> Frequency: <a href='#' class="atooltip" data-toggle="tooltip" title="The frequency for open office hours is how often people of the group should meet. Weekly meetings are recommended for most groups. If members have a quick question, they sign up for that week. After being paired with other members with similar interests, that member meets with them for that week, discusses her/his problem, and gets feedback. The person who created the new meeting will have the option of continuing the next week by re-inviting the same members of the group to the same time and meeting room, the following week. The frequency thus enables groups to naturally form and meet on a regular cadence that you establish through frequency"> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpOpenOfficeHoursFrequency">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4" style="display:none">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p>Dates:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtOpenOfficeHoursFromAndToDate" message="open hours date is a required field." />
+                    </div>
+                    @*<div class="col-md-3">
+                    <input type="text" class="form-control" id="txtOpenHoursToDate" required />
+                </div>*@
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p> Day and time: <a href='#' class="atooltip" data-toggle="tooltip" title="The frequency for open office hours is how often people of the group should meet. Weekly meetings are recommended for most groups. If members have a quick question, they sign up for that week. After being paired with other members with similar interests, that member meets with them for that week, discusses her/his problem, and gets feedback. The person who created the new meeting will have the option of continuing the next week by re-inviting the same members of the group to the same time and meeting room, the following week. The frequency thus enables groups to naturally form and meet on a regular cadence that you establish through frequency."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        @*<input type="text" class="form-control" id="txtOpenOfficeHoursTime" message="First name is a required field" required />*@
+                        <a href="#" id="hrefOpenOfficeHoursTime" data-toggle="modal" data-target="#openOfficeHoursDateTimeModal">Set Time</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p> Add hours: <a href='#' class="atooltip" data-toggle="tooltip" title="We often hear from members, that meeting for open office hours on a single time is challenging and they wish they had more flexibility. To provide your members additional flexibility, you can choose to enable members of this community to schedule office hours for 2 hrs before and 2 hours after, the time you have scheduled. For more info on office hours, how they work, and best practices see Office hours"> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="checkbox" id="txtOpenOfficeAddhours" name="OpenOfficeAddhours" /><span style="color:#ffffff"> add hours</span>
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p>
+                            Max # Attendees:
+                            <a href='#' class="atooltip" data-toggle="tooltip" title="The max # of attendees sets the largest size of the peer-to-peer teams for this group. For example, if you set the max size of the group at 10, when members of this group have a question, they can invite up to 9 other people to join a weekly discussion to answer questions for that member. Group size is set in increments of 2, and Sphix’s system ensures 2 or more people in each team before open office hours launches."> <i class="fas fa-info-circle"></i></a>
+                            @*<a href="#" data-toggle="modal" data-target="#openOfficeHoursMaxAttendeesModel"><i class="fas fa-info-circle"></i></a>*@
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpOpenOfficeHoursMaxAttendees">
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p>Who can attend: <a href='#' class="atooltip" data-toggle="tooltip" title="Right now, the Sphix system, will automatically pair and match, members based on matching community associations and interests and dissimilar geography. In the future, you will be provided more advanced tools to influence how and why people meet through peer-to-peer networks."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpOpenOfficeHoursWhoCanAttend">
+                            <option value="0">coming soon</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+            <div class="row" id="idNextLiveEvents">
+                <div class="col-md-12" style="font-size: x-large;text-align: center;margin-top:15px;">
+                    <a href="#" class="selected" onclick="ShowContentAndStructureTabls(2);">Next (Live Events)</a>
+                </div>
+            </div>
+</div>
+@*Max Attendees Model*@
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-2" id="openOfficeHoursMaxAttendeesModel"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2> Max # Attendees</h2>
+
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <partial name="_maxAttendees.cshtml" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="openOfficeHoursDateTimeModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-4 p-white-color">
+                            <select class="form-control" id="drpOpenOfficeHoursDaysName">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 bootstrap-timepicker timepicker">
+                            <input type="text" class="form-control" id="txtOpenOfficeHoursTime" />
+                            @*<span class="input-group-addon"><i class="fas fa-clock"></i></span>*@
+                        </div>
+
+                        <div class="col-md-5">
+                            <select class="form-control" id="drpTimeZone">
+                                <option timeZoneId="1" gmtAdjustment="PST" useDaylightTime="0" value="-12">PST</option>
+                                <option timeZoneId="2" gmtAdjustment="CST" useDaylightTime="0" value="-11">CST</option>
+                                <option timeZoneId="3" gmtAdjustment="HST" useDaylightTime="0" value="-10">HST</option>
+                                <option timeZoneId="4" gmtAdjustment="EST" useDaylightTime="1" value="-9">EST</option>
+                            
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="setOpenOfficeTime();">Apply</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .modal-backdrop {
+        position: initial !important;
+    }
+
+    .bootstrap-timepicker-widget table td input {
+        width: 32px !important;
+    }
+
+    .glyphicon glyphicon-chevron-up {
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        //set calendar
+        $('#txtOpenOfficeHoursFromAndToDate').daterangepicker({
+            //startDate: new Date('2019-07-09T00:00:00'),
+            // endDate: new Date('2019-07-18T00:00:00'),
+            autoUpdateInput: false,
+            opens: 'left'
+        }, function (start, end, label) {
+            //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            _openHoursFromDate = start.format('YYYY-MM-DD');
+            _openHoursToDate = end.format('YYYY-MM-DD');
+            $('#txtOpenOfficeHoursFromAndToDate').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
+        });
+
+
+        //set timer
+        $('#txtOpenOfficeHoursTime').timepicker({
+            icons: {
+                up: "fas fa-angle-up",
+                down: "fas fa-angle-down",
+            }
+        });
+
+        $('#txtOpenOfficeHoursDescription').summernote({
+            height: 170,
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+
+    });
+    function setOpenOfficeTime() {
+        _openHoursDayName = $('#drpOpenOfficeHoursDaysName').val();
+        _openHoursTime = $('#txtOpenOfficeHoursTime').val();
+        _openHoursTimeZone = $('#drpTimeZone option:selected').attr('gmtAdjustment');
+
+        $('#hrefOpenOfficeHoursTime').html($('#drpOpenOfficeHoursDaysName').val() + ', ' + $('#txtOpenOfficeHoursTime').val() + ' ' + $('#drpTimeZone option:selected').attr('gmtAdjustment'));
+        $('#openOfficeHoursDateTimeModal').modal('toggle');
+    }
+</script>
