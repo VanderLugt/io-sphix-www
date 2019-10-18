@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Communities For Good";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboad-outer">
+    <div  id="divContainer">
+
+    </div>
+</div>
+<style>
+    #feedback {
+        font-size: 1.4em;
+    }
+
+    #selectable .ui-selecting {
+        background: #FECA40;
+    }
+
+    #selectable .ui-selected {
+        background: #E68F07;
+        color: white;
+    }
+
+    #selectable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #selectable li {
+            padding-left: 0.3em;
+            /*font-size: 1.4em;*/
+            height: 30px;
+            border-radius: 3px;
+            line-height: 28px;
+            cursor: pointer;
+        }
+    .navigation-icon .fa-location-arrow {
+        transform: rotate(45deg);
+    }
+</style>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            LoadSection('/CommunitiesForGood/CommunityTypes', 'Communities For Good');
+        });
+
+    </script>
+}
+

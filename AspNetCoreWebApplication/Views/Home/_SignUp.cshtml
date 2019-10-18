@@ -1,0 +1,201 @@
+﻿@*@model Sphix.ViewModels.RoleViewModel*@
+<div class="step-container">
+    <div class="d-flex justify-content-center align-items-center">
+
+        <div class="row ">
+            <div class="center-form-block col-md-12" id="formSinup1">
+                <h4 class="text-center mb-3">Step 1 to 3</h4>
+                <h5 class="text-center mb-2">Let's Verify Who You Are</h5>
+                <p class="text-center themetextTitle mb-5" style="border-bottom: 2px solid #999;">This is an essential part of maintaining a safe community</p>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 required-field">
+                            <input type="text" class="form-control" placeholder="First Name" id="FirstName" message="First name is a required field" required />
+                            <span class="required">*</span>
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <input type="text" class="form-control" placeholder="Last Name" id="LastName" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 required-field">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="email" class="form-control" placeholder="Email address" id="Email" message="Email address is a required field." required />
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 required-field">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" placeholder="Password" id="Password" message="Password is a required field." required />
+                            <span class="required">*</span>
+                            <span id="result"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4 required-field">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" placeholder="Re-cofirm password" id="ConformPassword" message="Conform password is a required field." required />
+                            <span class="required">*</span>
+                            <span id='message'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" maxlength="10" placeholder="Phone Number" id="PhoneNumber" />
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <div class="float-right">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Code" id="SMSCode" message="SMSCode is a required field!" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="form-bottom-border">
+                    <hr />
+                </div>
+                <div class="form-group">
+                    <div class="float-right">
+                        <div class="row">
+                            <div class="col-md-4 pr-0">
+                                <a href="#" class="themetextTitle" id="btnShowLogin">Login</a>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" id="SignUpStep1" class="btn btn-light">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" id="checkShareMyLocation" value="">
+                                    <span class="checkmark"></span>
+                                    I gave Sphix permission to collect and use my location o provide better content and user experience
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*formSinup2*@
+            <div class="center-form-block col-md-12" id="formSinup2" style="display:block">
+                <h4 class="text-center mb-3">Step 2 to 3</h4>
+                <h5 class="text-center mb-2">Customize a Community Association</h5>
+                <p class="text-center mb-5 form-sub-heading">This helps align communities among common interests</p>
+
+                <ol id="selectable">
+                    @foreach (var item in ViewBag.Communities)
+                    {
+                        <li class="ui-widget-content mb-3" id="@item.Value" text="@item.Text">@item.Text</li>
+                    }
+                </ol>
+
+                <div class="form-bottom-border">
+                    <hr />
+                </div>
+                <div class="form-group">
+                    <div class="float-right device-next-prev-btn">
+                        <div class="row">
+                            <div class="col-md-4 pr-0 device-prev-btn">
+                                <a href="#" class="back-icon" title="Step 1" id="BackToStep1"><i class="fas fa-reply-all"></i></a>
+                            </div>
+                            <div class="col-md-8 device-next-btn">
+                                <button type="button" id="SignUpStep2" class="btn btn-light">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @*formSinup3*@
+            <div class="center-form-block col-md-12" id="formSinup3" style="display:block">
+                <h4 class="text-center mb-3">Step 2 to 3</h4>
+                <h5 class="text-center mb-2" id="divCommunityTitle">Customize Your Community</h5>
+                <p class="text-center mb-5"></p>
+                <div id="divLoadStep3">
+                    Loading...
+                    @*Load Step 3*@
+                </div>
+                <div class="form-bottom-border">
+                    <hr />
+                </div>
+                <div class="form-group">
+                    <div class="float-right device-next-prev-btn">
+                        <div class="row">
+                            <div class="col-md-4 pr-0 device-prev-btn">
+                                <a href="#" class="back-icon" title="Step 2" id="BackToStep2"><i class="fas fa-reply-all"></i></a>
+                            </div>
+                            <div class="col-md-8 device-next-btn">
+                                <button type="button" id="SignUpStep3" class="btn btn-light">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row themetextP">
+                        You can customize the rest once you comlete your membership sign up process.
+                    </div>
+                </div>
+
+            </div>
+            @*formSinup4*@
+            <div class="center-form-block col-md-12" id="formSinup4" style="display:block">
+                <h4 class="text-center mb-3">Step 3 to 3</h4>
+                <h5 class="text-center mb-2">Confirm commitment to seeing Sphix Succeed.</h5>
+                <p class="text-center mb-5"></p>
+                <h5 class="text-center mb-2">Our intention to make a new social platform for the 21st century, starting with a public launch in January.</h5>
+                <div class="form-bottom-border">
+                    <hr />
+                </div>
+                <div class="form-group mb-4 signup-checkbox themetextP">
+                    <label class="form-check-label">
+                        <input type="checkbox" id="checkAgree1" class="form-control" />
+                        <span class="checkmark"></span>
+                        I anticipate contributing to Sphix's kickstarter campaign and would like to be notified when a kickstarter campaign is launched.
+                    </label>
+                </div>
+                <div class="form-group mb-4 signup-checkbox themetextP">
+                    <label class="form-check-label">
+                        <input type="checkbox" id="checkAgree2" class="form-control" />
+                        <span class="checkmark"></span>
+                        While interesting, I do not anticipate financially supporting Sphix in a Kickstarter campaign.
+                    </label>
+                </div>
+                <div class="form-group mb-4 signup-checkbox themetextP">
+                    <label class="form-check-label">
+                        <input type="checkbox" id="checkAgree3" class="form-control" />
+                        <span class="checkmark"></span>
+                        Certify terms and conditions, etc.
+                    </label>
+                </div>
+                <div class="form-group device-next-prev-btn">
+                    <div class="row">
+                        <div class="col-md-2 pr-0 device-prev-btn">
+                            <a href="#" class="back-icon" title="Step 2" id="BackToStep3"><i class="fas fa-reply-all"></i></a>
+                        </div>
+                        <div class="col-md-10 device-next-btn">
+                            <button type="button" id="SignUpStep4" onclick="SignUp();" class="btn btn-success">START MEMBERSHIP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

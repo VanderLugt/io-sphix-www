@@ -1,0 +1,125 @@
+﻿@model Sphix.ViewModels.User.UserShortProfileViewModel
+@{
+    ViewData["Title"] = "Email verification";
+     Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center container ">
+    <div class="row ">
+
+        @*formSinup4*@
+        @if (Model.Status)
+        {
+        <div class="center-form-block">
+            <h4 class="text-left mb-3 themetextTitle">Welcome to Sphix!</h4>
+            
+            <div id="verificationStep1" style="display:block">
+            
+                <p class="text-left themetextP md2">
+                    We are thrilled that you are about to join the Sphix Network.
+                </p>
+                <p class="text-left themetextP mb-2">Our intention to make a new social platform for the 21st century, starting with a public launch in January.</p>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 btn-success text-center">
+                            CONTINUE 1 of 2
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="themetextPColor">Your Account Details</h5>
+                            <p class="text-left themetextP"> Name :@Model.FirstName @Model.LastName </p>
+                            <p class="text-left themetextP"> Email :@Model.Email </p>
+                            <h5 class="themetextPColor">How your membership work</h5>
+                            <p class="themetextP" style="margin-left:20px">Unlimited Exploration<br />Observe, Participate, or create new conversations  that you care about<br />Connect with new interesting people. </p>
+                            <p class="text-left themetextP">To cancel, go to <b class="themetextTitle">Your Account</b> and click on “Cancel Membership”</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12  text-center">
+                            <button type="button" id="brnVerificationStep1" class="btn btn-success">Next</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="verificationStep2" style="display:none">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-center themetextTitle">Please Actually Read the Below [10 MINS] </p>
+                            <p class="text-center themetextP">The first two pages help to explain and maintain the integrity and differentiation of the platform. After these two pages are the legal terms and definitions when you are done, click the <b class="themetextTitle">Done</b> button and find the right community groups for you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 btn-success text-center">
+                            CONTINUE 2 of 2
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div id="divTerms" class="col-md-12" style="background-color:#fff;height: 320px;overflow: auto;">
+                            @Html.Raw(ViewBag.SphixFirsttimeuse)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12  text-center">
+                            <a href="#" id="brnVerificationStep1Back">Back</a>
+                            <a href="/" id="btnAccessNow" class="btn btn-success">Access Now</a>
+                            @*<button type="button" id="btnAccessNow" class="btn btn-success">Access Now</button>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            @*<div class="form-group mb-4 signup-checkbox">
+                <input type="checkbox" id="checkAgree1" class="form-control" />
+
+                <span>Our intention to make a new social platform for the 21st century, starting with a public launch in January.</span>
+            </div>*@
+
+
+        </div>
+            }
+            else
+            {
+            <div class="center-form-block">
+                <h4 class="text-left mb-3 themetextTitle">@Model.Messsage</h4>
+                <a href="/">Login</a> 
+            </div>
+            }
+        </div>
+        </div>
+@section Scripts{ 
+    <script src="~/js/SignUp/SignUp.js"></script>
+<script>
+    jQuery(function ($) {
+        $('#btnAccessNow').hide();
+    $('#divTerms').on('scroll', function() {
+        if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            $('#btnAccessNow').show();
+        }
+        else {
+            $('#btnAccessNow').hide();
+        }
+    })
+});
+</script>
+}
+
+
+

@@ -1,0 +1,35 @@
+﻿@model Sphix.ViewModels.UserCommunities.ArticleViewModel
+<div class="row">
+    <div class="col-md-12" style="background-color:#4D0B0A;color:#fff;">
+
+        <p>@Model.ArticleTitle</p>
+    </div>
+
+</div>
+@*<div class="row">
+        <div class="col-md-6">
+            Title: @Model.ETitle<br />
+            Created by : Sphix
+        </div>
+        <div class="col-md-6">
+            Frequently: <span style="text-transform:capitalize;">@Model.EFrequency</span> <br />
+        </div>
+    </div>*@
+<div class="row">
+    <div class="col-md-12" style="overflow-x:auto;height:200px;">
+        @Html.Raw(Model.ArticleDescription)
+    </div>
+</div>
+<input type="hidden" id="ArticleId" value="@Model.Id" />
+@*<partial name="/Views/ArticleComments/_addComment.cshtml" />*@
+<div id="divAddCommentBox">
+
+</div>
+<div id="divComments" class="divComments">
+
+</div>
+<script>
+    $('#divAddCommentBox').load('/ArticleComments/AddArticleCommentPartial');
+   //$('#divComments').load('/ArticleComments/LoadArticleComments?articleId='+@Model.Id +'&parentId=0');
+    loadArticleCommentsAjax(@Model.Id);
+</script>

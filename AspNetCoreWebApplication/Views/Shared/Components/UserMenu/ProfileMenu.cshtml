@@ -1,0 +1,113 @@
+﻿<ul class="navbar-nav flex-row mr-lg-0">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle mr-3 mr-lg-0" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="@Model.ProfilePicture" id="imgUserProfileSmall" />
+            <span class="username-block">Hi, <span class="user-full-name">@Model.FirstName @Model.LastName</span></span>
+            <span class="caret"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" id="divNavbarDropdownMenuLink">
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="btnShowUpdatePictureModel" src="@Model.ProfilePicture" id="imgUserProfileBig" />
+                    <h6>@Model.FirstName @Model.LastName</h6>
+                    @if (Model.Roles.ToUpper() == "ADMIN")
+                    {
+                        <span><i class="fas fa-crown"></i> @Model.Roles.ToUpper()</span>
+                    }
+                    else
+                    {
+                        <span><i class="fas fa-user-tie"></i> @Model.Roles.ToUpper()</span>
+                    }
+
+                    <div class="user-edit-btn btnShowUpdatePictureModel">
+                        <a title="change profile picture"><i class="fas fa-portrait"></i> Change profile picture </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a asp-controller="Dashboard" asp-action="Index"><i class="fas fa-user-circle"></i> My Account</a> </li>
+                        @*<li><a asp-controller="Dashboard" asp-action="Notification"><i class="fas fa-cog"></i> Notifications</a></li>*@
+                        <li><a href="#" onclick="LoadLeftSection('/Dashboard/CommunityAssociations')"><i class="fas fa-address-card"></i> Community Associations</a></li>
+                        
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li><a asp-controller="ManageCommunityGroups" asp-action="Add"><i class="fas fa-users"></i> Create Community Group</a></li>
+                            <li><a asp-controller="ManageCommunityGroups" asp-action="Index"><i class="far fa-list-alt"></i> My Community Groups</a></li>
+                        }
+                        <li><a asp-controller="Logout" asp-action="Index"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </li>
+    @*<li class="nav-item dropdown header-setting-block">
+        <a class="nav-link dropdown-toggle mr-3 mr-lg-0 header-icon" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-cog"></i>
+        </a>
+    </li>
+    <li class="header-calender-block">
+        <a href="#" class="header-icon">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="dropdown-notification">1</span>
+        </a>
+    </li>*@
+    <li class="nav-item dropdown header-setting-block ">
+        @*<a style="margin-left:10px;" onclick="LoadSection('/Communities/CommunitiesForGood','My Community  Groups');" class="nav-link mr-3 mr-lg-0 header-icon" id="navbarCommunityGroups" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Communities For Good
+        </a>*@
+        <a style="margin-left:10px;" class="nav-link mr-3 mr-lg-0 header-icon" id="navbarCommunityGroups" asp-controller="CommunitiesForGood" asp-action="Index">Communities For Good</a>
+        @*<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarCommunityGroups">
+
+            @foreach (var item in Model.communityGroups)
+            {
+            <a class="dropdown-item">@item.Name</a>
+            }
+        </div>*@
+    </li>
+    @*@if (Model.Roles.ToUpper() == "ADMIN")
+    {
+        <li class="nav-item dropdown header-calender-block">
+            <a href="#" style="margin-left:20px;color:#fff;">Communities For Good</a>
+        </li>
+    }*@
+</ul>
+<button class="navbar-toggler ml-lg-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-1" id="updateProfilePicture"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Change profile picture
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="file" id="txtPrpfilePicture"   accept='image/*' extension="jpg,png,jpge,heif" message="Please select profile picture" required/>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="submit" id="btnUpdateProfilePicture" onclick="updateProfilePicture();" class="btn btn-primary">Upload</button>
+                                    <button type="button" id="btnHideModal" class="btn btn-info">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

@@ -1,0 +1,2 @@
+﻿# Rewrite path with additional sub directory
+RewriteRule ^/CommunityGroups/Academia-And-Research /CommunityGroups/Index/1 [L,R=302]

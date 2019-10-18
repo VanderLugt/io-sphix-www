@@ -1,0 +1,293 @@
+﻿<div class="form-group mb-4">
+    <div class="row">
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="live event title (50 characters)" id="txtLiveEventsTitle" message="live event title is a required field." required />
+        </div>
+        <div class="col-md-3 ">
+            <p> Picture</p>
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" id="drpLiveEventsPicture">
+                <option value="1">Generic Earth</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="form-group mb-4" style="display:none;">
+    <div class="row">
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="live event name (50 characters)" id="txtLiveEventsName" message="live event name is a required field." />
+        </div>
+    </div>
+</div>
+<div class="form-group mb-4">
+    <div class="row">
+        <div class="col-md-5">
+            <textarea class="form-control" style="height:230px" placeholder="Description" id="txtLiveEventsDescription"></textarea>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p> Frequency: <a href='#' class="atooltip" data-toggle="tooltip" title="This options lets you choose to hold this same meeting on a regular basis; one-time only, weekly, monthly, or quarterly, without the need re-create these meetings each time.  Duplicate meetings will be automatically created and synced with your calendar.  Group members who are interested, will receive updates and reminders for each live event scheduled.  One time only, the default option, indicates this meeting will not be recurring"> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpLiveEventsFrequency">
+                            <option value="single event">Single event</option>
+                            @*<option value="weekly">Weekly</option>*@
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p> Date: <a href='#' class="atooltip" data-toggle="tooltip" title="Let your members know the date you are having your live event meeting. "> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtLiveEventsFromAndToDate" message="event date is a required field." required readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p> Time: <a href='#' class="atooltip" data-toggle="tooltip" title="Let your members know the of your live event meeting."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="#" id="hrefLiveEventsTime" data-toggle="modal" data-target="#LiveEventsDateTimeModal">Set Time</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p>
+                            Max # Attendees:
+                            @*<a href="#" data-toggle="modal" data-target="#lievEventMaxAttendeesModel"><i class="fas fa-info-circle"></i></a>*@
+                            <a href='#' class="atooltip" data-toggle="tooltip" title="The max # of attendees sets the largest size of people that can attend this event.  Group size can be 250, 100, 50, 25, 10, or 5 people.  The maximum # attendees is determined by the combination of the number of participants and the number of observers.  In other words, the number of people who are actively engaging and participating in the conversation, and observers, who can watch the discussion, but not participate. "> <i class="fas fa-info-circle"></i></a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpLiveEventsMaxAttendees">
+                            <option value="250">250</option>
+                            <option value="100">100</option>
+                            <option value="50">50</option>
+                            <option value="25">25</option>
+                            <option value="10">10</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p> Max# participants: <a href='#' class="atooltip" data-toggle="tooltip" title="Participants are members who join into the conversation of a live event.  For example, if you are holding a live event where you are giving a presentation to 100 people, and your intent is to allow for interacting with any of those 100 people, then you would set the number of participants to 100.   In this case, because all 100 people are participating, 0 attendees would be allowed to simply observe, without participating."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpLiveEventsParticipants">
+                            <option value="25">25</option>
+                            <option value="10">10</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p> Max #observers: <a href='#' class="atooltip" data-toggle="tooltip" title="Observers are people who are able to view the live event, but are not able to interact with the live event.  For example, if you are giving a presentation, and you expect more than 1000 people to reserve a seat for the event, you would not likely expect to interact with all 1000 people.  Alternatively, you can select to interact with say 100 participants in a Q&A session, leaving the remaining 900 participants to view the discussion and Q&A as observers, but not as participants."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpLiveEventsObservers">
+                            <option value="225">225</option>
+                            <option value="75">75</option>
+                            <option value="50">50</option>
+                            <option value="25">25</option>
+                            <option value="10">10</option>
+                            <option value="5">5</option>
+                            <option value="0">0</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <p> Who can attend: <a href='#' class="atooltip" data-toggle="tooltip" title="Right now, the Sphix system, will automatically pair and match, members based on matching community associations and interests and dissimilar geography. In the future, you will be provided more advanced tools to influence how and why people can see and join live events."> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpLiveEventsWhoCanAttend">
+                            <option value="1">Coming soon</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*Max Attendees Model*@
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-2" id="lievEventMaxAttendeesModel"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2> Max # Attendees</h2>
+
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <partial name="~/Views/ManageCommunityGroups/_maxAttendees.cshtml" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="LiveEventsDateTimeModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="drpLiveEventsDaysName" style="display:none;">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 bootstrap-timepicker timepicker">
+                            <input type="text" class="form-control" id="txtLiveEventsTime" />
+                        </div>
+
+                        <div class="col-md-5">
+                            <select class="form-control" id="drpEventsTimeZone">
+                                <option timeZoneId="1" gmtAdjustment="PST" useDaylightTime="0" value="-12">PST</option>
+                                <option timeZoneId="2" gmtAdjustment="CST" useDaylightTime="0" value="-11">CST</option>
+                                <option timeZoneId="3" gmtAdjustment="HST" useDaylightTime="0" value="-10">HST</option>
+                                <option timeZoneId="4" gmtAdjustment="EST" useDaylightTime="1" value="-9">EST</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="setEventsTime();">Apply</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .modal-backdrop {
+        position: initial !important;
+    }
+
+    .bootstrap-timepicker-widget table td input {
+        width: 32px !important;
+    }
+
+    .glyphicon glyphicon-chevron-up {
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        //set calendar
+        $('#txtLiveEventsFromAndToDate').daterangepicker({
+            autoUpdateInput: false,
+              singleDatePicker: true,
+            opens: 'left'
+        }, function (start, end, label) {
+            //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                _liveEventFromDate = start.format('YYYY-MM-DD');
+                setEventDayName(_liveEventFromDate);
+            _liveEventToDate = end.format('YYYY-MM-DD');
+            $('#txtLiveEventsFromAndToDate').val(start.format('MM/DD/YYYY'));
+        });
+
+        //set timer
+        $('#txtLiveEventsTime').timepicker({
+            icons: {
+                up: "fas fa-angle-up",
+                down: "fas fa-angle-down",
+            }
+        });
+
+        $('#txtLiveEventsDescription').summernote({
+            height: 170,
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+
+    });
+    function setEventsTime() {
+       // _liveEventDayName = $('#drpLiveEventsDaysName').val();
+        _liveEventTime = $('#txtLiveEventsTime').val();
+        _liveEventTimeZone = $('#drpEventsTimeZone option:selected').attr('gmtAdjustment');
+
+        $('#hrefLiveEventsTime').html($('#txtLiveEventsTime').val() + ' ' + $('#drpEventsTimeZone option:selected').attr('gmtAdjustment'));
+        $('#LiveEventsDateTimeModal').modal('toggle');
+    }
+      function setEventDayName(dateString) {
+        //console.log(dateString);
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var d = new Date(dateString);
+          _liveEventDayName = days[d.getDay()];
+
+    }
+</script>
+<script>
+    $(document).ready(function () {
+
+        $(document).on({
+            'show.bs.modal': function () {
+                var zIndex = 1040 + (10 * $('.modal:visible').length);
+                $(this).css('z-index', zIndex);
+                setTimeout(function () {
+                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                }, 0);
+            },
+            'hidden.bs.modal': function () {
+                if ($('.modal:visible').length > 0) {
+                    // restore the modal-open class to the body element, so that scrolling works
+                    // properly after de-stacking a modal.
+                    setTimeout(function () {
+                        $(document.body).addClass('modal-open');
+                    }, 0);
+                }
+            }
+        }, '.modal');
+    });
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>

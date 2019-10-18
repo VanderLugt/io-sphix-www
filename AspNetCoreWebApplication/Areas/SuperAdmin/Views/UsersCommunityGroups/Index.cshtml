@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewData["Title"] = "Users Community Groups";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Community Groups</h1>
+</div>
+<div class="dashboard-workboard-options">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="form-group workboard-filters">
+                <label>Filters</label>
+                <div class="select-dropdown">
+                    <select class="form-control" id="drpStatus">
+                        <option value="">All</option>
+                        <option value="0">Un-Published</option>
+                        <option value="1">Published</option>
+                    </select>
+                </div>
+                @*<div class="select-dropdown">
+                        <select class="form-control" id="">
+                            <option>Prio</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="select-dropdown">
+                        <select class="form-control" id="">
+                            <option>Date Range</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>*@
+            </div>
+        </div>
+        @*<div class="col-lg-3 col-md-12 text-right">
+                <div class="rest-add-task">
+                    <ul>
+                        <li><a href="#"><i class="icon-refresh"></i> Reset </a></li>
+                        <li><a href="#"><i class="icon-plus"></i> Add Tasks </a></li>
+                    </ul>
+                </div>
+            </div>*@
+    </div>
+</div>
+<div class="dashboard-task-block">
+    <div class="table-responsive">
+        <table id="tblCommunitiesList" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Is Publish?</th>
+                    <th>Date</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-2" id="divReviewCommunityGroupModel"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 id="divCommunityGroupSubTitle"> Community Group</h2>
+
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="divReviewCommunityGroup">
+                                    Loading....
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+@section Scripts {
+    <script src="~/js/admin/UserCommuntyGroup.js"></script>
+    <script>
+        var communityGroupsDataTable;
+        $(document).ready(function () {
+            function fill_CommunityGroupsdatatable(IsPublish = '') {
+                communityGroupsDataTable = $("#tblCommunitiesList").DataTable({
+                    "processing": false, // for show progress bar
+                    "serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    "pageLength": 10,
+                    //"lengthMenu": [10, 25, 50],
+                    "ajax": {
+                        "url": "/SuperAdmin/UsersCommunityGroups/CommunitiesGroupsList",
+                        "type": "POST",
+                        "datatype": "json",
+                        "data": { "IsPublish": IsPublish }
+                    },
+                    "columnDefs":
+                        [{
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false,
+                            /* true or false */
+                        }],
+                    "columns": [
+                        { "data": "id", "name": "id", "autoWidth": true },
+                        { "data": "title", "name": "title", "autoWidth": true },
+                        { "data": "isPublish", "name": "isPublish", "autoWidth": true },
+                        { "data": "postDate", "name": "postDate", "autoWidth": true },
+                        {
+                            "render": function (data, type, full, meta) {
+                                return "<a href='#' class='btn btn-info' onclick=ShowCommunityGroupRview('" + full.id + "'); >View</a>";
+                            }, 'orderable': false
+                        },
+                    ]
+
+                });
+            }
+            fill_CommunityGroupsdatatable();
+
+
+            $('#drpStatus').on('change', function () {
+                //alert(this.value);
+                $('#tblCommunitiesList').DataTable().destroy();
+                fill_CommunityGroupsdatatable(this.value);
+            });
+
+        });
+
+        function ShowCommunityGroupRview(Id) {
+            //  $('#divCommunityGroupSubTitle').html('Events');
+            $("#divReviewCommunityGroup").html('Loading..');
+            $("#divReviewCommunityGroup").load('/SuperAdmin/UsersCommunityGroups/ViewCommunityGroup?Id=' + Id);
+            $('#divReviewCommunityGroupModel').modal('toggle');
+        }
+
+    </script>
+}
+
+

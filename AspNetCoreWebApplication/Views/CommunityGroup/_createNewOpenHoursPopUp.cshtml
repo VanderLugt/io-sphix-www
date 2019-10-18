@@ -1,0 +1,63 @@
+﻿<fieldset>
+    <div class="container" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-3" id="modelCreateOpenHours">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content" style="background-color:#6f6c6c">
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <ul class="nav nav-tabs" style="margin-top:20px;">
+                                      
+                                        <li><a data-toggle="tab" class="classTabMenu active show" href="#toAddNewTable">Add a new table</a></li>
+                                        <li><a data-toggle="tab" class="classTabMenu" href="#toAbout">About</a></li>
+                                    </ul>
+                                    <div class="tab-content" style="color:#ffffff">
+                                        <br />
+                                        <div id="toAddNewTable" class="tab-pane active">
+                                            <p>You are about to add a table to this week's office hours, once it is published, anyone who is a member of this group will be able to join. </p>
+                                            <p><u>What time will this begin</u></p>
+                                            <div class="row">
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="PST" /> @Model.OTime PST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="CST"/> @Model.OTime CST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="HST"/> @Model.OTime HST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone"value="EST"/> @Model.OTime EST</div>
+                                            </div>
+                                            <p><u>Roles and Responsibilities</u></p>
+                                            <div>
+                                                <input type="checkbox" onclick="checkCreateOpenHoursTable(this);"  />
+                                                By checking this box, I certify that understand my role, responsibilities, and best practices for leading this discussion.
+                                            </div>
+                                            <div class="float-right">
+                                                <input type="button" class="btn btn-primary" disabled="disabled" onclick="AddOpenOfficeHours(@Model.Id);" id="btnSubmitCreateOpneHoursTable" value="SUBMIT"/>
+                                            </div>
+                                        </div>
+                                        <div id="toAbout" class="tab-pane">
+                                            <p >“Peer-to-Peer networking allows to you connect with other group members of the group to ask questions or to provide helpful feedback to other members. To understand how this work, think of this link a digital room. By Clicking on “create new”, you are adding a table to the room with empty chairs, and asking for members of this community to join you through an RSVP system. The integrated web conferencing solution will connect all of you together at the designated staring time for the group. Alternatively, you can join an existing table that some one has created by clicking on the RSVP button. Etiquette for group meetings is such that the person who creates the group is the person who will start off and lead meeting. At the end, please reserve enough time for 5 minute feedback session on the good, the not so good, and needs improvement. The leader will be responsible for asking the group feedback. At the conclusion of the meeting, the leader will be receive a notification button that will provide the option to continue the same discussion group another week.”</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+<script>
+    function checkCreateOpenHoursTable(_this) {
+        if (_this.checked) {
+            $("#btnSubmitCreateOpneHoursTable").removeAttr("disabled");
+        }
+        else {
+            $("#btnSubmitCreateOpneHoursTable").attr("disabled", true);
+        }
+        
+    }
+  
+</script>

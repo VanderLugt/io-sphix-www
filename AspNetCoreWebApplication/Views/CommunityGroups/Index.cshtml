@@ -1,0 +1,193 @@
+﻿@model IEnumerable<Sphix.ViewModels.CommunityGroupsFroentEnd.CommunityGroupsFroentEndDataView>
+@{
+    //ViewData["Title"] = "Index";
+}
+<div class="dashboad-outer">
+    <div class="container" id="divContainer">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="col-md-12">
+
+                <div class="form-group mb-4  col-md-12">
+                    <div class="row">
+                        @if (Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-4 col-md-12 col-sm-12 col-xs-12 ">
+                                    <div class="community-main-body">
+                                        <div class="community-category" style="background-color:@item.Color">
+                                            @item.CommunityName
+                                        </div>
+                                        <div class="communit-title">
+                                            @item.Title
+                                        </div>
+                                        <div class="community-icons">
+                                            <div class="float-left">
+                                                <a href="#" onclick="ShowDetail(@item.Id);" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                                            </div>
+                                            <div class="float-right navigation-icon">
+                                                <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="community-category-bottom" style="background-color:@item.Color">
+                                            <a asp-controller="CommunitiesForGood" asp-action="Index" style="color:#fff;"> Back to Communities for Good</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <partial name="~/Views/Shared/_NoData.cshtml" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-3" id="modelCommunityDetail">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="form-group" id="divCommunityDetail">
+                                        Loading...
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <h4>Would you like to join this community group?</h4>
+                                    <button type="button" class="btn btn-success" onclick="JoinCommunityGroup();">Yes</button>
+                                    <button type="button" class="btn btn-secondary" onclick="hideCummunityModel();">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-3" id="modelJoinNow">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Join now</h2>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <h4>Would you like to join this community group?</h4>
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="button" class="btn btn-success" onclick="JoinCommunityGroup();">
+                                        Yes
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<input type="hidden" id="hdnCommunityGroupId" />
+<style>
+    .navigation-icon .fa-location-arrow {
+        transform: rotate(45deg);
+    }
+
+    .community-icons {
+        display: inline-block;
+        width: 100%;
+        padding: 0 10px;
+        position: absolute;
+        bottom: 60px;
+    }
+
+        .community-icons a {
+            display: inline-block;
+            background: #4D0B0A;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 50%;
+            color: #fff;
+        }
+
+    .community-main-body {
+        margin-top: 30px;
+        background-image: url('/img/backdrop/1.png');
+        background-size: cover;
+        min-height: 250px;
+        width: 100%;
+        background-position: center center;
+        position: relative;
+    }
+
+    .communit-title {
+        padding: 61px 10px;
+        text-align: center;
+        margin-top: 0;
+        color: #fff;
+        font-size: large;
+        /*font-weight:bold;*/
+    }
+
+        .communit-title a {
+            color: #fff;
+            line-height: 18px;
+            display: inline-block;
+            width: 100%;
+            font-size: 16px;
+        }
+
+    .community-category {
+        background: #4D0B0A;
+        color: #ffffff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .community-category-bottom {
+        margin-top: 0;
+        text-align: center;
+        background-color: #4D0B0A;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding: 10px 0;
+    }
+</style>
+<script src="~/js/User/JoinUserCommunityGroup.js"></script>
+<script>
+    function ShowDetail(Id) {
+        $('#hdnCommunityGroupId').val(Id);
+        $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
+        $('#modelCommunityDetail').modal('toggle');
+    }
+    function ShowJoinNowModel(Id) {
+        $('#hdnCommunityGroupId').val(Id);
+        $('#modelJoinNow').modal('toggle');
+    }
+    function hideCummunityModel() {
+        $('#modelCommunityDetail').modal('hide');
+    }
+</script>

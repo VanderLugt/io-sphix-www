@@ -1,0 +1,188 @@
+﻿@model IEnumerable<Sphix.ViewModels.CommunityGroupsFroentEnd.CommunityForGoodList>
+<style>
+    .community-icons {
+        width: 100%;
+        padding: 0 10px;
+        position: absolute;
+        bottom: 60px;
+    }
+    .community-icons a {
+        display: inline-block;
+        background: #4D0B0A;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        border-radius: 50%;
+        color: #fff;
+    }
+    .community-desc {
+        padding: 68px 10px;
+    }
+    .bg-right-section .dashboad-outer .form-group {
+        padding: 0 35px;
+    }
+    
+</style>
+<div class="d-flex justify-content-center align-items-center mb-4 mt-4">
+    <div class="row">
+        <div class="" style="margin-top:0px;">
+            <div class="form-group mb-4 ">
+                <div class="row">
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12" >
+                                <div class="community-main-body">
+                                    <div class="community-category" style="background-color:@item.Color">@item.Name</div>
+                                    @*<div class="row">
+            <div class="col-md-12  p-white-color">
+                <p>@item.Description </p>
+            </div>
+        </div>*@
+                                    <div class="community-desc">
+                                        <div class="col-md-12 community-image">
+                                            <p style="color:#ffffff; margin:0px;">@item.Description </p>
+                                            @*<img src="@item.ImageUrl" />*@
+                                        </div>
+                                    </div>
+                                    <div class="community-icons">
+                                        <div class="float-left">
+                                            <a href="CommunityGroups/@item.CommunityUrl" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                                        </div>
+                                        <div class="float-right navigation-icon">
+                                            @if (item.IsAlreadyJoined == false)
+                                            {
+                                                <a href="#" onclick="JoinCommunity(@item.Id,'@item.CommunityUrl');" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
+                                            }
+                                            else
+                                            {
+                                                if (item.CommunityGroupURL != null)
+                                                {
+                                                    @*<a href="#" onclick="JoinCommunity(@item.Id,'@item.CommunityUrl');" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>*@
+                                                    <a href="CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="CommunityGroups/@item.CommunityUrl" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>
+                                                }
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                    @*<div class="communit-title">@item.Description</div>*@
+                                    <div class="community-category-bottom" style="background-color:@item.Color">
+                                        <a href="CommunityGroups/@item.CommunityUrl" style="font-size:16px;color:#fff;margin-right:5px;">&nbsp;More @item.FooterLinkText@*<i class="fas fa-arrow-alt-circle-right"></i>*@ </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Records</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdnCommuntyId" />
+<input type="hidden" id="hdnCommuntyUrl" />
+<fieldset>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="modal fade" tabindex="-3" id="modelJoinCommunity">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Join now</h2>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <h4>Would you like to join this community?</h4>
+                                </div>
+                            </div>
+                            <div class="form-submit-btn modal-footer">
+                                <button type="button" class="btn btn-success" onclick="JoinCommunityCategory();">
+                                    Yes
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<style>
+    .community-main-body {
+        margin-bottom: 30px;
+        background-image: url('../img/backdrop/1.png');
+        background-size: cover;
+        min-height: 250px;
+        padding: 0px;
+        position:relative;
+        background-position:center center;
+    }
+
+        .community-main-body img {
+            width: 100%;
+            min-height: 183px;
+        }
+
+        .community-main-body .community-image {
+            padding:0;
+            text-align:center;
+        }
+
+    .communit-title {
+        padding: 10px;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 0;
+        color: #fff;
+        font-size: large;
+        /*font-weight:bold;*/
+    }
+
+    .community-category {
+        background: #4D0B0A;
+        color: #ffffff;
+        padding: 10px;
+        margin-left: 0px;
+        text-align: center;
+        border: solid #808080 1px;
+    }
+   
+    .community-category-bottom {
+        margin: 0px 0px 0px 0;
+        text-align: center;
+        border: solid #808080 1px;
+        padding:10px 0;
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        /*background-color: #4D0B0A;*/
+    }
+</style>
+<script src="~/js/User/JoinUserCommunityGroup.js"></script>
+<script>
+    function JoinCommunity(Id,url) {
+        $('#hdnCommuntyId').val(Id);
+        $('#hdnCommuntyUrl').val(url);
+        $('#modelJoinCommunity').modal('toggle');
+    }
+    function ShowCommunities(Id) {
+        LoadSection('/CommunitiesForGood/CommunitiesByCategory?Id=' + Id, 'Communities For Good');
+    }
+</script>

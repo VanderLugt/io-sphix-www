@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Sphix.ViewModels.User.AssociationsList>
+<div class="row" style="margin-top:33px;margin-bottom:5px;">
+    <div class="col-md-6 selected">Community</div>
+    <div class="col-md-6 selected">Associations</div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row" style="padding:4px">
+        <div class="col-md-6" style="margin-top:7%;">
+            <button class="btn btn-success" style="width:200px; font-size:13px;background-color:@item.Color;" type="button">@item.Name</button>
+        </div>
+        <div class="col-md-6">
+            <textarea id="@item.CommunityId" readonly class="form-control" style="color:#fff;background-color:@item.Color;padding-right:20px;min-height:90px;font-size:11px;" >@item.Associations</textarea>
+            <a href="#" style="color:#fff;bottom:1px;right:29px;position:absolute;" onclick="manageAssociations(@item.CommunityId);">edit</a>
+        </div>
+    </div>
+}
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-3" id="manageAssociations"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                                    Manage Associations
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group center-form-block col-md-12" style="margin-top:0px;background-color:transparent" id="divAssociations">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-submit-btn modal-footer">
+                                    <button type="submit" onclick="saveAssociations();" class="btn btn-primary">Save</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

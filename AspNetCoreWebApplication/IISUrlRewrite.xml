@@ -1,0 +1,9 @@
+﻿<rewrite>
+  <rewriteMaps>
+    <rewriteMap name="StaticRewrites" defaultValue="">
+      <add key="/CommunityGroups/Academia-And-Research" value="/CommunityGroups/Index/1" />
+      <add key="/webcasts" value="/default.aspx?tabid=2&amp;subtabid=24" />
+      <add key="/php" value="/default.aspx?tabid=7116" />
+    </rewriteMap>
+  </rewriteMaps>
+</rewrite>

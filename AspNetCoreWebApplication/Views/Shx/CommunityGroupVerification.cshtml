@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "CommunityGroupVerification";
+     Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center container ">
+    <div class="row ">
+        <div class="center-form-block">
+            @if (Model.Status)
+            {
+                <h4 class="text-left mb-4 themetextTitle">Community Group Is Published Now! Thanks</h4>
+            }
+            else
+            {
+                <h4 class="text-left mb-4 themetextTitle">@Model.Messsage</h4>
+            }
+        </div>
+        </div>
+    </div>
+

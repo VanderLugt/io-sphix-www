@@ -1,0 +1,60 @@
+﻿@model Sphix.ViewModels.User.SignUpStep3ViewModel
+@if (Model.Association.Count() > 0) { 
+<div class="form-group mb-4">
+    <select id="drpGroups" class="form-control"
+            asp-items="@(new SelectList(Model.GroupsList,"Value", "Text"))"></select>
+</div>
+}
+else
+{
+<input type="hidden" id="drpGroups" value="0" />
+}
+@if (Model.Association.Count() > 0) { 
+<div class="form-group mb-4">
+    <select id="drpAssociation" class="form-control"
+            asp-items="@(new SelectList(Model.Association,"Value", "Text"))"></select>
+</div>
+}
+else
+{
+    <input type="hidden" id="drpAssociation" value="0" />
+}
+@if (Model.Type1List.Count() > 0) { 
+<div class="form-group mb-4">
+    <select id="drpType1" class="form-control"
+            asp-items="@(new SelectList(Model.Type1List,"Value", "Text"))"></select>
+</div>
+}
+else {<input type="hidden" id="drpType1" value="0" /> }
+@if (Model.Type2List.Count() > 0) { 
+<div class="form-group mb-4">
+    <select id="drpType2" class="form-control"
+            asp-items="@(new SelectList(Model.Type2List,"Value", "Text"))"></select>
+</div>
+}
+else {<input type="hidden" id="drpType2" value="0" /> }
+<div class="form-group mb-4">
+
+    <div class="btn-group-toggle" data-toggle="buttons">
+        @if (Model.Interests.Count() > 0) {
+        foreach (var item in Model.Interests)
+        {
+        <label class="btn btn-secondary">
+            @item.Text
+            <input type="checkbox" class="chkInterests" id="@item.Value" autocomplete="off">
+            <span class="checkmark"></span>
+        </label>
+        }
+        }
+        else
+        {
+            <input type="checkbox" class="chkInterests" id="0" checked style="display:none;" autocomplete="off">
+        }
+    </div>
+</div>
+
+<style>
+    .btn-group-toggle > .btn, .btn-group-toggle > .btn-group > .btn {
+        margin: 1px;
+    }
+</style>

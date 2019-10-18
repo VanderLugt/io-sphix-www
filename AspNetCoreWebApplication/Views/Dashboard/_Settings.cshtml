@@ -1,0 +1,82 @@
+﻿@model Sphix.ViewModels.User.NotificationSettingsViewModel
+    <div class="dashboad-inner">
+        <div class="dashboard-heading">
+            <h2>Notification Settings</h2>
+            <p></p>
+        </div>
+
+        <div class="dashboad-form-block dashboard-heading">
+            <div class="row ">
+                <div class="col-md-10">
+                    <h5> Blog Subscription</h5>
+                    <label>Receive emails about new posts and updates.</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="switch">
+                        <input type="checkbox" id="chkBlogSubscription" checked="@Model.BlogSubscription">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-md-9">
+                    <h5> Blog Notifications</h5>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Email Notifications</label>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row ">
+                <div class="col-md-10">
+                    <h5> Likes</h5>
+                    <label>Notify me when a member likes my posts and comments.</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="switch">
+                            <input type="checkbox" id="chkNotificationSettingsLike" checked="@Model.Like">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <h5> Comments</h5>
+                    <label>Notify me when members like my posts and comments.</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="switch">
+                            <input type="checkbox" id="chkNotificationSettingsComments" checked="@Model.Comments">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-md-10">
+                    <h5> Follows</h5>
+                    <label>Notify me when there are updates about members and posts.</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="switch">
+                            <input type="checkbox" id="chkNotificationSettingsFollows" checked="@Model.Followis">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+        </div>
+    </div>
+<script src="~/js/User/NotificationSettings.js"></script>
