@@ -49,7 +49,7 @@ namespace AspNetCoreWebApplication.Controllers
                     model.ODescription = openHoursModel.ODescription;
                     model.OFrequency = openHoursModel.OFrequency;
                     TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
-                    if (difference.Days > 7)
+                    if (difference.Days > 7) 
                     {
                         model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
                     }

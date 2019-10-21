@@ -132,7 +132,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
             //IsMeetingTokenUsed
             return new BaseModel { Status = true, Id = openOfficeHoursModel.Id, Messsage = UMessagesInfo.RecordSaved };
         }
-        private DateTime setDateFromDayName(string dayName, DateTime date)
+        private DateTime setDateFromDayName(string dayName, DateTime date) 
         {
             DateTime todayDate = DateTime.Now;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
