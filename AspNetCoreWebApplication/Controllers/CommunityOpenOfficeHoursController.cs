@@ -42,16 +42,29 @@ namespace AspNetCoreWebApplication.Controllers
                 var openHoursModel = await _openOfficeHoursService.getOpenHoursAsync(Id);
                 if(openHoursModel!=null && openHoursModel.IsMeetingTokenUsed==false)
                 {
-                    DateTime nextMeetingDate = openHoursModel.OFromDate.AddDays(7);
+                    //DateTime nextMeetingDate = openHoursModel.OFromDate.AddDays(7);
                    
                     model.UserId = openHoursModel.CreatedBy;
                     model.MaxAttendees =  openHoursModel.MaxAttendees;
                     model.ODescription = openHoursModel.ODescription;
                     model.OFrequency = openHoursModel.OFrequency;
-                    model.OFromDate = nextMeetingDate;
+                    TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
+                    if (difference.Days > 7)
+                    {
+                        model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
+                    }
+                    else if (difference.Days == 0)
+                    {
+                        model.OFromDate = openHoursModel.OFromDate;
+                    }
+                    else
+                    {
+                        model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
+                    }
+                   // model.OFromDate = nextMeetingDate;
                     model.OTimeZone = openHoursModel.OTimeZone;
                     model.OTime = openHoursModel.OTime;
-                    model.OToDate = nextMeetingDate;// openHoursModel.OToDate;
+                    model.OToDate = model.OFromDate;// openHoursModel.OToDate;
                     model.OName = openHoursModel.OName;
                     model.OTime = openHoursModel.OTime;
                     model.OTitle = openHoursModel.OTitle;
@@ -85,7 +98,7 @@ namespace AspNetCoreWebApplication.Controllers
                             HtmlBody = SourceReader.ReadToEnd();
                         }
                         var callbackUrl = Url.Action("ActiveNextSession", "CommunityOpenOfficeHours", null, protocol: HttpContext.Request.Scheme) + "/" + token;
-                      await  _openHoursMailService.SendMailOnCreateNewTableAsync(model.UserId, token, callbackUrl, HtmlBody, nextMeetingDate.ToShortDateString() +" at "+model.OTime+" "+model.OTimeZone);
+                      await  _openHoursMailService.SendMailOnCreateNewTableAsync(model.UserId, token, callbackUrl, HtmlBody, model.OFromDate.ToShortDateString() +" at "+model.OTime+" "+model.OTimeZone);
                         //send thanks mail
                     }
 
@@ -110,9 +123,13 @@ namespace AspNetCoreWebApplication.Controllers
             {
                 model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
             }
-            else
+           else if(difference.Days==0)
             {
                 model.OFromDate = openHoursModel.OFromDate;
+            }
+            else
+            {
+                model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
             }
             
             model.OToDate = model.OFromDate;
@@ -153,11 +170,12 @@ namespace AspNetCoreWebApplication.Controllers
         }
         private DateTime setDateFromDayName(string dayName, DateTime date)
         {
+            DateTime todayDate = DateTime.Now;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);
             int _todayDayIndex = Array.IndexOf(days, date.DayOfWeek.ToString());
-            if (dayName != date.DayOfWeek.ToString())
+            if (date.Date != todayDate.Date)
             {
                 if (_todayDayIndex > _dayIndex)
                 {
