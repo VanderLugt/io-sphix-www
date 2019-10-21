@@ -132,13 +132,14 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
             //IsMeetingTokenUsed
             return new BaseModel { Status = true, Id = openOfficeHoursModel.Id, Messsage = UMessagesInfo.RecordSaved };
         }
-        private DateTime setDateFromDayName(string dayName, DateTime date)
+        private DateTime setDateFromDayName(string dayName, DateTime date) 
         {
+            DateTime todayDate = DateTime.Now;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);
             int _todayDayIndex = Array.IndexOf(days, date.DayOfWeek.ToString());
-            if (dayName != date.DayOfWeek.ToString())
+            if (date.Date != todayDate.Date)
             {
                 if (_todayDayIndex > _dayIndex)
                 {

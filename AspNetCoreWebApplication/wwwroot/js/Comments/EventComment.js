@@ -71,7 +71,7 @@ function deleteEventComment(_Id) {
 }
 function editEventComment(_Id) {
     var dataModel = {
-        EventId: $('#EventId').val(),
+        EventId: $('#hdnEventId').val(),
         Id: _Id,
         CommentText: $('#txtEventReply' + _Id).val()
     };
@@ -123,7 +123,7 @@ function AddEventComment() {
 }
 function postEventCommentReply(parentId) {
     var dataModel = {
-        EventId: $('#EventId').val(),
+        EventId: $('#hdnEventId').val(),
         ParentId: parentId,
         CommentText: $('#txtEventReply' + parentId).val()
     };
@@ -189,7 +189,7 @@ function getNestedChildrenForEventComments(arr, parent) {
             eventlistComment += '<li><div class="comment-profile">' + arr[i].userName + '&nbsp;&nbsp;' + arr[i].commentedDate + '</div><p id="msg_' + arr[i].id + '">' + arr[i].commentText + '</p>';
             if (arr[i].isDeletedMessage === false) {
                 if (arr[i].commentedById === arr[i].loggedInUserId) {
-                    eventlistComment += '<div id="div_' + arr[i].id + '"><i class="fa fa-comment-alt fa-sm" ></i ><input type="button" class="replycomment" onclick="addEventCommentBox(this,' + arr[i].id + ');" value="Reply"><a class="editcomment" onclick="editAticleCommentBox(this,' + arr[i].id + ');">Edit</a><a class="editcomment" onclick="deleteEventComment(' + arr[i].id + ');">Delete</a></div>';
+                    eventlistComment += '<div id="div_' + arr[i].id + '"><i class="fa fa-comment-alt fa-sm" ></i ><input type="button" class="replycomment" onclick="addEventCommentBox(this,' + arr[i].id + ');" value="Reply"><a class="editcomment" onclick="editEventCommentBox(this,' + arr[i].id + ');">Edit</a><a class="editcomment" onclick="deleteEventComment(' + arr[i].id + ');">Delete</a></div>';
                 }
                 else {
                     eventlistComment += '<div id="div_' + arr[i].id + '"><i class="fa fa-comment-alt fa-sm" ></i > <input type="button" class="replycomment" onclick="addEventCommentBox(this,' + arr[i].id + ');" value="Reply"></div>';
@@ -206,11 +206,11 @@ function getNestedChildrenForEventComments(arr, parent) {
     eventlistComment += "</ul>";
 }
 function appendEventComment(result) {
-    var _replyDiv = '';
+    var _replyDiv = ''; 
     //var _li = ' <li>' + result.commentText + '</li>';
     var _li = '<li><div class="comment-profile">' + result.userName + '&nbsp;&nbsp;' + result.commentedDate + '</div><p id="msg_' + result.id + '">' + result.commentText + '</p>';
     if (result.commentedById === result.loggedInUserId) {
-        _replyDiv += '<div id="div_' + result.id + '"><i class="fa fa-comment-alt fa-sm" ></i ><input type="button" class="replycomment" onclick="addEventCommentBox(this,' + result.id + ');" value="Reply"><a class="editcomment" onclick="editAticleCommentBox(this,' + result.id + ');">Edit</a><a class="editcomment" onclick="deleteEventComment(' + result.id + ');">Delete</a></div>';
+        _replyDiv += '<div id="div_' + result.id + '"><i class="fa fa-comment-alt fa-sm" ></i ><input type="button" class="replycomment" onclick="addEventCommentBox(this,' + result.id + ');" value="Reply"><a class="editcomment" onclick="editEventCommentBox(this,' + result.id + ');">Edit</a><a class="editcomment" onclick="deleteEventComment(' + result.id + ');">Delete</a></div>';
     }
     else {
         _replyDiv = '<div id="div_' + result.id + '"><i class="fa fa-comment-alt fa-sm" ></i > <input type="button" class="replycomment" onclick="addEventCommentBox(this,' + result.id + ');" value="Reply"></div>';
