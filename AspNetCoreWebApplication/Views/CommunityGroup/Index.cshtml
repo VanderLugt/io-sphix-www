@@ -13,7 +13,8 @@
                             <div class="row">
                                 <div class="community-category">
                                     @Model.Title
-                                    <p>Weekly Scheduled | Peer to Peer Live Networking | Can I ask you a quick question</p>
+                                    @*<p>Weekly Scheduled | Peer to Peer Live Networking | Can I ask you a quick question</p>*@
+                                   @if (Model.OpenOfficeHours != null) { <p>@Model.OpenOfficeHours.OTitle</p>}
                                 </div>
                             </div>
                         </div>
@@ -34,7 +35,8 @@
 
                                         <div class="float-left icon-texts">
                                             <p style="cursor:help;" title="create new table in open hours meeting" onclick="CreateNewTable();">Create New</p>
-                                            <a href="#" title="Other times" onclick="ShowOtherTimes();">
+                                            <a href="#" title="Other times" onclick="CreateNewTable();">
+                                                @*onclick="ShowOtherTimes();"*@
                                                 <i class="far fa-clock"></i>
                                             </a>
                                         </div>
@@ -196,7 +198,7 @@ else
         background: #4D0B0A;
         color: #ffffff;
         padding: 10px;
-        text-align: left;
+        text-align: center;
         width: 100%;
     }
 
