@@ -49,7 +49,7 @@ namespace AspNetCoreWebApplication.Controllers
                     model.ODescription = openHoursModel.ODescription;
                     model.OFrequency = openHoursModel.OFrequency;
                     TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
-                    if (difference.Days > 7) 
+                    if (difference.Days > 7)
                     {
                         model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
                     }
@@ -131,7 +131,7 @@ namespace AspNetCoreWebApplication.Controllers
             {
                 model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
             }
-            
+
             model.OToDate = model.OFromDate;
             model.OName = openHoursModel.OName;
             model.OTime = openHoursModel.OTime;
@@ -174,13 +174,21 @@ namespace AspNetCoreWebApplication.Controllers
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);
-            int _todayDayIndex = Array.IndexOf(days, date.DayOfWeek.ToString());
+            int _todayDayIndex = Array.IndexOf(days, todayDate.DayOfWeek.ToString());
             if (date.Date != todayDate.Date)
             {
                 if (_todayDayIndex > _dayIndex)
                 {
-                    _dayIndex = (7 - (_todayDayIndex - _dayIndex));
-                    return date.AddDays(_dayIndex);
+                    if (_dayIndex > 0)
+                    {
+                        _dayIndex = (7 - (_todayDayIndex - _dayIndex));
+                        return date.AddDays(_dayIndex);
+                    }
+                    else
+                    {
+                        return date.AddDays(7);
+                    }
+                    
                 }
                 return date.AddDays(_dayIndex - 1);
             }

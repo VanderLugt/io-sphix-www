@@ -84,6 +84,7 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                     openOfficeHours.OTimeZone = _openOfficeHour[0].OTimeZone;
                 }
                 openOfficeHours.OTime = _openOfficeHour[0].OTime;
+                openOfficeHours.OTitle = _openOfficeHour[0].OTitle;
                 openOfficeHours.Id = _openOfficeHour[0].Id;
             }
             model.OpenOfficeHours = openOfficeHours;

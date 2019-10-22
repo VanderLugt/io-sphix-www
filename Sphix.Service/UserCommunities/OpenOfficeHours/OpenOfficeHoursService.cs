@@ -58,8 +58,8 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                     OName = model.OName,
                     ODescription = model.ODescription,
                     OFrequency = model.OFrequency,
-                    OFromDate = setDateFromDayName(model.OTimeDayName, model.OFromDate),
-                    OToDate = setDateFromDayName(model.OTimeDayName, model.OFromDate),
+                    OFromDate = model.OFromDate, // setDateFromDayName(model.OTimeDayName, model.OFromDate),
+                    OToDate = model.OFromDate,// setDateFromDayName(model.OTimeDayName, model.OFromDate),
                     OTime = model.OTime,
                     OTimeDayName = model.OTimeDayName,
                     OTimeZone = model.OTimeZone,
@@ -92,7 +92,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                 openOfficeHoursModel.OName = model.OName;
                 openOfficeHoursModel.ODescription = model.ODescription;
                 openOfficeHoursModel.OFrequency = model.OFrequency;
-                openOfficeHoursModel.OFromDate = setDateFromDayName(model.OTimeDayName, model.OFromDate);
+                openOfficeHoursModel.OFromDate = model.OFromDate;// setDateFromDayName(model.OTimeDayName, model.OFromDate);
                 openOfficeHoursModel.OToDate = openOfficeHoursModel.OFromDate;
                 openOfficeHoursModel.OTime = model.OTime;
                 openOfficeHoursModel.OTimeDayName = model.OTimeDayName;
@@ -132,13 +132,13 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
             //IsMeetingTokenUsed
             return new BaseModel { Status = true, Id = openOfficeHoursModel.Id, Messsage = UMessagesInfo.RecordSaved };
         }
-        private DateTime setDateFromDayName(string dayName, DateTime date) 
+        private DateTime setDateFromDayName(string dayName, DateTime date)
         {
             DateTime todayDate = DateTime.Now;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);
-            int _todayDayIndex = Array.IndexOf(days, date.DayOfWeek.ToString());
+            int _todayDayIndex = Array.IndexOf(days, todayDate.DayOfWeek.ToString());
             if (date.Date != todayDate.Date)
             {
                 if (_todayDayIndex > _dayIndex)

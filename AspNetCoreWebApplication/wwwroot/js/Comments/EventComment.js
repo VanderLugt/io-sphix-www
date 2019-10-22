@@ -206,7 +206,7 @@ function getNestedChildrenForEventComments(arr, parent) {
     eventlistComment += "</ul>";
 }
 function appendEventComment(result) {
-    var _replyDiv = ''; 
+    var _replyDiv = '';
     //var _li = ' <li>' + result.commentText + '</li>';
     var _li = '<li><div class="comment-profile">' + result.userName + '&nbsp;&nbsp;' + result.commentedDate + '</div><p id="msg_' + result.id + '">' + result.commentText + '</p>';
     if (result.commentedById === result.loggedInUserId) {
