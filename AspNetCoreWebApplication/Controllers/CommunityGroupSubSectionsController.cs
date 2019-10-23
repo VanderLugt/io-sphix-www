@@ -9,6 +9,7 @@ using Sphix.Service.UserCommunities.CommunityGroupPublishMail;
 using Sphix.Service.UserCommunities.JoinCommunityEventMeeting;
 using Sphix.Service.UserCommunities.JoinCommunityGroup;
 using Sphix.Service.UserCommunities.JoinCommunityOpenHoursMeeting;
+using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMail;
 using Sphix.Utility;
 using Sphix.ViewModels;
 using Sphix.ViewModels.UserCommunities;
@@ -26,6 +27,7 @@ namespace AspNetCoreWebApplication.Controllers
         private readonly IUserCommunitiesService _userCommunitiesService;
         private readonly IHostingEnvironment _env;
         private readonly ICommunityGroupEmailService _communityGroupEmailService;
+        private readonly IOpenHoursMailService _openHoursMailService;
         public CommunityGroupSubSectionsController(ClaimAccessor claimAccessor
             ,ICommunitiesForGoodService communitiesForGoodService
             , IJoinCommunityGroupService joinCommunityGroupService
@@ -34,6 +36,7 @@ namespace AspNetCoreWebApplication.Controllers
             , IUserCommunitiesService userCommunitiesService
             , IHostingEnvironment env
             , ICommunityGroupEmailService communityGroupEmailService
+              , IOpenHoursMailService openHoursMailService
          )
         {
             _env = env;
@@ -44,6 +47,7 @@ namespace AspNetCoreWebApplication.Controllers
             _joinCommunityOpenHoursMeetingService = joinCommunityOpenHoursMeetingService;
             _joinCommunityEventMeetingService = joinCommunityEventMeetingService;
             _userCommunitiesService = userCommunitiesService;
+            _openHoursMailService = openHoursMailService;
         }
         
         public async Task<IActionResult> CommunityGroupDetail(long Id)
@@ -85,7 +89,25 @@ namespace AspNetCoreWebApplication.Controllers
             if (UMessagesInfo.CheckTimeZoneValidation(model.TimeZone))
             {
                 model.UserId = _claimAccessor.UserId;
-                return Json(await _joinCommunityOpenHoursMeetingService.SaveAsync(model));
+                var _result = await _joinCommunityOpenHoursMeetingService.SaveAsync(model);
+                if (_result.Status)
+                {
+                    var pathToFile = _env.WebRootPath
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "Templates"
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "EmailTemplates"
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "WelcomJoinOpenHoursMeeting.html";
+                    string HtmlBody = string.Empty;
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+                        HtmlBody = SourceReader.ReadToEnd();
+                    }
+                    await _openHoursMailService.WelcomeMailOnJoinOpenOfficeHoursMettingAsync(_claimAccessor.UserId,  HtmlBody, _result.Data);
+                    //send thanks mail
+                }
+                return Json(_result);
             }
             else
             {
@@ -98,7 +120,25 @@ namespace AspNetCoreWebApplication.Controllers
             if (UMessagesInfo.CheckTimeZoneValidation(model.TimeZone))
             {
                 model.UserId = _claimAccessor.UserId;
-                return Json(await _joinCommunityEventMeetingService.SaveAsync(model));
+                var _result = await _joinCommunityEventMeetingService.SaveAsync(model);
+                if (_result.Status)
+                {
+                    var pathToFile = _env.WebRootPath
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "Templates"
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "EmailTemplates"
+                             + Path.DirectorySeparatorChar.ToString()
+                             + "WelcomJoinEventMeeting.html";
+                    string HtmlBody = string.Empty;
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+                        HtmlBody = SourceReader.ReadToEnd();
+                    }
+                    await _openHoursMailService.WelcomeMailOnJoinEventMettingAsync(_claimAccessor.UserId, HtmlBody, _result.Data);
+                    //send thanks mail
+                }
+                return Json(_result);
             }
             else
             {

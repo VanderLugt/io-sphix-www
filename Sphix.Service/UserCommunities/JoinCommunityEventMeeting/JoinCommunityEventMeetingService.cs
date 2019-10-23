@@ -37,7 +37,7 @@ namespace Sphix.Service.UserCommunities.JoinCommunityEventMeeting
                 joinEventMeeting.JoinDateTime = DateTime.Now;
                 joinEventMeeting.TimeZone = model.TimeZone;
                 await _unitOfWork.JoinEventMeetingRepository.Insert(joinEventMeeting);
-                return new BaseModel { Id = joinEventMeeting.Id, Status = true, Messsage = UMessagesInfo.RecordSaved };
+                return new BaseModel { Id = joinEventMeeting.Id, Status = true, Messsage = UMessagesInfo.RecordSaved,Data=joinEventMeeting.LiveEvent.EFromDate.ToShortDateString()+" at"+joinEventMeeting.LiveEvent.ETime+" "+joinEventMeeting.LiveEvent.ETimeZone };
             }
             catch (Exception)
             {
