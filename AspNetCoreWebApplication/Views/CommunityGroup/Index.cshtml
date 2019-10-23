@@ -14,14 +14,17 @@
                                 <div class="community-category">
                                     @Model.Title
                                     @*<p>Weekly Scheduled | Peer to Peer Live Networking | Can I ask you a quick question</p>*@
-                                   @if (Model.OpenOfficeHours != null) { <p>@Model.OpenOfficeHours.OTitle</p>}
+                                 
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-4  col-md-12">
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 community-main-body">
-
+                                    <div class="community-category">
+                                        @if (Model.OpenOfficeHours != null)
+                                        {@Model.OpenOfficeHours.OTitle}
+                                    </div>
                                     <div class="community-icons">
                                         <div style="text-align:center;">
                                             <a href="#" onclick="ShowDetail(@Model.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
@@ -179,6 +182,7 @@ else
         padding-left: 0px;
         position: relative;
         background-position: center center;
+        margin-top:10px;
     }
 
     .communit-title {

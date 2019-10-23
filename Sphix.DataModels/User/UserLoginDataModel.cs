@@ -9,7 +9,6 @@ namespace Sphix.DataModels.User
     {
         public UsersLoginDataModel()
         {
-            
             LastLoginDateTime = DateTime.Now;
         }
         [Key]
