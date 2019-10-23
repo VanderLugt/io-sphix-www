@@ -55,5 +55,71 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMai
                 return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
             }
         }
+        public async Task<BaseModel> WelcomeMailOnJoinOpenOfficeHoursMettingAsync(long userId, string emailTemplateBody, string meetingDateAndTime)
+        {
+            try
+            {
+                var _data = await _unitOfWork.UserProfileRepository.FindAllBy(c => c.User.Id == userId);
+                if (_data != null)
+                {
+                    if (string.IsNullOrEmpty(_data[0].Email))
+                    {
+                        return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+                    }
+                    string messageBody = string.Format(emailTemplateBody,
+                            _data[0].FirstName,
+                            meetingDateAndTime,
+                            UMessagesInfo.MailFooter
+                            );
+                    await _emailSender.SendEmailAsync(
+                            "Open Office Hours Meeting",
+                            messageBody,
+                            _data[0].Email,
+                            _sphixConfiguration.SupportEmail,
+                            UMessagesInfo.SphixSupport
+                            );
+                    return new BaseModel { Status = true, Messsage = UMessagesInfo.EmailSent };
+                }
+                return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+            }
+            catch (Exception)
+            {
+
+                return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+            }
+        }
+        public async Task<BaseModel> WelcomeMailOnJoinEventMettingAsync(long userId, string emailTemplateBody, string meetingDateAndTime)
+        {
+            try
+            {
+                var _data = await _unitOfWork.UserProfileRepository.FindAllBy(c => c.User.Id == userId);
+                if (_data != null)
+                {
+                    if (string.IsNullOrEmpty(_data[0].Email))
+                    {
+                        return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+                    }
+                    string messageBody = string.Format(emailTemplateBody,
+                            _data[0].FirstName,
+                            meetingDateAndTime,
+                            UMessagesInfo.MailFooter
+                            );
+                    await _emailSender.SendEmailAsync(
+                            "New event date & timing",
+                            messageBody,
+                            _data[0].Email,
+                            _sphixConfiguration.SupportEmail,
+                            UMessagesInfo.SphixSupport
+                            );
+                    return new BaseModel { Status = true, Messsage = UMessagesInfo.EmailSent };
+                }
+                return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+            }
+            catch (Exception)
+            {
+
+                return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+            }
+        }
     }
 }

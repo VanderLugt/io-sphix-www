@@ -17,6 +17,7 @@ namespace Sphix.ViewModels
     {
         public bool Status { get; set; }
         public string Messsage { get; set; }
+        public string Data { get; set; }
     }
     public class SearchFilter
     {
