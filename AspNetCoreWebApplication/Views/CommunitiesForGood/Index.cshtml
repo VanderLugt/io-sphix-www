@@ -5,10 +5,12 @@
 }
 
 <div class="dashboad-outer">
-    <div  id="divContainer">
+    <div id="divContainer">
 
     </div>
 </div>
+<input type="hidden" id="hdnCommunityGroupId" value="0" />
+<input type="hidden" id="hdnCommuntyGroupUrl" value="0" />
 <style>
     #feedback {
         font-size: 1.4em;
@@ -38,11 +40,24 @@
             line-height: 28px;
             cursor: pointer;
         }
+
     .navigation-icon .fa-location-arrow {
         transform: rotate(45deg);
     }
 </style>
-
+<partial name="_joinThisCommunityPopUp.cshtml" />
+<script>
+    function ShowDetail(Id, url) {
+        if (Id == 0) {
+            return;
+        }
+        $('#hdnCommunityGroupId').val(Id);
+        $('#hdnCommuntyGroupUrl').val(url);
+        $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
+        $('#modelCommunityDetail').modal('toggle');
+    }
+    func
+</script>
 @section Scripts{
     <script>
         $(document).ready(function () {

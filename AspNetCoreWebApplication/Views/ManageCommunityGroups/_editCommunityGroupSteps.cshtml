@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="form-submit-btn modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                    <button type="button" data-dismiss="modal" class="btn btn-info" onclick="return window.location='/ManageCommunityGroups'">
                                         Ok
                                     </button>
                                 </div>
@@ -225,10 +225,13 @@
 <input type="hidden" value="0" id="hdnTargetedThemes" />
 <input type="hidden" value="0" id="hdnOpenOfficeHoursId" />
 <input type="hidden" value="@ViewBag.Id" id="hdnCommunityId" />
+<input type="hidden" value="0" id="hdnIsPublicGroup" />
 <script>
     var _communityId = 0;
     var _targetedIds = '';
     var _themesIds = '';
+    var _interestIds = '';
+    var _associations = '';
 
     var _openHoursFromDate = '';
     var _openHoursToDate = '';
@@ -294,14 +297,16 @@
                             url: '/ManageCommunityGroups/getCommunityDetail?Id='+@ViewBag.Id ,
                             //data: objectToPass,
                            success: function (data) {
-                               
+                               //alert(data.isPublicGroup);
                                            $('#txtEditCommunityGroupTitle').val(data.title);
                                            $('#txtGroupDescription').summernote('code', data.description);
                                            $('#hdnTargetedCommunityGroups').val(data.communityTargetedGroupId);
                                            $('#hdnTargetedCommunityInterests').val(data.targetedInterestIds);
                                             $('#hdnTargetedCommunityAssociationIds').val(data.associationId);
-                                            $('#hdnTargetedCommunityType1Ids').val(data.type1Id);
-                                            $('#hdnTargetedCommunityType2Ids').val(data.type2Id);
+                                            //$('#hdnTargetedCommunityType1Ids').val(data.type1Id);
+                                            //$('#hdnTargetedCommunityType2Ids').val(data.type2Id);
+                                            $('#hdnIsPublicGroup').val(data.isPublicGroup);
+                                         
                                            $('#hdnTargetedThemes').val(data.themesId);
                                            _videoUrl = data.descriptionVideoUrl;
 

@@ -34,5 +34,7 @@ namespace Sphix.ViewModels.CommunityGroupsFroentEnd
         public string Description { get; set; }
         public bool IsAlreadyJoined { get; set; }
         public string CommunityGroupURL { get; set; }
+        public Int64 CommunityGroupId { get; set; }
+        public Int32 TotalMembers { get; set; }
     }
 }

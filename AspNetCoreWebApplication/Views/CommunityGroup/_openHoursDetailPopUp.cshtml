@@ -12,17 +12,17 @@
                                 </div>
                             </div>
                             <div class="form-submit-btn modal-footer">
-                                @if (Model.OpenOfficeHours.IsRegisterInMeeting)
-                                {
-                                    <h2>You have already joined this meeting</h2>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideCummunityModel();">Close</button>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn btn-success" onclick="JoinCommunityOpenHoursMeeting();">SIGN UP</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideCummunityModel();">Close</button>
-                                }
-
+                                @*@if (Model.OpenOfficeHours.IsRegisterInMeeting)
+        {
+            <h2>You have already joined this meeting</h2>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideCummunityModel();">Close</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-success" onclick="JoinCommunityOpenHoursMeeting();">SIGN UP</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        }*@
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

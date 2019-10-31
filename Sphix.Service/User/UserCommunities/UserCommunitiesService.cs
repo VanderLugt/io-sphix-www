@@ -92,6 +92,46 @@ namespace Sphix.Service.User.UserCommunities
             
             return true;
         }
+        public async Task<bool> SaveGroupsAsync(string groupIds, UsersLoginDataModel user, CommunityDataModel community)
+        {
+            if (groupIds == null)
+            {
+                return false;
+            }
+            string[] interests = groupIds.Split(',');
+            var _selectedInterests = await _unitOfWork.UserGroupsRepository.FindAllBy(c => c.User == user && c.Community == community);
+
+            foreach (var updateItem in _selectedInterests)
+            {
+                if (interests.Contains(updateItem.GroupId.ToString()) == false)
+                {
+                    updateItem.IsActive = false;
+                }
+                else
+                {
+                    updateItem.IsActive = true;
+                    interests = interests.Where(val => val != updateItem.GroupId.ToString()).ToArray();
+                }
+                await _unitOfWork.UserGroupsRepository.Update(updateItem);
+
+            }
+            foreach (var item in interests)
+            {
+                if (!string.IsNullOrEmpty(item) && item != "0")
+                {
+
+                    UserGroupsDataModel userGroups = new UserGroupsDataModel();
+                    userGroups.User = user;
+                    userGroups.Community = community;
+                    userGroups.IsActive = true;
+                    userGroups.GroupId = Convert.ToInt32(item);
+                    await _unitOfWork.UserGroupsRepository.Insert(userGroups);
+
+                }
+                //Console.WriteLine(item);
+            }
+            return true;
+        }
         public async Task<bool> SaveInterestsAsync(string interestsIds, UsersLoginDataModel user, CommunityDataModel community)
         {
             if (interestsIds == null)
@@ -130,7 +170,46 @@ namespace Sphix.Service.User.UserCommunities
                 }
                 //Console.WriteLine(item);
             }
-            
+            return true;
+        }
+        public async Task<bool> SaveAssociationsAsync(string associationsIds, UsersLoginDataModel user, CommunityDataModel community)
+        {
+            if (associationsIds == null)
+            {
+                return false;
+            }
+            string[] interests = associationsIds.Split(',');
+            var _selectedInterests = await _unitOfWork.UserAssociationsRepository.FindAllBy(c => c.User == user && c.Community == community);
+
+            foreach (var updateItem in _selectedInterests)
+            {
+                if (interests.Contains(updateItem.AssociationId.ToString()) == false)
+                {
+                    updateItem.IsActive = false;
+                }
+                else
+                {
+                    updateItem.IsActive = true;
+                    interests = interests.Where(val => val != updateItem.AssociationId.ToString()).ToArray();
+                }
+                await _unitOfWork.UserAssociationsRepository.Update(updateItem);
+
+            }
+            foreach (var item in interests)
+            {
+                if (!string.IsNullOrEmpty(item) && item != "0")
+                {
+
+                    UserAssociationsDataModel userGroups = new UserAssociationsDataModel();
+                    userGroups.User = user;
+                    userGroups.Community = community;
+                    userGroups.IsActive = true;
+                    userGroups.AssociationId = Convert.ToInt32(item);
+                    await _unitOfWork.UserAssociationsRepository.Insert(userGroups);
+
+                }
+                //Console.WriteLine(item);
+            }
             return true;
         }
     }

@@ -1,20 +1,21 @@
 ﻿@model Sphix.ViewModels.UserCommunities.OpenOfficeHoursViewModel
 <div class="row">
-    <div class="col-md-12" style="background-color:#4D0B0A;color:#fff;">
+    <div class="col-md-12 community-category" style="text-align:left">
 
-        <p>@Model.OName</p>
+        <p>@Model.OTitle</p>
     </div>
 
 </div>
 <div class="row">
     <div class="col-md-6">
-        Title: @Model.OTitle<br />
+        @*Title: @Model.OTitle<br />*@
+        @*Date: @Model.OFromDate.ToString("dd MMM yyyy") - @Model.OToDate.ToString("dd MMM yyyy")<br />*@
+        Time: @Model.OTime @Model.OTimeZone<br />
         Created by : Sphix
     </div>
     <div class="col-md-6">
         Frequently: <span style="text-transform:capitalize;">@Model.OFrequency</span> <br />
-        Date: @Model.OFromDate.ToString("dd MMM yyyy") - @Model.OToDate.ToString("dd MMM yyyy")<br />
-        Time: @Model.OTime @ViewBag.TimeZone<br />
+        
         Who: @Model.MaxAttendees Members<br />
     </div>
 </div>

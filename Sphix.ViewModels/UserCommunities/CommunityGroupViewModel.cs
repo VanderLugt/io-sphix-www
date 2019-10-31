@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Sphix.ViewModels.UserCommunities
@@ -19,9 +20,10 @@ namespace Sphix.ViewModels.UserCommunities
         public string CommunityTargetedGroupId { get; set; }
         public string ThemesId { get; set; }
         public string AssociationId { get; set; }
-        public string Type1Id { get; set; }
-        public string Type2Id { get; set; }
+        //public string Type1Id { get; set; }
+        //public string Type2Id { get; set; }
         public string TargetedInterestIds { get; set; }
+        public bool IsPublicGroup { get; set; }
     }
     
 }

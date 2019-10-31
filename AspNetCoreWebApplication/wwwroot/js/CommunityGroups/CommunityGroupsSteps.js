@@ -1,4 +1,5 @@
 ﻿
+
 function uploadStreamingFile() {
     var data = new FormData();
     $.each($('#fileCommunityGroupDescriptionVideo')[0].files, function (i, file) {
@@ -62,10 +63,11 @@ function SaveCommunity() {
 
     formData.append("OgranizationsId", _communityId);
     formData.append("CommunityTargetedGroupId", _targetedIds);
-    formData.append("AssociationId", $('#drpAssociation').val());
-    formData.append("Type1Id", $('#drpType1').val());
-    formData.append("Type2Id", $('#drpType2').val());
+    formData.append("AssociationId", _associations);
+    //formData.append("Type1Id", $('#drpType1').val());
+    //formData.append("Type2Id", $('#drpType2').val());
     formData.append("TargetedInterestIds", _interestIds);
+    formData.append("IsPublicGroup", $('#chkIsPublicGroup').prop('checked'));//
 
     formData.append("ThemesId", _themesIds);
 
@@ -183,11 +185,11 @@ function EditCommunity() {
     formData.append("Id", $("#hdnCommunityId").val());
     formData.append("OgranizationsId", _communityId);
     formData.append("CommunityTargetedGroupId", _targetedIds);
-    formData.append("AssociationId", $('#drpAssociation').val());
+    formData.append("AssociationId", _associations);
     formData.append("Type1Id", $('#drpType1').val());
     formData.append("Type2Id", $('#drpType2').val());
     formData.append("TargetedInterestIds", _interestIds);
-
+    formData.append("IsPublicGroup", $('#chkIsPublicGroup').prop('checked'));
     formData.append("DescriptionVideoUrl", _videoUrl);
     formData.append("ThemesId", _themesIds);
     formData.append("Title", $('#txtEditCommunityGroupTitle').val());
@@ -404,14 +406,27 @@ function checkFirstStepValidations() {
         swal("Sorry!", "Please select at least one community organizations!", "error");
         return false;
     }
-    setCheckedTargetedtIds();
-    setCheckedTargetedtInterestsIds();
-    setCheckedThemeIds();
+    //alert($('#chkIsPublicGroup').prop('checked'));
+       
+            setCheckedTargetedtIds();
+            setCheckedTargetedtAssociationsIds();
+            setCheckedTargetedtInterestsIds();
+            setCheckedThemeIds();
     
+if ($('#chkIsPublicGroup').prop('checked') === false) {
     if (_targetedIds === '') {
         swal("Sorry!", "Please select at least one Targeted Community Groups!", "error");
         return false;
     }
+    if (_associations === '') {
+        swal("Sorry!", "Please select at least one associations!", "error");
+        return false;
+    }
+    if (_interestIds === '') {
+        swal("Sorry!", "Please select at least one interests!", "error");
+        return false;
+    }
+}
     if (_themesIds === '') {
         swal("Sorry!", "Please select at least one Theme of community group!", "error");
         return false;

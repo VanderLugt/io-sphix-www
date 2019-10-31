@@ -39,6 +39,7 @@ namespace Sphix.ViewModels.CommunityGroupsFroentEnd
         }
         public string FullName { get; set; }
         public string EmailAddress { get; set; }
+        public string Color { get; set; }
         public OpenOfficeHoursViewModel OpenOfficeHours { get; set; }
     }
 }

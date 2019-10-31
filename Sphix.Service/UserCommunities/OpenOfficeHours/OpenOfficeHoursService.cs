@@ -92,8 +92,16 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                 openOfficeHoursModel.OName = model.OName;
                 openOfficeHoursModel.ODescription = model.ODescription;
                 openOfficeHoursModel.OFrequency = model.OFrequency;
-                openOfficeHoursModel.OFromDate = model.OFromDate;// setDateFromDayName(model.OTimeDayName, model.OFromDate);
-                openOfficeHoursModel.OToDate = openOfficeHoursModel.OFromDate;
+                if (openOfficeHoursModel.OTimeDayName.ToLower().Trim() != model.OTimeDayName.ToLower().Trim())
+                {
+                    openOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(model.OTimeDayName, DateTime.Now.Date);
+                    openOfficeHoursModel.OToDate = openOfficeHoursModel.OFromDate;
+                }
+                else
+                {
+                    openOfficeHoursModel.OFromDate = model.OFromDate;// setDateFromDayName(model.OTimeDayName, model.OFromDate);
+                    openOfficeHoursModel.OToDate = openOfficeHoursModel.OFromDate;
+                }
                 openOfficeHoursModel.OTime = model.OTime;
                 openOfficeHoursModel.OTimeDayName = model.OTimeDayName;
                 openOfficeHoursModel.OTimeZone = model.OTimeZone;

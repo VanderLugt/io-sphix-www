@@ -35,6 +35,7 @@ namespace Sphix.ViewModels.UserCommunities
         public string Type1Id { get; set; }
         public string Type2Id { get; set; }
         public string TargetedInterestIds { get; set; }
+        public bool IsPublicGroup { get; set; }
         public OpenOfficeHoursViewModel OpenOfficeHours { get; set; }
     }
 }

@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-6 p-white-color">
                             <p>
-                                Which Commuity <a href='#' class="atooltip" data-placement="top" data-toggle="tooltip" title="By selecting the community, you are indicating which type of community that this group will belong to. In advance, please know there is strong crossover between groups. In other words, content and live meetings created within and for this group, will have the option when being published, to being shared to other groups not only within this community, but also to groups in other communities."> <i class="fas fa-info-circle"></i></a>
+                                Which Community  <a href='#' class="atooltip" data-placement="top" data-toggle="tooltip" title="By selecting the community, you are indicating which type of community that this group will belong to. In advance, please know there is strong crossover between groups. In other words, content and live meetings created within and for this group, will have the option when being published, to being shared to other groups not only within this community, but also to groups in other communities."> <i class="fas fa-info-circle"></i></a>
                             </p><br />
                             <ol id="selectable">
                                 @foreach (var item in ViewBag.Communities)
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="form-submit-btn modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-info">
+                                    <button type="button" data-dismiss="modal" class="btn btn-info" onclick="return location.reload()">
                                         Ok
                                     </button>
                                 </div>
@@ -235,6 +235,7 @@
     var _targetedIds = '';
     var _themesIds = '';
     var _interestIds = '';
+    var _associations = '';
 
     var _openHoursFromDate = new Date();
     var _openHoursToDate = new Date();

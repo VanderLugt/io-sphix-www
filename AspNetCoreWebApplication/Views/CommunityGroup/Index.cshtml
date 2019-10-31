@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="from-group col-md-12">
                             <div class="row">
-                                <div class="community-category">
+                                <div class="community-category" >
                                     @Model.Title
                                     @*<p>Weekly Scheduled | Peer to Peer Live Networking | Can I ask you a quick question</p>*@
                                  
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="community-icons">
                                         <div style="text-align:center;">
-                                            <a href="#" onclick="ShowDetail(@Model.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
+                                            <a href="#" onclick="ShowDetail(@Model.OpenOfficeHours.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
                                         </div>
                                     </div>
                                     <div class="communit-title">
@@ -73,7 +73,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-top:10%;">
                                     <ul class="nav nav-tabs" style="margin-top:20px;">
                                         <li><a class="classTabMenu">Invite a friend: </a></li>
                                         <li><a data-toggle="tab" class="classTabMenu active show" href="#toGroup">To This Group</a></li>
@@ -82,8 +82,14 @@
                                     <div class="tab-content">
                                         <br />
                                         <div id="toGroup" class="tab-pane active">
-                                            <input type="email" id="txtInviteToGroupEmails" onkeyup="InviteToGroupWordCount();" class="form-control" placeholder="Email Address" message="Email address is a required field." required  />
-                                            <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToGroupEmail" value="SEND" onclick="sendInvitationToGroup();" />
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <input type="email" id="txtInviteToGroupEmails" onkeyup="InviteToGroupWordCount();" class="form-control" placeholder="Email Address" message="Email address is a required field." required />
+                                                </div>
+                                                <div class="col-2">
+                                                    <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToGroupEmail" value="SEND" onclick="sendInvitationToGroup();" />
+                                                </div>
+                                            </div>
                                         </div>
                                         @*<div id="toSphix" class="tab-pane">
                                             <input type="text" id="txtInviteToSphixEmails" onkeyup="InviteToSphixWordCount();" class="form-control" placeholder="Email Address" />
@@ -118,7 +124,7 @@ else
     <partial name="~/Views/Shared/_NoData.cshtml" />
 }
 <input type="hidden" id="hdnCommunityGroupId" value="@ViewBag.CId" />
-<partial name="_joinThisCommunityPopUp.cshtml" />
+<partial name="_openHoursDetailPopUp.cshtml" />
 <partial name="_registerOpenOfficeHoursMeetingPopUp.cshtml" />
 <partial name="_singleEventPopUp.cshtml" />
 <partial name="_registerForEventPopUp.cshtml" />
@@ -150,7 +156,7 @@ else
 
         .community-icons a {
             display: inline-block;
-            background: #4D0B0A;
+            background: @Model.Color;
             width: 50px;
             height: 50px;
             line-height: 50px;
@@ -161,7 +167,7 @@ else
 
     .rsvp-icons {
         display: inline-block;
-        background: #4D0B0A;
+          background: @Model.Color;
         width: 50px;
         height: 50px;
         line-height: 50px;
@@ -199,7 +205,7 @@ else
         }
 
     .community-category {
-        background: #4D0B0A;
+        background: @Model.Color;
         color: #ffffff;
         padding: 10px;
         text-align: center;
@@ -207,6 +213,7 @@ else
     }
 
     .community-category-bottom {
+
         margin-top: 0;
         text-align: left;
         color: #fff;
@@ -262,8 +269,10 @@ else
     var _liveEventTimeZone = '';
     function ShowDetail(Id) {
         //   $('#hdnCommunityGroupId').val(Id);
-        $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
-        $('#modelCommunityDetail').modal('toggle');
+        //$("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
+        $("#divOpenHoursDetail").load('/CommunityGroupSubSections/RegisterForOpenHours?Id=' + Id);
+        //
+        $('#modelOpenHoursDetail').modal('toggle');
     }
     function hideCummunityModel() {
         $('#modelCommunityDetail').modal('hide');

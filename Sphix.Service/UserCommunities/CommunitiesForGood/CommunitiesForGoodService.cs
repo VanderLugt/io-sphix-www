@@ -46,18 +46,41 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                            list = handler.ReadToList<CommunityForGoodList>();
                            // do something with your results.
                        });
+            long _lastId = 0;
+            foreach (var item in list.ToList().OrderBy(c=>c.Id).OrderByDescending(c=>c.TotalMembers))
+            {
+                if (item.Id == _lastId)
+                {
+                    list.Remove(item);
+                    _lastId = 0;
+                }
+                else
+                {
+                    _lastId = item.Id;
+                }
+            }
             return list;
         }
         public async Task<CmmunityGroupDetailViewModel> getCommunityGroupDetail(long Id)
         {
             var _query = _unitOfWork.UserCommunityGroupsRepository.FindAllByQuery(c => c.Id == Id && c.IsActive == true);
             var _result =await _query.Include("User").ToListAsync();
+            
             CmmunityGroupDetailViewModel model = new CmmunityGroupDetailViewModel();
             if(_result != null && _result.Count!=0)
             {
                 var _userProfile = await _unitOfWork.UserProfileRepository.FindAllBy(c => c.User.Id == _result[0].User.Id);
+                var _comunityDetail = await _unitOfWork.CommunityRepository.GetByID(_result[0].CommunityId);
                 model.Id = _result[0].Id;
                 model.Title = _result[0].Title;
+                if (_comunityDetail != null)
+                {
+                    model.Color = _comunityDetail.Color;
+                }
+                else
+                {
+                    model.Color = "#4D0B0A";
+                }
                 model.Description = _result[0].Description;
                 model.VideoUrl = _result[0].DescriptionVideoUrl;
                 //set posted user detail
@@ -125,10 +148,10 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
         public async Task<OpenOfficeHoursViewModel> getCommunityGroupOpenHoursDetail(long Id)
         {
             OpenOfficeHoursViewModel openOfficeHoursView = new OpenOfficeHoursViewModel();
-            var openOfficeHours = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.FindAllBy(c => c.CommunityGroups.Id == Id);
-            if (openOfficeHours.Count != 0)
+            var _openHoursModel = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.GetByID(Id);
+            if (_openHoursModel != null)
             {
-                var _openHoursModel = openOfficeHours.FirstOrDefault();
+               // var _openHoursModel = openOfficeHours.FirstOrDefault();
                 openOfficeHoursView.Id = _openHoursModel.Id;
                 openOfficeHoursView.MaxAttendees = _openHoursModel.MaxAttendees;
                 openOfficeHoursView.ODescription = _openHoursModel.ODescription;

@@ -49,6 +49,11 @@ namespace AspNetCoreWebApplication.Controllers
         {
             return View();
         }
+        public IActionResult Edit(long Id)
+        {
+            ViewBag.Id = Id;
+            return View();
+        }
         public async Task<IActionResult> AddCommunityGroupSteps()
         {
             ViewBag.Communities = await _communitiesService.GetActiveCommunities();
@@ -78,7 +83,9 @@ namespace AspNetCoreWebApplication.Controllers
         [RequestSizeLimit(500000000)]
         public async Task<JsonResult> AddCommunityGroupSteps(CommunityGroupViewModel model, IFormFile file, IFormFile articleShareDocument)
         {
+          
             model.UserId = this._claimAccessor.UserId;
+            
             BaseModel result = await _communityGroupsService.SaveAsync(model, file, articleShareDocument);
             if (result.Status && model.Id==0)
             {
