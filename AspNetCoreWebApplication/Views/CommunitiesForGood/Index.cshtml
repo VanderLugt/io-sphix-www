@@ -47,7 +47,10 @@
 </style>
 <partial name="_joinThisCommunityPopUp.cshtml" />
 <script>
-    function ShowDetail(Id,url) {
+    function ShowDetail(Id, url) {
+        if (Id == 0) {
+            return;
+        }
         $('#hdnCommunityGroupId').val(Id);
         $('#hdnCommuntyGroupUrl').val(url);
         $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);

@@ -1,6 +1,6 @@
 ﻿@model Sphix.ViewModels.CommunityGroupsFroentEnd.CmmunityGroupDetailViewModel
 <div class="row">
-    <div class="col-md-12" style="background-color:#4D0B0A;color:#fff;padding:5px;">
+    <div class="col-md-12" style="background-color:@Model.Color;color:#fff;padding:5px;">
         @Model.Title
     </div>
 </div>
@@ -24,7 +24,8 @@
         <img src="@Model.UserProfilePic" style="width: 40px;border-radius: 50%;height: 40px;margin-right: 10px;" />
     </div>
     <div class="col-md-11">
-        @Model.FullName<br />@Model.EmailAddress
+        @Model.FullName
+        @*<br />@Model.EmailAddress*@
     </div>
 </div>    
 

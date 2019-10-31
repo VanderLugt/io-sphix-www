@@ -1,26 +1,27 @@
 ﻿@model Sphix.ViewModels.UserCommunities.LiveEventViewModel
 
 <div class="row">
-    <div class="col-md-12" style="background-color:#4D0B0A;color:#fff;">
-
+    <div class="col-md-12 community-category" style="text-align:left">
         <p>@Model.ETitle</p>
+     
     </div>
 
 </div>
 <div class="row">
     <div class="col-md-6">
         @*Title: @Model.ETitle<br />*@
+        Date: @Model.EFromDate.ToString("dd MMM yyyy") <br />
+        Time: @Model.ETime @ViewBag.TimeZone<br />
         Created by : Sphix
     </div>
     <div class="col-md-6">
         Frequently: <span style="text-transform:capitalize;">@Model.EFrequency</span> <br />
-        Date: @Model.EFromDate.ToString("dd MMM yyyy") - @Model.EToDate.ToString("dd MMM yyyy")<br />
-        Time: @Model.ETime @ViewBag.TimeZone<br />
         Who: @Model.MaxAttendees Members<br />
     </div>
 </div>
 <div class="row">
     <div class="col-md-12" style="overflow-x:auto;height:200px;">
+        <hr />
         @Html.Raw(Model.EDescription)
     </div>
 </div>

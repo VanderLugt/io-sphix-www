@@ -65,12 +65,22 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
         {
             var _query = _unitOfWork.UserCommunityGroupsRepository.FindAllByQuery(c => c.Id == Id && c.IsActive == true);
             var _result =await _query.Include("User").ToListAsync();
+            
             CmmunityGroupDetailViewModel model = new CmmunityGroupDetailViewModel();
             if(_result != null && _result.Count!=0)
             {
                 var _userProfile = await _unitOfWork.UserProfileRepository.FindAllBy(c => c.User.Id == _result[0].User.Id);
+                var _comunityDetail = await _unitOfWork.CommunityRepository.GetByID(_result[0].CommunityId);
                 model.Id = _result[0].Id;
                 model.Title = _result[0].Title;
+                if (_comunityDetail != null)
+                {
+                    model.Color = _comunityDetail.Color;
+                }
+                else
+                {
+                    model.Color = "#4D0B0A";
+                }
                 model.Description = _result[0].Description;
                 model.VideoUrl = _result[0].DescriptionVideoUrl;
                 //set posted user detail
