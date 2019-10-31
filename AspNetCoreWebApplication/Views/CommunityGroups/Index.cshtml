@@ -23,7 +23,7 @@
                                         </div>
                                         <div class="community-icons">
                                             <div class="float-left">
-                                                <a href="#" onclick="ShowDetail(@item.Id);" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                                                <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL');" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
                                             </div>
                                             <div class="float-right navigation-icon">
                                                 <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
@@ -108,6 +108,7 @@
     </fieldset>
 </div>
 <input type="hidden" id="hdnCommunityGroupId" />
+<input type="hidden" id="hdnCommuntyGroupUrl" value="0" />
 <style>
     .navigation-icon .fa-location-arrow {
         transform: rotate(45deg);
@@ -178,8 +179,9 @@
 </style>
 <script src="~/js/User/JoinUserCommunityGroup.js"></script>
 <script>
-    function ShowDetail(Id) {
+    function ShowDetail(Id,Url) {
         $('#hdnCommunityGroupId').val(Id);
+        $('#hdnCommuntyGroupUrl').val(Url);
         $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
         $('#modelCommunityDetail').modal('toggle');
     }

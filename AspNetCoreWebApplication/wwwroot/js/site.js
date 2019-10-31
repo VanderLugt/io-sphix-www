@@ -1,6 +1,10 @@
 ﻿var _sphixWebUrl = '';
+var _assocGroups = '';
+var _assocAssocations = '';
 var _assocInterests = '';
 var _communityId = 0;
+var d = new Date();
+var minDate = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
 // Write your Javascript code.
 //var idx = Math.floor((new Date().getHours()));
 //var body = document.getElementsByTagName("body")[0];
@@ -58,12 +62,14 @@ function manageAssociations(communityId) {
 }
 function saveAssociations() {
     setCheckedInterestsIds();
+    setCheckedGroupIds();
+    setCheckedAssociationIds();
  var  model = {
      EditId: $('#hndAssociationId').val(),
-     GroupId: $('#drpAssocGroups').val(),
-     AssociationId: $('#drpAssocAssociation').val(),
-     Type1Id: $('#drpAssocType1').val(),
-     Type2Id: $('#drpAssocType2').val(),
+     GroupId: _assocGroups,
+     AssociationId: _assocAssocations,
+     //Type1Id: $('#drpAssocType1').val(),
+     //Type2Id: $('#drpAssocType2').val(),
      InterestIds: _assocInterests,
      CommunityId: _communityId
     };

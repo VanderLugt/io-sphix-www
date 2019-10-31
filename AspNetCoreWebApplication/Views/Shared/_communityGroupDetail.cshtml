@@ -7,13 +7,16 @@
 <div class="row">
     <div class="col-md-12">
         @Html.Raw(Model.Description)
-        <div class="form-group">
-            <video width="400" controls>
-                <source src="@Model.VideoUrl">
-                Your browser does not support HTML5 video.
-                @Model.VideoUrl
-            </video>
-        </div>
+        @if (Model.VideoUrl != null)
+        {
+            <div class="form-group">
+                <video width="400" controls>
+                    <source src="@Model.VideoUrl">
+                    Your browser does not support HTML5 video.
+                    @Model.VideoUrl
+                </video>
+            </div>
+        }
     </div>
 </div>
 <div class="row">

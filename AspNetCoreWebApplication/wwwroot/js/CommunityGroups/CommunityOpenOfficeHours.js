@@ -19,7 +19,14 @@
         url: '/CommunityOpenOfficeHours/AddOpenOfficeHours?OpenHoursId=' + OpenHoursId,
         success: function (data) {
             //console.log(JSON.stringify(data));
-            swal("", data.messsage, "success");
+            //swal("", data.messsage, "success");
+            if (data.status) {
+                toastr.success(data.messsage, '', { timeOut: 1000 });
+                $('#modelCreateOpenHours').modal('hide');
+            }
+            else {
+                toastr.error(data.messsage, 'Sorry!', { timeOut: 5000 });
+            }
         },
         failure: function (response) {
             // alert(response.responseText);

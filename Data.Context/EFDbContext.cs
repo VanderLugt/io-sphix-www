@@ -40,7 +40,9 @@ namespace Data.Context
         public DbSet<RestPasswordLinkDataModel> restPasswordLinks { get; set; }
         public DbSet<UserCommunitiesDataModel> userCommunities { get; set; }
         public DbSet<UserSubCommunitiesDataModel> userSubCommunities { get; set; }
+        public DbSet<UserGroupsDataModel> userGroups { get; set; }
         public DbSet<UserInterestsDataModel> userInterests { get; set; }
+        public DbSet<UserAssociationsDataModel> userAssociations { get; set; }
         #endregion
         #region UserCommunitiesGroups
         public DbSet<CommunityGroupsDataModel> userCommunityGroups { get; set; }

@@ -138,6 +138,26 @@ namespace Sphix.UnitOfWorks
                 return userInterestsRepository;
             }
         }
+        private GenericRepository<UserGroupsDataModel> userGroupsRepository;
+        public GenericRepository<UserGroupsDataModel> UserGroupsRepository
+        {
+            get
+            {
+                if (this.userGroupsRepository == null)
+                    this.userGroupsRepository = new GenericRepository<UserGroupsDataModel>(_context);
+                return userGroupsRepository;
+            }
+        }
+        private GenericRepository<UserAssociationsDataModel> userAssociationsRepository;
+        public GenericRepository<UserAssociationsDataModel> UserAssociationsRepository
+        {
+            get
+            {
+                if (this.userAssociationsRepository == null)
+                    this.userAssociationsRepository = new GenericRepository<UserAssociationsDataModel>(_context);
+                return userAssociationsRepository;
+            }
+        }
         private GenericRepository<GroupEmailInvitationDataModel> groupEmailInvitationRepository;
         public GenericRepository<GroupEmailInvitationDataModel> GroupEmailInvitationRepository
         {

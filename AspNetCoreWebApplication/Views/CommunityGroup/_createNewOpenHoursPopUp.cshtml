@@ -30,7 +30,10 @@
                                                 By checking this box, I certify that understand my role, responsibilities, and best practices for leading this discussion.
                                             </div>
                                             <div class="float-right">
-                                                <input type="button" class="btn btn-primary" disabled="disabled" onclick="AddOpenOfficeHours(@Model.Id);" id="btnSubmitCreateOpneHoursTable" value="SUBMIT"/>
+                                                <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <input type="button" class="btn btn-primary" disabled="disabled" onclick="AddOpenOfficeHours(@Model.Id);" id="btnSubmitCreateOpneHoursTable" value="SUBMIT" />
                                             </div>
                                         </div>
                                         <div id="toAbout" class="tab-pane">

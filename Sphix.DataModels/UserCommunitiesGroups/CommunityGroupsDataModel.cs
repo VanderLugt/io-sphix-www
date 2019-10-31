@@ -31,5 +31,6 @@ namespace Sphix.DataModels.UserCommunities
         public DateTime AddedDate { get; set; }
         public int CommunityId { get; set; }
         public string CommunityGroupURL { get; set; }
+        public bool IsPublicGroup { get; set; }
     }
 }

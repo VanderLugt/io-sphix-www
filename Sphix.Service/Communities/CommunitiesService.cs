@@ -47,7 +47,6 @@ namespace Sphix.Service.Communities
                     CommunityDataModel communityData = new CommunityDataModel();
                     if (articleShareDocument != null && articleShareDocument.Length > 0)
                     {
-                        
                         await _awsS3Bucket.UploadFileAsync(articleFolderPath, articleShareDocument, articleFileName);
                         communityData.ImageUrl = articeDocUrl;
                     }

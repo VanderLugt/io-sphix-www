@@ -46,6 +46,19 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                            list = handler.ReadToList<CommunityForGoodList>();
                            // do something with your results.
                        });
+            long _lastId = 0;
+            foreach (var item in list.ToList().OrderBy(c=>c.Id).OrderByDescending(c=>c.TotalMembers))
+            {
+                if (item.Id == _lastId)
+                {
+                    list.Remove(item);
+                    _lastId = 0;
+                }
+                else
+                {
+                    _lastId = item.Id;
+                }
+            }
             return list;
         }
         public async Task<CmmunityGroupDetailViewModel> getCommunityGroupDetail(long Id)
@@ -125,10 +138,10 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
         public async Task<OpenOfficeHoursViewModel> getCommunityGroupOpenHoursDetail(long Id)
         {
             OpenOfficeHoursViewModel openOfficeHoursView = new OpenOfficeHoursViewModel();
-            var openOfficeHours = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.FindAllBy(c => c.CommunityGroups.Id == Id);
-            if (openOfficeHours.Count != 0)
+            var _openHoursModel = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.GetByID(Id);
+            if (_openHoursModel != null)
             {
-                var _openHoursModel = openOfficeHours.FirstOrDefault();
+               // var _openHoursModel = openOfficeHours.FirstOrDefault();
                 openOfficeHoursView.Id = _openHoursModel.Id;
                 openOfficeHoursView.MaxAttendees = _openHoursModel.MaxAttendees;
                 openOfficeHoursView.ODescription = _openHoursModel.ODescription;

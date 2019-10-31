@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Sphix.Service.UserCommunities.OpenOfficeHours;
 using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMail;
+using Sphix.Utility;
+using Sphix.ViewModels;
 using Sphix.ViewModels.UserCommunities;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -51,7 +53,7 @@ namespace AspNetCoreWebApplication.Controllers
                     TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
                     if (difference.Days > 7)
                     {
-                        model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
+                        model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
                     }
                     else if (difference.Days == 0)
                     {
@@ -59,7 +61,7 @@ namespace AspNetCoreWebApplication.Controllers
                     }
                     else
                     {
-                        model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
+                        model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
                     }
                    // model.OFromDate = nextMeetingDate;
                     model.OTimeZone = openHoursModel.OTimeZone;
@@ -121,7 +123,7 @@ namespace AspNetCoreWebApplication.Controllers
             TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
             if (difference.Days>7)
             {
-                model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
+                model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
             }
            else if(difference.Days==0)
             {
@@ -129,7 +131,7 @@ namespace AspNetCoreWebApplication.Controllers
             }
             else
             {
-                model.OFromDate = setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
+                model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
             }
 
             model.OToDate = model.OFromDate;
@@ -145,7 +147,7 @@ namespace AspNetCoreWebApplication.Controllers
             var _existingTable = await _openOfficeHoursService.CheckTableIsExist(_claimAccessor.UserId, model.CommunityGroupId, model.OTimeZone, model.OFromDate);
             if (_existingTable.Status)
             {
-                return Json(_existingTable);
+                return Json(  new BaseModel { Status = false, Messsage = UMessagesInfo.RecordExist });
             }
             var _result = await _openOfficeHoursService.SaveOpenHoursAsync(model, null, null);
             if (_result.Status)
@@ -168,32 +170,7 @@ namespace AspNetCoreWebApplication.Controllers
             }
             return Json(_result);
         }
-        private DateTime setDateFromDayName(string dayName, DateTime date)
-        {
-            DateTime todayDate = DateTime.Now;
-            var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-                          "Saturday", "Sunday" };
-            int _dayIndex = Array.IndexOf(days, dayName);
-            int _todayDayIndex = Array.IndexOf(days, todayDate.DayOfWeek.ToString());
-            if (date.Date != todayDate.Date)
-            {
-                if (_todayDayIndex > _dayIndex)
-                {
-                    if (_dayIndex > 0)
-                    {
-                        _dayIndex = (7 - (_todayDayIndex - _dayIndex));
-                        return date.AddDays(_dayIndex);
-                    }
-                    else
-                    {
-                        return date.AddDays(7);
-                    }
-                    
-                }
-                return date.AddDays(_dayIndex - 1);
-            }
-            return date;
-        }
+     
 
     }
 }

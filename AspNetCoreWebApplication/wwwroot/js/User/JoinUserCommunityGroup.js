@@ -35,7 +35,8 @@
 }
 function JoinCommunityGroup() {
     var dataModel = {
-        CommunityGroupId: $('#hdnCommunityGroupId').val()
+        CommunityGroupId: $('#hdnCommunityGroupId').val(),
+        IsJoin: true
     };
     $.ajax({
         type: 'POST',
@@ -43,7 +44,14 @@ function JoinCommunityGroup() {
         url: '/CommunityGroupSubSections/JoinCommunityGroup',
         success: function (data) {
             if (data.status) {
-                swal("", data.messsage, "success");
+               // swal("", data.messsage, "success");
+                swal({
+                    title: "Thanks",
+                    text: data.messsage,
+                    type: "success"
+                }).then(function () {
+                    window.location = "CommunityGroup/" + $('#hdnCommuntyGroupUrl').val();
+                });
             }
             else {
                 swal("Sorry!", data.messsage, "warning");

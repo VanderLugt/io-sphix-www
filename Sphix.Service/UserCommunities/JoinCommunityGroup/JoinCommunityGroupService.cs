@@ -26,10 +26,17 @@ namespace Sphix.Service.UserCommunities.JoinCommunityGroup
                 {
                     //insert record
                     joinCommunityGroupData.CommunityGroup = await _unitOfWork.UserCommunityGroupsRepository.GetByID(model.CommunityGroupId);
-                    joinCommunityGroupData.User = await _unitOfWork.UserLoginRepository.GetByID(model.UserId);
-                    joinCommunityGroupData.IsJoined = true;
-                    joinCommunityGroupData.JoinDateTime = DateTime.Now;
-                    await _unitOfWork.JoinCommunityGroupRepository.Insert(joinCommunityGroupData);
+                    if (joinCommunityGroupData.CommunityGroup != null)
+                    {
+                        joinCommunityGroupData.User = await _unitOfWork.UserLoginRepository.GetByID(model.UserId);
+                        joinCommunityGroupData.IsJoined = true;
+                        joinCommunityGroupData.JoinDateTime = DateTime.Now;
+                        await _unitOfWork.JoinCommunityGroupRepository.Insert(joinCommunityGroupData);
+                    }
+                    else
+                    {
+                        return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+                    }
                 }
                 else
                 {

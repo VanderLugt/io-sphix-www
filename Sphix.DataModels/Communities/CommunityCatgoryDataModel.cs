@@ -12,7 +12,7 @@ namespace Sphix.DataModels.Communities
         public int Id { get; set; }
         public int CommunityId { get; set; }
         public int Type { get; set; }
-        [MaxLength(50)]
+        [MaxLength(200)]
         [Required]
         public string Name { get; set; }
         [MaxLength(1500)]

@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="community-icons">
                                         <div style="text-align:center;">
-                                            <a href="#" onclick="ShowDetail(@Model.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
+                                            <a href="#" onclick="ShowDetail(@Model.OpenOfficeHours.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
                                         </div>
                                     </div>
                                     <div class="communit-title">
@@ -118,7 +118,7 @@ else
     <partial name="~/Views/Shared/_NoData.cshtml" />
 }
 <input type="hidden" id="hdnCommunityGroupId" value="@ViewBag.CId" />
-<partial name="_joinThisCommunityPopUp.cshtml" />
+<partial name="_openHoursDetailPopUp.cshtml" />
 <partial name="_registerOpenOfficeHoursMeetingPopUp.cshtml" />
 <partial name="_singleEventPopUp.cshtml" />
 <partial name="_registerForEventPopUp.cshtml" />
@@ -262,8 +262,10 @@ else
     var _liveEventTimeZone = '';
     function ShowDetail(Id) {
         //   $('#hdnCommunityGroupId').val(Id);
-        $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
-        $('#modelCommunityDetail').modal('toggle');
+        //$("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
+        $("#divOpenHoursDetail").load('/CommunityGroupSubSections/RegisterForOpenHours?Id=' + Id);
+        //
+        $('#modelOpenHoursDetail').modal('toggle');
     }
     function hideCummunityModel() {
         $('#modelCommunityDetail').modal('hide');

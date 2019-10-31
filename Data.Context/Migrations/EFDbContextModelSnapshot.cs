@@ -155,7 +155,7 @@ namespace Data.Context.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
 
                     b.Property<int>("Type");
 
@@ -302,6 +302,29 @@ namespace Data.Context.Migrations
                     b.ToTable("LoggerManager");
                 });
 
+            modelBuilder.Entity("Sphix.DataModels.User.UserAssociationsDataModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AssociationId");
+
+                    b.Property<int?>("CommunityId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<long?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommunityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersAssociations");
+                });
+
             modelBuilder.Entity("Sphix.DataModels.User.UserCommunitiesDataModel", b =>
                 {
                     b.Property<long>("Id")
@@ -319,6 +342,29 @@ namespace Data.Context.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UsersCommunities");
+                });
+
+            modelBuilder.Entity("Sphix.DataModels.User.UserGroupsDataModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CommunityId");
+
+                    b.Property<int>("GroupId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<long?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommunityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersGroups");
                 });
 
             modelBuilder.Entity("Sphix.DataModels.User.UserInterestsDataModel", b =>
@@ -587,6 +633,8 @@ namespace Data.Context.Migrations
                         .HasMaxLength(500);
 
                     b.Property<bool>("IsActive");
+
+                    b.Property<bool>("IsPublicGroup");
 
                     b.Property<bool>("IsPublish");
 
@@ -1065,8 +1113,30 @@ namespace Data.Context.Migrations
                         .HasForeignKey("SentByUserId");
                 });
 
+            modelBuilder.Entity("Sphix.DataModels.User.UserAssociationsDataModel", b =>
+                {
+                    b.HasOne("Sphix.DataModels.Communities.CommunityDataModel", "Community")
+                        .WithMany()
+                        .HasForeignKey("CommunityId");
+
+                    b.HasOne("Sphix.DataModels.User.UsersLoginDataModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Sphix.DataModels.User.UserCommunitiesDataModel", b =>
                 {
+                    b.HasOne("Sphix.DataModels.User.UsersLoginDataModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Sphix.DataModels.User.UserGroupsDataModel", b =>
+                {
+                    b.HasOne("Sphix.DataModels.Communities.CommunityDataModel", "Community")
+                        .WithMany()
+                        .HasForeignKey("CommunityId");
+
                     b.HasOne("Sphix.DataModels.User.UsersLoginDataModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId");

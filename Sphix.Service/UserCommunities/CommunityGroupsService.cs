@@ -235,7 +235,7 @@ namespace Sphix.Service.UserCommunities
                 communityGroupView.Title = _result.Title;
                 communityGroupView.Description = _result.Description;
                 communityGroupView.DescriptionVideoUrl = _result.DescriptionVideoUrl;
-               
+                communityGroupView.IsPublicGroup = _result.IsPublicGroup;
                     var _themes = await _unitOfWork.UserCommunityGroupThemeRepository.FindAllBy(c => c.CommunityGroups.Id == _result.Id && c.IsActive==true);
                     if (_themes.Count != 0) {
                         foreach (var item in _themes)
@@ -316,7 +316,7 @@ namespace Sphix.Service.UserCommunities
         {
             try
             {
-                if (string.IsNullOrEmpty(model.TargetedInterestIds))
+                if (string.IsNullOrEmpty(model.TargetedInterestIds) && model.IsPublicGroup==false)
                 {
                     return new BaseModel { Status = false, Messsage = "Please select Interest" };
                 }
@@ -330,18 +330,25 @@ namespace Sphix.Service.UserCommunities
                     DescriptionVideoUrl = model.DescriptionVideoUrl,
                     IsActive=true,
                     IsPublish=false,
+                    IsPublicGroup=model.IsPublicGroup,
                     CommunityId= model.OgranizationsId
                 };
                 await _unitOfWork.UserCommunityGroupsRepository.Insert(communityGroupModel);
-                //saveing data in relation tables
-                await SaveCommunityTargetedGroupsAsync(model.CommunityTargetedGroupId, user, communityGroupModel);
-                await SaveCommunityTargetedAssociationAsync(model.AssociationId, user, communityGroupModel);
-                await SaveCommunityTargetedType1Async(model.Type1Id, user, communityGroupModel);
-                await SaveCommunityTargetedType2Async(model.Type2Id, user, communityGroupModel);
-                await SaveCommunityTargetedInterestsAsync(model.TargetedInterestIds, user, communityGroupModel);
+                //if group is not public then data will save in relation tables
+                if (!model.IsPublicGroup)
+                { 
+                    //saveing data in relation tables
+                    await SaveCommunityTargetedGroupsAsync(model.CommunityTargetedGroupId, user, communityGroupModel);
+                    await SaveCommunityTargetedAssociationAsync(model.AssociationId, user, communityGroupModel);
+                    //await SaveCommunityTargetedType1Async(model.Type1Id, user, communityGroupModel);
+                    //await SaveCommunityTargetedType2Async(model.Type2Id, user, communityGroupModel);
+                    await SaveCommunityTargetedInterestsAsync(model.TargetedInterestIds, user, communityGroupModel);
+                }
                 await SaveCommunityGroupsThemeAsync(model.ThemesId, user, communityGroupModel);
                 //SaveOpenHours
                 OpenOfficeHoursViewModel OpenOfficeHoursModel = JsonConvert.DeserializeObject<OpenOfficeHoursViewModel>(model.OpenOfficeHours);
+                OpenOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(OpenOfficeHoursModel.OTimeDayName, DateTime.Now.Date);
+                OpenOfficeHoursModel.OToDate = OpenOfficeHoursModel.OFromDate;
                 OpenOfficeHoursModel.IsFirstMeeting = true;
                 await _openOfficeHoursService.SaveOpenHoursAsync(OpenOfficeHoursModel, user, communityGroupModel);
                 //SaveLiveEvent
@@ -371,23 +378,28 @@ namespace Sphix.Service.UserCommunities
                     communityGroupModel.DescriptionVideoUrl = model.DescriptionVideoUrl;
                 }
                 communityGroupModel.CommunityGroupURL= Urlhelper.GenerateSeoFriendlyURL(model.Title);
-                communityGroupModel.IsActive = true;
-                communityGroupModel.IsPublish = true;
+                //communityGroupModel.IsActive = true;
+                //communityGroupModel.IsPublish = true;
+                communityGroupModel.IsPublicGroup = model.IsPublicGroup;
                 communityGroupModel.AddedDate = DateTime.Now;
                 communityGroupModel.CommunityId = model.OgranizationsId;
                 await _unitOfWork.UserCommunityGroupsRepository.Update(communityGroupModel);
-                //saving data in relation tables
-                await SaveCommunityTargetedGroupsAsync(model.CommunityTargetedGroupId, communityGroupModel.User, communityGroupModel);
-                await SaveCommunityTargetedAssociationAsync(model.AssociationId, communityGroupModel.User, communityGroupModel);
-                await SaveCommunityTargetedType1Async(model.Type1Id, communityGroupModel.User, communityGroupModel);
-                await SaveCommunityTargetedType2Async(model.Type2Id, communityGroupModel.User, communityGroupModel);
-                await SaveCommunityTargetedInterestsAsync(model.TargetedInterestIds, communityGroupModel.User, communityGroupModel);
-
+                //if group is not public then data will save in relation tables
+                if (!model.IsPublicGroup)
+                {
+                    //saving data in relation tables
+                    await SaveCommunityTargetedGroupsAsync(model.CommunityTargetedGroupId, communityGroupModel.User, communityGroupModel);
+                    await SaveCommunityTargetedAssociationAsync(model.AssociationId, communityGroupModel.User, communityGroupModel);
+                    //await SaveCommunityTargetedType1Async(model.Type1Id, communityGroupModel.User, communityGroupModel);
+                    //await SaveCommunityTargetedType2Async(model.Type2Id, communityGroupModel.User, communityGroupModel);
+                    await SaveCommunityTargetedInterestsAsync(model.TargetedInterestIds, communityGroupModel.User, communityGroupModel);
+                }
                 await SaveCommunityGroupsThemeAsync(model.ThemesId, communityGroupModel.User, communityGroupModel);
 
                 //SaveOpenHours
                 OpenOfficeHoursViewModel OpenOfficeHoursModel = JsonConvert.DeserializeObject<OpenOfficeHoursViewModel>(model.OpenOfficeHours);
-              
+                //OpenOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(OpenOfficeHoursModel.OTimeDayName, DateTime.Now.Date);
+                //OpenOfficeHoursModel.OToDate = OpenOfficeHoursModel.OFromDate;
                 await _openOfficeHoursService.SaveOpenHoursAsync(OpenOfficeHoursModel, communityGroupModel.User, communityGroupModel);
 
                 return new BaseModel { Status = true, Id = communityGroupModel.Id, Messsage = UMessagesInfo.RecordSaved };

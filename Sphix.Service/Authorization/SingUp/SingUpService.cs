@@ -96,22 +96,27 @@ namespace Sphix.Service.Authorization
                 var _mainCommunity = await _unitOfWork.CommunityRepository.GetByID(Convert.ToInt32(model.CommunityId));
                 if (_mainCommunity != null)
                 {
-                    //Save data into the community table like group,association 
-                    UserSubCommunitiesDataModel userCommunities = new UserSubCommunitiesDataModel
-                    {
-                        User = userData,
-                        Association = model.AssociationId,
-                        GroupId = model.GroupId,
-                        Type1Id = model.Type1ListId,
-                        Type2ListId = model.Type2ListId,
-                        Community = _mainCommunity
+                    await _userCommunities.SaveGroupsAsync(model.GroupId.ToString(), userData, _mainCommunity);
+                    await _userCommunities.SaveAssociationsAsync(model.AssociationId.ToString(), userData, _mainCommunity);
 
-                    };
-                    await _userCommunities.SaveSubCommunitiesAsync(userCommunities);
-                    userCommunities = null;
+                    //Save data into the Interests table 
+                    await _userCommunities.SaveInterestsAsync(model.InterestsId, userData, _mainCommunity);
+                    //Save data into the community table like group,association 
+                    //UserSubCommunitiesDataModel userCommunities = new UserSubCommunitiesDataModel
+                    //{
+                    //    User = userData,
+                    //    Association = model.AssociationId,
+                    //    GroupId = model.GroupId,
+                    //    Type1Id = model.Type1ListId,
+                    //    Type2ListId = model.Type2ListId,
+                    //    Community = _mainCommunity
+
+                    //};
+                    //await _userCommunities.SaveSubCommunitiesAsync(userCommunities);
+                    //userCommunities = null;
                 }
-                //Save data into the Interests table 
-                await _userCommunities.SaveInterestsAsync(model.InterestsId,userData,_mainCommunity);
+
+               
                 userLoginData = null;
                 usersProfileData = null;
                 _mainCommunity = null;

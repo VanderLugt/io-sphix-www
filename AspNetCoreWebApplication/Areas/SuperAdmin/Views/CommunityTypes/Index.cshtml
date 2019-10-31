@@ -61,6 +61,7 @@
     <script src="~/js/SuperAdmin/CommunityTypes.js"></script>
     <script>
     var communitytypesDataTable;
+   
         $(document).ready(function () {
             function fill_CommunityGroupsdatatable(IsPublish = '') {
                 communitytypesDataTable = $("#tblDataTableList").DataTable({
@@ -89,7 +90,7 @@
                         { "data": "isLive", "name": "isLive", "autoWidth": true },
                         {
                             "render": function (data, type, full, meta) {
-                                return "<a href='#' class='btn btn-info' onclick=Edit('" + full.id + "'); >Edit</a>";
+                                return "<a href='#' class='btn btn-info' onclick='Edit(" + full.id + ")'; >Edit</a>";
                             }, 'orderable': false
                         },
                     ]
@@ -100,16 +101,18 @@
             }
             fill_CommunityGroupsdatatable();
 
+          
 
             $('#drpStatus').on('change', function () {
                 //alert(this.value);
                 $('#tblCommunitiesList').DataTable().destroy();
                 fill_CommunityGroupsdatatable(this.value);
             });
-
+             
         });
 
-        function Edit(Id) {
+    function Edit(Id) {
+        //console.log(JSON.stringify(Id));
             //  $('#divCommunityGroupSubTitle').html('Events');
             $("#divReviewCommunityGroup").html('Loading..');
             $("#divReviewCommunityGroup").load('/SuperAdmin/CommunityTypes/Add?Id=' + Id);
