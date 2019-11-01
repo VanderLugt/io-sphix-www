@@ -13,6 +13,7 @@
     <link href="~/admintheme/css/responsive.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="dashboard">
     @Html.AntiForgeryToken()
@@ -21,18 +22,24 @@
         <div class="container-fluid">
             <div class="row">
                 <nav class="col-md-2 d-md-block bg-light sidebar">
-                    <div class="sidebar-sticky">
+               
+                    <div class="sidebar-sticky" id="navbarCollapse">
                         <ul class="nav flex-column">
+                            @*<li>
+                                <button class="navbar-toggler" id="toggle-button" type="button"  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            </li>*@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="SuperAdmin" asp-controller="UsersCommunityGroups" asp-action="Index">
                                     <i class="fas fa-users"></i>
-                                    <label>Community Groups</label>
+                                    <label class="label">Community Groups</label>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="SuperAdmin" asp-controller="CommunityTypes" asp-action="Index">
                                     <i class="far fa-list-alt"></i>
-                                    <label>Community Types</label>
+                                    <label class="label">Community Types</label>
                                 </a>
                             </li>
                         </ul>
@@ -72,10 +79,21 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-
-
         <script>
             $(document).ready(function () {
+                $('#toggle-button').click( function() {
+                    var toggleWidth = $("#navbarCollapse").width() == 60 ? "220px" : "60px";
+                    $('#navbarCollapse').animate({ width: toggleWidth },0);
+                    if (toggleWidth != '60px') {
+                        $(".label").show();
+                    }
+                    else {
+                        $(".label").hide();
+                    }
+                   
+                    
+                });
+
                 $(document).ajaxStart(function () {
                     $("#wait").css("display", "block");
                 });

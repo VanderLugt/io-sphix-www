@@ -75,5 +75,7 @@ namespace Sphix.ViewModels.User
     {
         public string Name { get; set; }
         public long Id { get; set; }
+        public string Color { get; set; }
+        public string CommunityUrl { get; set; }
     }
 }

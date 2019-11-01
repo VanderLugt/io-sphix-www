@@ -76,6 +76,8 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 if (_comunityDetail != null)
                 {
                     model.Color = _comunityDetail.Color;
+                    model.CommunityUrl = _comunityDetail.CommunityUrl;
+                    model.CommunityName = _comunityDetail.FooterLinkText;
                 }
                 else
                 {

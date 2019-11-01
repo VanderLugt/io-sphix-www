@@ -121,17 +121,20 @@ namespace Sphix.Service.User
                     ProfilePicture=_data[0].ProfilePicture,
                     Roles=_roles[0].Role.RoleName
                 };
-                //var _communityGroups = await _unitOfWork.CommunityRepository.FindAllBy(c => c.IsActive);
-                //List<CommunityGroups> communityGroups = new List<CommunityGroups>();
-                //foreach (var item in _communityGroups)
-                //{
-                //    communityGroups.Add(new CommunityGroups {
-                //        Id=item.Id,
-                //        Name=item.Name
-                //    });
-                //}
+                var _communityGroups = await _unitOfWork.CommunityRepository.FindAllBy(c => c.IsActive);
+                List<CommunityGroups> communityGroups = new List<CommunityGroups>();
+                foreach (var item in _communityGroups)
+                {
+                    communityGroups.Add(new CommunityGroups
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Color=item.Color,
+                        CommunityUrl=item.CommunityUrl
+                    });
+                }
                 _data = null;
-                //userShortProfile.communityGroups = communityGroups;
+                userShortProfile.communityGroups = communityGroups;
                 return userShortProfile;
             }
             return new UserShortProfileViewModel { Status = false, Messsage = UMessagesInfo.RecordNotExist };
