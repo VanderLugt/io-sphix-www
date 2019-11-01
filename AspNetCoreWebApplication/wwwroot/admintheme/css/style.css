@@ -162,7 +162,7 @@ a:hover{
 	outline:none;
 }
 .brolio-dashboard .sidebar-sticky {
-    padding-top: 50px;
+    padding-top: 10px;
 	background: #336699;
 }
 .brolio-dashboard .sidebar-sticky ul li a{
@@ -171,7 +171,7 @@ a:hover{
   font-size:16px;
   font-weight:400;
   border-bottom: 1px solid #3C78B5;
-  padding: .8rem 1rem;
+  padding: .8rem 10px;
 }
 /*
  * Utilities
@@ -546,7 +546,7 @@ a:hover{
 	cursor:pointer;
 }
 .brolio-dashboard .sidebar-sticky ul li:after {
-    content:"\f105";
+    /*content:"\f105";*/
     color:#B5CEE8;
     position: absolute;
     top: 10px;
@@ -585,3 +585,31 @@ table.dataTable thead .sorting_asc::after {
     background: #ea9c0c;
     border: none;
 }
+
+.brolio-dashboard .menu-icon {
+    padding-top: 73px;
+    background: #336699;
+    padding-left: 15px;
+    text-align: right;
+    width: 100%;
+    padding-right: 15px;
+    border-radius: 0;
+}
+    .brolio-dashboard .menu-icon i {
+        color: #B5CEE8;
+        font-size: 21px;
+        cursor:pointer;
+    }
+@media(max-width:1199px) {
+    .brolio-dashboard .menu-icon {
+        padding-top: 130px;
+    }
+
+}
+@media(max-width:991px){
+    .brolio-dashboard .menu-icon {
+        text-align: center;
+    }
+
+}
+

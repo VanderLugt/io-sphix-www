@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 @media only screen and (max-width: 1360px) {
 	.brolio-banner-block .carousel-inner .carousel-item .container .carousel-caption {
@@ -85,7 +85,7 @@
 		margin-left:0px;
 	}
 	.brolio-dashboard .sidebar-sticky ul li a{
-		font-size:14px;
+		font-size:13px;
 	}
 	.dashboard-deal-col{
 		min-height: 200px;
@@ -298,7 +298,7 @@
 		flex: 0 0 90%;
 	}
 	.brolio-dashboard .sidebar-sticky{
-		padding-top: 75px;
+		padding-top: 10px;
 	}
 	.d-md-block.bg-light.sidebar .sidebar-sticky ul li.nav-item a i{
 		font-size: 22px;
@@ -774,4 +774,28 @@
 		max-width: 80%;
 		flex: 0 0 80%;
 	}
+}
+@media (max-width: 992px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 54px;
+        right: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+        transition: all 0.3s ease;
+        display: block;
+    }
+
+        .navbar-collapse.collapsing {
+            height: auto !important;
+            margin-right: 50%;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .navbar-collapse.show {
+            right: 0;
+        }
 }
