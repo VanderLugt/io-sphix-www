@@ -20,6 +20,7 @@ using Sphix.Service.Authorization.Login;
 using Sphix.Service.Authorization.Login.ForgotPassword;
 using Sphix.Service.Authorization.SignUp.EmailVerification;
 using Sphix.Service.Communities;
+using Sphix.Service.Communities.ComunitySubTypes;
 using Sphix.Service.EmailInvitation;
 using Sphix.Service.Logger;
 using Sphix.Service.SendGridManager;
@@ -127,6 +128,7 @@ namespace Sphix.Web
             services.AddScoped<IJoinCommunityEventMeetingService, JoinCommunityEventMeetingService>();
             services.AddScoped<IArticleCommentsService, ArticleCommentsService>();
             services.AddScoped<IEmailInvitationService, EmailInvitationService>();
+            services.AddScoped<IComunitySubTypesService, ComunitySubTypesService>();
             //send grid
             services.AddSingleton<IEmailSenderService, EmailSenderService>();
             services.AddSingleton<IAWSS3Bucket, AWSS3Bucket>();

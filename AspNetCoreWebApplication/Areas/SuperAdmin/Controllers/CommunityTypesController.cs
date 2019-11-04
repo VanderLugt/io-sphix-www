@@ -61,5 +61,12 @@ namespace AspNetCoreWebApplication.Areas.Admin.Controllers
             }
             return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
         }
+        #region manage groups type, Associations and Associated Interests
+        public IActionResult CommunitySubTypes(long Id)
+        {
+            ViewBag.Id = Id;
+            return PartialView("_eventsList");
+        }
+        #endregion
     }
 }

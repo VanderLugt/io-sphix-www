@@ -97,13 +97,13 @@
                     {
                         "render": function (data, type, full, meta)
                         {
-                             return "<a href='#' class='btn btn-info btn-sm' onclick=EditCommunityGroup('" + full.id + "'); ><i class='far fa-edit'></i> Edit</a>";
+                             return "<button class='btn btn-info btn-sm' onclick=EditCommunityGroup('" + full.id + "'); ><i class='far fa-edit'></i> Edit</button>";
                         }, 'orderable': false
                     },
                     {
                         "render": function (data, type, full, meta)
                         {
-                             return "<a href='#' class='btn btn-info btn-sm' onclick=ShowEventsList('" + full.id + "'); ><i class='far fa-calendar-alt'></i> Events</a> "+"<a href='#' class='btn btn-info btn-sm' onclick=ShowArticlesList('" + full.id + "'); ><i class='fas fa-book'></i> Articles</a>";
+                             return "<button class='btn btn-info btn-sm' onclick=ShowEventsList('" + full.id + "'); ><i class='far fa-calendar-alt'></i> Events</button> "+"<button  class='btn btn-info btn-sm' onclick=ShowArticlesList('" + full.id + "'); ><i class='fas fa-book'></i> Articles</button>";
                         }, 'orderable': false
                     },
                 ]

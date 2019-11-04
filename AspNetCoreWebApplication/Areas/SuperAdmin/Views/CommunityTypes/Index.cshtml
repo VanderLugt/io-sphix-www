@@ -90,7 +90,7 @@
                         { "data": "isLive", "name": "isLive", "autoWidth": true },
                         {
                             "render": function (data, type, full, meta) {
-                                return "<a href='#' class='btn btn-info' onclick='Edit(" + full.id + ")'; >Edit</a>";
+                                return "<a href='#' class='btn btn-info btn-sm' onclick='Edit(" + full.id + ")'; >Edit</a> <a class='btn btn-info btn-sm' href='/SuperAdmin/CommunitySubTypes?id=" + full.id + "'><i class='fas fa-book'></i> Manage sub types</a>";
                             }, 'orderable': false
                         },
                     ]
