@@ -11,7 +11,13 @@
 html, body {
   height: 100%;
 }
-
+.body-content {
+    background: rgba(0,0,0,0.5);
+    /*height:100vh;*/
+}
+/*.container {
+    background: rgba(0,0,0,0.5);
+}*/
 html {
     margin: 0;
     padding: 0;
@@ -443,7 +449,8 @@ input[type="file"] {
     display: inline-block;
     width: 100%;
     padding: 10px;
-    background: rgba(0,0,0,0.5);
+    /*background: rgba(0,0,0,0.5);*/
+    /*height:100vh;*/
 }
 .dashboad-inner {
     padding: 25px;

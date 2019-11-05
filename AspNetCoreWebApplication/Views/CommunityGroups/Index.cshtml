@@ -5,42 +5,45 @@
 <div class="dashboad-outer">
     <div class="container" id="divContainer">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="col-md-12">
+            <div class="row">
+                <div class="" style="margin-top:0px;">
 
-                <div class="form-group mb-4  col-md-12">
-                    <div class="row">
-                        @if (Model.Count() > 0)
-                        {
-                            foreach (var item in Model)
+                    <div class="form-group mb-4  col-md-12">
+                        <div class="row">
+                            @if (Model.Count() > 0)
                             {
-                                <div class="col-lg-4 col-md-4 col-md-12 col-sm-12 col-xs-12 ">
-                                    <div class="community-main-body">
-                                        <div class="community-category" style="background-color:@item.Color">
-                                            @item.CommunityName
-                                        </div>
-                                        <div class="communit-title">
-                                            @item.Title
-                                        </div>
-                                        <div class="community-icons">
-                                            <div class="float-left">
-                                                <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL');" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                                foreach (var item in Model)
+                                {
+                                    <div class="col-lg-4 col-md-4 col-md-12 col-sm-12 col-xs-12 ">
+                                        <div class="community-main-body">
+                                            <div class="community-category" style="background-color:@item.Color">
+                                                @item.CommunityName
                                             </div>
-                                            <div class="float-right navigation-icon">
-                                                <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
+                                            <div class="communit-title">
+                                                @item.Title
                                             </div>
-                                        </div>
-                                        <div class="community-category-bottom" style="background-color:@item.Color">
-                                            <a asp-controller="CommunitiesForGood" asp-action="Index" style="color:#fff;"> Back to Communities for Good</a>
+                                            <div class="community-icons">
+                                                <div class="float-left">
+                                                    <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL');" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                                                </div>
+                                                <div class="float-right navigation-icon">
+                                                    <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="community-category-bottom" style="background-color:@item.Color">
+                                                <a asp-controller="CommunitiesForGood" asp-action="Index" style="color:#fff;"> Back to Communities for Good</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <partial name="~/Views/Shared/_NoData.cshtml" />
-                        }
+                            else
+                            {
+                                <partial name="~/Views/Shared/_NoData.cshtml" />
+                            }
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -176,10 +179,15 @@
         bottom: 0;
         padding: 10px 0;
     }
+
+    .body-content {
+        height: 100vh;
+    }
 </style>
 <script src="~/js/User/JoinUserCommunityGroup.js"></script>
 <script>
-    function ShowDetail(Id,Url) {
+    
+    function ShowDetail(Id, Url) {
         $('#hdnCommunityGroupId').val(Id);
         $('#hdnCommuntyGroupUrl').val(Url);
         $("#divCommunityDetail").load('/CommunityGroupSubSections/CommunityGroupDetail?Id=' + Id);
@@ -192,4 +200,9 @@
     function hideCummunityModel() {
         $('#modelCommunityDetail').modal('hide');
     }
+
 </script>
+
+@section Scripts{
+
+}
