@@ -14,7 +14,7 @@
             <div class="form-group mb-4 ">
                 <div class="container">
                     <br />
-                    <div style="margin:0 auto;">
+                    <div style="margin:0 auto;overflow-y:auto">
                         <table id="tblCommunitiesList" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -87,11 +87,14 @@
                     "targets": [0],
                     "visible": false,
                     "searchable": false,
+
                     /* true or false */
-                }],
+                    }
+
+                    ],
                 "columns": [
                     { "data": "id", "name": "id", "autoWidth": true },
-                    { "data": "title", "name": "title", "autoWidth": true },
+                    { "data": "title", "name": "title" },
                     { "data": "isPublish", "name": "isPublish", "autoWidth": true },
                     { "data": "postDate", "name": "postDate", "autoWidth": true },
                     {
