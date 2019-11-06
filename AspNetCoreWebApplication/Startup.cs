@@ -172,7 +172,7 @@ namespace Sphix.Web
                // .AddRedirect("redirect-rule/(.*)", "redirected/$1")
                .AddRewrite(@"CommunityGroups/academia-and-research", "/CommunityGroups/Index?id=1&title=Academia And Research", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/businesses-and-organizations", "/CommunityGroups/Index?id=3&title=Businesses And Organizations", skipRemainingRules: true)
-               .AddRewrite(@"CommunityGroups/data-tech-and-info-systems", "/CommunityGroups/Index?id=4&title=DataTech And InfoSystems", skipRemainingRules: true)
+               .AddRewrite(@"CommunityGroups/technology-and-environment", "/CommunityGroups/Index?id=4&title=Technology & Environment", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/philanthropy-and-relationships", "/CommunityGroups/Index?id=5&title=Philanthropy And Relationships", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/philosophy-and-religion", "/CommunityGroups/Index?id=6&title=Philosophy And Religion", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/politics-and-government", "/CommunityGroups/Index?id=2&title=Politics And Government", skipRemainingRules: true)
