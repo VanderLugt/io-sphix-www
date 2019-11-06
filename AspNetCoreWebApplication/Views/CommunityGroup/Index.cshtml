@@ -254,6 +254,11 @@ else
         margin: 2px;
         color: #fff;
     }
+     .commuity-header-block {
+        display: inline-block;
+        width: 100%;
+    border-bottom:1px solid #dee2e6;
+    }
 </style>
 <link href="~/css/slick.css" rel="stylesheet" />
 <link href="~/css/slick-theme.css" rel="stylesheet" />
@@ -342,6 +347,14 @@ else
         });
     function goBack() {   
         window.location = document.referrer;
-    }
+            }
+    $(window).on('load', function () {
+       //            var divHeight = $('#divContainer').height();
+       //// alert(divHeight);
+       // console.log(divHeight + 'px');
+       // $('#divLeftSection').css('height',divHeight + 'px')
+      //alert("Window Loaded");
+ });
     </script>
+
 }

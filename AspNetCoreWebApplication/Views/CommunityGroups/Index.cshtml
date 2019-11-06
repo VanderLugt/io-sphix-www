@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Sphix.ViewModels.CommunityGroupsFroentEnd.CommunityGroupsFroentEndDataView>
 @{
-    //ViewData["Title"] = "Index";
+//ViewData["Title"] = "Index";
 }
 <div class="dashboad-outer">
     <div class="container" id="divContainer">
@@ -10,11 +10,20 @@
 
                     <div class="form-group mb-4  col-md-12">
                         <div class="row">
-                            @if (Model.Count() > 0)
-                            {
-                                foreach (var item in Model)
+                            @{ string _width = "400px";
+                                if (Model.Count() == 1)
                                 {
-                                    <div class="col-lg-4 col-md-4 col-md-12 col-sm-12 col-xs-12" style="width:400px;">
+                                    _width = "800px";
+                                }
+                                else  if (Model.Count() == 2)
+                                {
+                                    _width = "400px";
+                                }
+                                @if (Model.Count() > 0)
+                            {
+                                    foreach (var item in Model)
+                                    {
+                                    <div class="col-lg-4 col-md-4 col-md-12 col-sm-12 col-xs-12" style="width:@_width;">
                                         <div class="community-main-body">
                                             <div class="community-category" style="background-color:@item.Color">
                                                 @item.CommunityName
@@ -41,6 +50,7 @@
                             {
                                 <partial name="~/Views/Shared/_NoData.cshtml" />
                             }
+                                }
                         </div>
                     </div>
 
