@@ -1,74 +1,9 @@
-﻿<style>
-    slider {
-        width: 50%;
-        margin: 100px auto;
-    }
-
-    .slick-slide {
-        margin-right:5px;
-    }
-    .slick-slide:last-child {
-        margin-right: 0;
-    }
-    .slick-slide img {
-        width: 100%;
-    }
-    .slick-slide .community-main-body {
-        margin-bottom: 0;
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        color: black;
-    }
-    .slider{
-        background:none;
-    }
-
-    .slick-slide {
-        transition: all ease-in-out .3s;
-        opacity: 1;
-    }
-
-    .slick-active {
-        opacity: 1;
-    }
-
-    .slick-current {
-        opacity: 1;
-    }
-    .commuity-header-block { 
-        display: inline-block;
-        width: 100%;
-    }
-    .commuity-header-block .community-head-title {
-        float: left;
-    }
-    .commuity-header-block .community-button {
-        float: right;
-    }
-    .commuity-header-block .community-head-title h1 {
-        font-size: 15px;
-        color:#fff;
-    }
-    .commuity-header-block .community-head-title h1 span {
-        color: #ea9c0c;
-        font-weight: bold;
-    }
-    .commuity-header-block .community-button a {
-        color: #fff;
-        font-size: 16px;
-        margin-top: 10px;
-        display: inline-block;
-    }
-    .commuity-header-block .community-button a:hover{
-        text-decoration:none;
-    }
-</style>
+﻿
 @model IEnumerable<Sphix.ViewModels.UserCommunities.CommunityGroupEventsListViewModel>
 <div class="commuity-header-block">
     <div class="community-head-title">
         <h1><span>Live Meetings</span> Special topics and community events.</h1>
+
     </div>
     @if (User.IsInRole("admin"))
     {
@@ -97,6 +32,81 @@
     }
 </div>
         }
+<style>
+    slider {
+        width: 50%;
+        margin: 100px auto;
+    }
+
+    .slick-slide {
+        margin-right: 5px;
+    }
+
+        .slick-slide:last-child {
+            margin-right: 0;
+        }
+
+        .slick-slide img {
+            width: 100%;
+        }
+
+        .slick-slide .community-main-body {
+            margin-bottom: 0;
+        }
+
+    .slick-prev:before,
+    .slick-next:before {
+        color: black;
+    }
+
+    .slider {
+        background: none;
+    }
+
+    .slick-slide {
+        transition: all ease-in-out .3s;
+        opacity: 1;
+    }
+
+    .slick-active {
+        opacity: 1;
+    }
+
+    .slick-current {
+        opacity: 1;
+    }
+
+   
+
+        .commuity-header-block .community-head-title {
+            float: left;
+        }
+
+        .commuity-header-block .community-button {
+            float: right;
+        }
+
+        .commuity-header-block .community-head-title h1 {
+            font-size: 15px;
+            color: #fff;
+        }
+
+            .commuity-header-block .community-head-title h1 span {
+                color: #ea9c0c;
+                font-weight: bold;
+            }
+
+        .commuity-header-block .community-button a {
+            color: #fff;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+            .commuity-header-block .community-button a:hover {
+                text-decoration: none;
+            }
+</style>
 <script>
      $(".regular").slick({
         dots: true,

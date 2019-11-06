@@ -123,7 +123,7 @@ namespace Sphix.Service.User
                 };
                 var _communityGroups = await _unitOfWork.CommunityRepository.FindAllBy(c => c.IsActive);
                 List<CommunityGroups> communityGroups = new List<CommunityGroups>();
-                foreach (var item in _communityGroups)
+                foreach (var item in _communityGroups.OrderBy(c=>c.DisplayIndex))
                 {
                     communityGroups.Add(new CommunityGroups
                     {

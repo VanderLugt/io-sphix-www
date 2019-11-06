@@ -52,10 +52,10 @@
             <span class="dropdown-notification">1</span>
         </a>
     </li>*@
-    <li class="nav-item dropdown header-setting-block ">
-        <a style="margin-left:10px;" class="nav-link dropdown-toggle mr-3 mr-lg-0 header-icon"  id="navbarCommunityGroups" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="CommunitiesForGood" asp-action="Index" >Communities For Good</a>
+    <li class="nav-item header-setting-block dropdown">
+        <a style="margin-left:10px;" class="nav-link dropdown-toggle mr-3 mr-lg-0 header-icon "    id="navbarCommunityGroups"   asp-controller="CommunitiesForGood" asp-action="Index" >Communities For Good</a>
         <div class="dropdown-menu dropdown-menu-right" style="padding:0px;" aria-labelledby="navbarCommunityGroups">
-            <a class="dropdown-item" asp-controller="CommunitiesForGood" asp-action="Index" >Communities For Good</a>
+            @*<a class="dropdown-item" asp-controller="CommunitiesForGood" asp-action="Index" >Communities For Good</a>*@
             @foreach (var item in Model.communityGroups)
             {
             <a class="dropdown-item" style="background-color:@item.Color;color:#fff;" asp-controller="CommunityGroups" asp-action="@item.CommunityUrl">@item.Name</a>

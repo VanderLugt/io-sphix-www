@@ -43,12 +43,12 @@
         }
     <div class="main-body">
         <div class="row" style="margin:0px;">
-            <div class="col-lg-4 col-md-4 col-sm-12 bg-left-section" >
+            <div class="col-lg-4 col-md-4 col-sm-12 bg-left-section" id="mainLeftSection" >
                 <div class="bg-left-block-inner" id="divLeftSection">
                     
                 </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 bg-right-section">
+            <div class="col-lg-8 col-md-8 col-sm-12 bg-right-section" id="mainRightSection">
                 <div class="body-content">
                     @RenderBody()
                 </div>
@@ -89,6 +89,10 @@
         .note-popover .popover-content, .panel-heading.note-toolbar {
             background: #ea9c0c !important;
         }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: -8px;
+     }
     </style>
     <script src="~/js/validator.js"></script>
     <script src="~/js/site.js"></script>
@@ -111,11 +115,39 @@
         </script>
         <script> 
             $(document).ready(function () {
+                //$('.dropdown').hover(function () {
+                //      $('#dropdown', this).trigger('click'); 
+                //    });
                 $(document).ajaxStart(function () {
                     $("#wait").css("display", "block");
                 });
                 $(document).ajaxComplete(function () {
                     $("#wait").css("display", "none"); 
+
+                    var divRightHeight = $('.body-content').height();
+                    var divLeftHeight = $('#mainLeftSection').height();
+                    console.log('Right : '+ (divRightHeight) + 'px left : ' +(divLeftHeight) + 'px');
+                    if (divRightHeight != divLeftHeight) {
+                        if (divRightHeight > divLeftHeight) {
+                              if (divRightHeight <=  898) {
+                                 $('#mainLeftSection').css('height', (divRightHeight) + 'px')
+                            }
+                            else {
+                                 $('#mainLeftSection').css('height', (divRightHeight + 30) + 'px')
+                            }
+                           
+                        }
+                        else {
+                            if (divLeftHeight <= 657) {
+                                $('#divContainer').css('height', (divLeftHeight - 60) + 'px')
+                            }
+                            else {
+                                $('#divContainer').css('height', (divLeftHeight - 20) + 'px')
+                            }
+                            
+                        }
+                    }
+               
                 });
             });
 
