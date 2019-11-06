@@ -131,22 +131,18 @@
                     if (divRightHeight != divLeftHeight) {
                         if (divRightHeight > divLeftHeight) {
                            // 
-                              if (divRightHeight <=  898) {
-                                  $('#mainLeftSection').css('height', (divRightHeight) + 'px')
-                            }
-                            else {
-                                  $('#mainLeftSection').css('height', (divRightHeight + 30) + 'px')
-                            }
+                            //  if (divRightHeight <=  898) {
+                            //      $('#mainLeftSection').css('height', (divRightHeight) + 'px')
+                            //}
+                            //else {
+                            //      $('#mainLeftSection').css('height', (divRightHeight) + 'px')
+                            //}
+                             $('#mainLeftSection').css('height', (divRightHeight) + 'px')
                            
                         }
                         else {
                             // $('#mainLeftSection').css('height', divLeftHeight + 'px')
-                            if (divLeftHeight <= 657) {
-                                $('#divContainer').css('height', (divLeftHeight - 60) + 'px')
-                            }
-                            else {
-                                $('#divContainer').css('height', (divLeftHeight - 20) + 'px')
-                            }
+                            $('#divContainer').css('height', (divLeftHeight-(divLeftHeight-divRightHeight)-1) + 'px')
                             
                         }
                     }
