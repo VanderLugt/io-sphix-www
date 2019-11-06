@@ -22,7 +22,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <header class="black-header">
-                <nav class="navbar navbar-expand-md navbar-dark flex-row">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top">
                     <div class="container">
                         <div class="pull-left">
                             @await Component.InvokeAsync("UserMenu")
@@ -93,6 +93,9 @@
         display: block;
         margin-top: -8px;
      }
+      .modal-backdrop{
+          z-index:0;
+      }
     </style>
     <script src="~/js/validator.js"></script>
     <script src="~/js/site.js"></script>
@@ -115,9 +118,7 @@
         </script>
         <script> 
             $(document).ready(function () {
-                //$('.dropdown').hover(function () {
-                //      $('#dropdown', this).trigger('click'); 
-                //    });
+          
                 $(document).ajaxStart(function () {
                     $("#wait").css("display", "block");
                 });
@@ -129,15 +130,17 @@
                     console.log('Right : '+ (divRightHeight) + 'px left : ' +(divLeftHeight) + 'px');
                     if (divRightHeight != divLeftHeight) {
                         if (divRightHeight > divLeftHeight) {
+                           // 
                               if (divRightHeight <=  898) {
-                                 $('#mainLeftSection').css('height', (divRightHeight) + 'px')
+                                  $('#mainLeftSection').css('height', (divRightHeight) + 'px')
                             }
                             else {
-                                 $('#mainLeftSection').css('height', (divRightHeight + 30) + 'px')
+                                  $('#mainLeftSection').css('height', (divRightHeight + 30) + 'px')
                             }
                            
                         }
                         else {
+                            // $('#mainLeftSection').css('height', divLeftHeight + 'px')
                             if (divLeftHeight <= 657) {
                                 $('#divContainer').css('height', (divLeftHeight - 60) + 'px')
                             }

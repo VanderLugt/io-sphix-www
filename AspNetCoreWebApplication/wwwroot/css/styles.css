@@ -44,13 +44,15 @@ a {
   color: white;
   text-decoration: none;
 }
-
+.main-body{
+    margin-top:71px;
+}
 .wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -7rem;
-  position: relative;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -7rem;
+    position: relative;
 }
 
 footer, .push {
