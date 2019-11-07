@@ -32,6 +32,7 @@ function LoadLeftSection(path, pageTitle) {
     //$("#divUserContainer").html('<span class="loader">Loading....</span >');
     $("#divLeftSection").html('');
     $("#divLeftSection").load(path); 
+    $('#mainLeftSection').css('background-color', 'rgba(0,0,0,0.5)');
 }
 
 function checkMaxAttendees() {
@@ -59,6 +60,7 @@ function manageAssociations(communityId) {
     $('#divAssociations').html('Loading...');
     $('#divAssociations').load('/Dashboard/EditAssociations?CommunityId=' + communityId);
     $('#manageAssociations').modal('toggle');
+   
 }
 function saveAssociations() {
     setCheckedInterestsIds();

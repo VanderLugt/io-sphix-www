@@ -76,7 +76,7 @@ namespace Sphix.Service.Communities
                     communityData.Color = model.Color;
                     communityData.FooterLinkText = model.FooterLinkText;
                     communityData.DisplayIndex = model.DisplayIndex;
-                    communityData.CommunityUrl = Urlhelper.GenerateSeoFriendlyURL(model.Name);
+                   // communityData.CommunityUrl = Urlhelper.GenerateSeoFriendlyURL(model.Name);
                     await _unitOfWork.CommunityRepository.Update(communityData);
                     //baseModel = await Update(model);
                 }

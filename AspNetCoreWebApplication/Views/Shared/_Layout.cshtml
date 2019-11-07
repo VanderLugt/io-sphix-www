@@ -118,7 +118,7 @@
         </script>
         <script> 
             $(document).ready(function () {
-          
+                //$('#mainLeftSection').hide();
                 $(document).ajaxStart(function () {
                     $("#wait").css("display", "block");
                 });
@@ -141,8 +141,8 @@
                            
                         }
                         else {
-                            // $('#mainLeftSection').css('height', divLeftHeight + 'px')
-                            $('#divContainer').css('height', (divLeftHeight-(divLeftHeight-divRightHeight)-1) + 'px')
+                             //$('#divContainer').css('height', divLeftHeight + 'px')
+                            $('#divContainer').css('height', (divLeftHeight+(divLeftHeight-divRightHeight)-1) + 'px')
                             
                         }
                     }
