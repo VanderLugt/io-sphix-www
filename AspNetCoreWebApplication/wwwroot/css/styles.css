@@ -803,7 +803,7 @@ padding: 3rem 5rem;
     right: 5px;
 }
 .bg-left-section {
-    background: rgba(0,0,0,0.5);
+    /*background: rgba(0,0,0,0.5);*/
     height: 100vh;
 }
 .bg-right-section {
