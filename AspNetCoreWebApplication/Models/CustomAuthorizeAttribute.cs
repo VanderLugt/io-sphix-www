@@ -12,6 +12,7 @@ namespace AspNetCoreWebApplication.Models
         private readonly string _someFilterParameter;
         private string controller = "";
         private string action = "";
+        private string area = "";
         public Dictionary<string, string> communytyType = new Dictionary<string, string>();
         public CustomAuthorizeAttribute()
         {
@@ -27,13 +28,12 @@ namespace AspNetCoreWebApplication.Models
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = context.HttpContext.User;
-
+            var routeValues = context.RouteData.Values;
+            controller = (string)routeValues["controller"];
+            action = (string)routeValues["action"];
+            area = (string)routeValues["area"];
             if (!user.Identity.IsAuthenticated)
             {
-                var routeValues = context.RouteData.Values;
-
-                controller = (string)routeValues["controller"];
-                action = (string)routeValues["action"];
                 // it isn't needed to set unauthorized result 
                 // as the base class already requires the user to be authenticated
                 // this also makes redirect to a login page work properly
@@ -56,11 +56,9 @@ namespace AspNetCoreWebApplication.Models
                 {
                     context.Result = new RedirectToActionResult("Index", "Home", new { returnUrl = context.HttpContext.Request.Path });
                 }
-                
-                
                 return;
             }
-
+           
             // you can also use registered services
             //var someService = context.HttpContext.RequestServices.GetService<IRoleService>();
 
@@ -70,6 +68,10 @@ namespace AspNetCoreWebApplication.Models
             //    context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
             //    return;
             //}
+        }
+        private void checkRights()
+        {
+
         }
     }
 }

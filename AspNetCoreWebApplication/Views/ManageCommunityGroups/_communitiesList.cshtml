@@ -22,7 +22,7 @@
                                     <th>Community Group Title</th>
                                     <th>IsPublish</th>
                                     <th>Last Update</th>
-                                    <th>Edit</th>
+                                    <th>Actions</th>
                                     <th>More</th>
                                 </tr>
                             </thead>
@@ -65,11 +65,11 @@
 </div>
 
 <script>
-
+      var communityGroupsDataTable;
 
         $(document).ready(function ()
         {
-            $("#tblCommunitiesList").DataTable({
+           communityGroupsDataTable =  $("#tblCommunitiesList").DataTable({
                 "processing": false, // for show progress bar
                 "serverSide": true, // for process server side
                 "filter": true, // this is for disable filter (search box)
@@ -100,7 +100,7 @@
                     {
                         "render": function (data, type, full, meta)
                         {
-                             return "<button class='btn btn-info btn-sm' onclick=EditCommunityGroup('" + full.id + "'); ><i class='far fa-edit'></i> Edit</button>";
+                             return "<button class='btn btn-info btn-sm' title='Edit' onclick=EditCommunityGroup('" + full.id + "'); ><i class='far fa-edit'></i> Edit</button>&nbsp;<button class='btn btn-danger btn-sm' title='Delete' onclick=DeleteCommunityGroup('" + full.id + "'); ><i class='far fa-trash-alt'></i></button>";
                         }, 'orderable': false
                     },
                     {

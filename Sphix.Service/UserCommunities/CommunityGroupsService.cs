@@ -223,6 +223,22 @@ namespace Sphix.Service.UserCommunities
                 return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
             }
         }
+        public async Task<BaseModel> DeleteCommunityGroupAsync(long Id)
+        {
+            try
+            {
+                CommunityGroupsDataModel communityGroupModel = await _unitOfWork.UserCommunityGroupsRepository.GetByID(Id);
+                communityGroupModel.IsActive = false;
+
+                await _unitOfWork.UserCommunityGroupsRepository.Update(communityGroupModel);
+                return new BaseModel { Status = true, Id = communityGroupModel.Id, Messsage = UMessagesInfo.RecordDeleted };
+            }
+            catch (Exception)
+            {
+
+                return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
+            }
+        }
         public async Task<EditCommunityGroupViewModel> getCommunityGroupDetail(long Id,long UserId)
         {
             EditCommunityGroupViewModel communityGroupView = new EditCommunityGroupViewModel();

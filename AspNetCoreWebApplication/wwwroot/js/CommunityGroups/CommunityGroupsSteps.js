@@ -1,4 +1,35 @@
-﻿
+﻿function DeleteCommunityGroup(id) {
+    if (confirm("Are you sure you want to delete...?")) {
+        $.ajax({
+            type: 'POST',
+            data: { Id: id },
+            url: '/ManageCommunityGroups/DeleteCommunityGroup',
+            success: function (data) {
+                //alert(JSON.stringify(data));
+                if (data.status) {
+                    // swal("Wait", "Good", "success");
+                    toastr.success(data.messsage, '', { timeOut: 1000 });
+                    communityGroupsDataTable.ajax.reload();
+                    //DashBoard
+                }
+                else {
+                    swal("Sorry!", data.messsage, "warning");
+                }
+                //$('#divLoadStep3').html(data);
+            },
+            failure: function (response) {
+                // alert(response.responseText);
+                swal("Sorry!", response.responseText, "error");
+            },
+            error: function (response) {
+                swal("Sorry!", response.responseText, "error");
+            }
+        });
+    }
+    else {
+        return false;
+    }
+}
 
 function uploadStreamingFile() {
     var data = new FormData();
