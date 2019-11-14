@@ -10,6 +10,7 @@ namespace Sphix.Service.UserCommunities
     {
         Task<BaseModel> SaveAsync(CommunityGroupViewModel model, IFormFile file, IFormFile aticleSharedoc);
         Task<BaseModel> PublishCommunityGroupAsync(long Id,bool IsPublish);
+        Task<BaseModel> DeleteCommunityGroupAsync(long Id);
         Task<IList<CommunityGroupsListViewModel>> getCommunitiesGroupsList(SearchFilter model);
         
         Task<IList<CommunityGroupsListViewModel>> getAdminCommunitiesGroupsList(CustomeSearchFilter model);

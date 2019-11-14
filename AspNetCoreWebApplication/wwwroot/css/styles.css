@@ -855,8 +855,10 @@ padding: 3rem 5rem;
     -ms-user-select: none;
     user-select: none;
 }
-
-    /* Hide the browser's default checkbox */
+th.sorting_disabled {
+    color: #fff;
+}
+/* Hide the browser's default checkbox */
 .center-form-block .form-group .form-check-label input {
     position: absolute;
     opacity: 0;

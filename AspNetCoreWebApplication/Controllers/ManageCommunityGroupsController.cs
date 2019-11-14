@@ -120,6 +120,11 @@ namespace AspNetCoreWebApplication.Controllers
         {
             return PartialView("_communitiesList");
         }
+        [HttpPost]
+        public async Task<JsonResult> DeleteCommunityGroup(long Id)
+        {
+            return Json(await _communityGroupsService.DeleteCommunityGroupAsync(Id));
+        }
         public async Task<IActionResult> MyCommunitiesGroupsList(SearchFilter model)
         {
             var draw = Request.Form["draw"].FirstOrDefault();
