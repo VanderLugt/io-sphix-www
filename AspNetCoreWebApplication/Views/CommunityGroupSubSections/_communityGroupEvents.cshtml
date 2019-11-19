@@ -18,7 +18,7 @@
     @foreach (var item in Model)
     {
 
-        <div class="col-lg-12 col-md-12 col-sm-12 community-main-body">
+        <div class="col-lg-12 col-md-12 col-sm-12 community-main-body" style="background-image: url('/img/backdrop/@item.Picture') !important;">
             <div class="community-category">@item.Title</div>
             <div class="col-md-12  p-white-color">
                 <p><i class="fas fa-user"></i> @item.TotalJoinedMembers </p>
@@ -52,6 +52,7 @@
 
         .slick-slide .community-main-body {
             margin-bottom: 0;
+            
         }
 
     .slick-prev:before,

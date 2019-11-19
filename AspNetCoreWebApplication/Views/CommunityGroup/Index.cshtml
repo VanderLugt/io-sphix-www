@@ -5,74 +5,45 @@
 @if (!string.IsNullOrEmpty(Model.Title))
 {
     <div class="dashboad-outer">
-        <div class="container" id="divContainer" style="margin-top:25px;">
-            <div class="d-flex justify-content-center align-items-center community-outer">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="from-group col-md-12">
-                            <div class="row">
+        <div id="divContainer">
+            <div class="community-outer">
+                <div class="">
+                    <div class="">
+                        <div class="from-group">
+                            <div class="">
                                 <div class="community-category" >
-                                    @Model.Title
-                                    @*<p>
-                                       <a style="color:#ea9c0c;" asp-controller="CommunityGroups" asp-action="@Model.CommunityUrl">More @Model.CommunityName</a>
-                                    </p>*@
+                                    <h6>@Model.Title</h6>
+                                    <p style="color:#fff;" class="card-top-text">@Model.FooterLinkText</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mb-4  col-md-12">
+                        <div class="form-group mb-4">
                             <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 community-main-body">
-                                    <div class="community-category">
-                                        @if (Model.OpenOfficeHours != null)
-                                        {@Model.OpenOfficeHours.OTitle}
-                                    </div>
-                                    <div class="community-icons">
-                                        <div style="text-align:center;">
-                                            <a href="#" onclick="ShowDetail(@Model.OpenOfficeHours.Id);" title="more detail"><i class="fas fa-info-circle"></i></a>
-                                            
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="community-main-body" style="background-image:!important">
+                                        <div class="community-category">
+                                            @if (Model.OpenOfficeHours != null)
+                                            {
+                                                <span style="text-transform:capitalize">@Model.OpenOfficeHours.OFrequency</span><span>:</span> @Model.OpenOfficeHours.OTitle
+                                                <p style="margin-bottom: 0;">Next session:&nbsp;@Model.OpenOfficeHours.OFromDate.ToString("MMM dd")<span> @Html.Raw('@') </span> @Model.OpenOfficeHours.OTime</p>
+                                            }
                                         </div>
-                                    </div>
-                                    <div class="communit-title">
-                                        <a href="#">
-                                        </a>
-                                    </div>
-                                    <div class="community-icons">
+                                        <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:200px;background-image:url('../img/backdrop/open_office_hours_meeting.png')">
 
-                                        <div class="float-left icon-texts">
-                                            <p style="cursor:help;" title="create new table in open hours meeting" onclick="CreateNewTable();">Create New</p>
-                                            <a href="#" title="Other times" onclick="CreateNewTable();">
-                                                @*onclick="ShowOtherTimes();"*@
-                                                <i class="far fa-clock"></i>
-                                            </a>
                                         </div>
-                                        <div class="float-right icon-texts">
-                                            <p>@Model.OpenOfficeHours.OTime <span id="spanTimeZone">@Model.OpenOfficeHours.OTimeZone</span></p>
-                                            <a href="#" onclick="LoadOpenHoursDetail();">
-                                                @*<i class="fas fa-sign-in-alt" title="RSVP"></i>*@
-                                                RSVP
-                                            </a>
-                                        </div>
-                                        <div class="timeoptions">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input type="button" value="PST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime PST
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="button" value="CST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime CST
-                                                    </div>
+                                        <div class="community-category-bottom" style="background-color:@Model.Color">
+                                            <div class="row form-row">
+                                                <div class="col-4">
+                                                    <a onclick="CreateNewTable();" style="font-size:14px;color:#fff;margin-left:2px;">Create team</a>
                                                 </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input type="button" value="HST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime HST
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="button" value="EST" class="timeOptionButton" />@Model.OpenOfficeHours.OTime EST
-                                                    </div>
+                                                <div class="col-5">
+                                                    <a style="font-size:14px;color:#fff;" onclick="LoadOpenHoursDetail();">Join team</a>
                                                 </div>
+                                                <div class="col-3"><i class="fas fa-info-circle" style="color:#fff;font-size:25px;" onclick="ShowDetail(@Model.OpenOfficeHours.Id);"></i></div>
                                             </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-top:10%;">
@@ -101,16 +72,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mb-4  col-md-12">
-                            <div class="row">
-                                <div class="col-md-12" id="divCommunityGroupEvnts">
+                        <div class="form-group mb-4">
+                            <div class="">
+                                <div class="" id="divCommunityGroupEvnts">
 
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mb-4  col-md-12">
-                            <div class="row">
-                                <div class="col-md-12" id="divCommunityGroupArticles">
+                        <div class="form-group mb-4">
+                            <div class="">
+                                <div class="" id="divCommunityGroupArticles">
 
                                 </div>
                             </div>
@@ -182,7 +153,19 @@ else
 
     .community-main-body {
         margin-bottom: 10px;
-        background-image: url('/img/backdrop/1.png');
+       -- background-image: url('@Model.ImageUrl');
+        background-size: cover;
+        min-height: 250px;
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+        position: relative;
+        background-position: center center;
+        margin-top:10px;
+    }
+      .community-main-body-artilce {
+        margin-bottom: 10px;
+       background-image: url('@Model.ImageUrl');
         background-size: cover;
         min-height: 250px;
         width: 100%;
@@ -219,11 +202,10 @@ else
         margin-top: 0;
         text-align: left;
         color: #fff;
-        position: absolute;
+        position: relative;
         bottom: 0;
         width: 100%;
-        padding-left: 15px;
-        padding-bottom: 15px;
+        padding: 10px 5px;
     }
 
     .classTabMenu {

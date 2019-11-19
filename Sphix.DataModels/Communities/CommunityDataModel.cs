@@ -27,5 +27,7 @@ namespace Sphix.DataModels.Communities
         [MaxLength(200)]
         public string FooterLinkText { get; set; }
         public int DisplayIndex { get; set; }
+        [MaxLength(200)]
+        public string HeaderLogo { get; set; }
     }
 }

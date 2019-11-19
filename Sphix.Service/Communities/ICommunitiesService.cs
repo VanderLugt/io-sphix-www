@@ -14,6 +14,6 @@ namespace Sphix.Service.Communities
         Task<IList<SelectListItems>> GetActiveCommunityThemes(int id);
         Task<CommunityTypeViewModel> getCommunityTypeAsync(int id);
         Task<IList<CommunityTypesListViewModel>> getCommunitiesGroupsTypeList(CustomeSearchFilter model);
-        Task<BaseModel> SaveAsync(CommunityTypeViewModel model, IFormFile articleShareDocument);
+        Task<BaseModel> SaveAsync(CommunityTypeViewModel model, IFormFile articleShareDocument, IFormFile headerLogo);
     }
 }

@@ -77,7 +77,9 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 {
                     model.Color = _comunityDetail.Color;
                     model.CommunityUrl = _comunityDetail.CommunityUrl;
-                    model.CommunityName = _comunityDetail.FooterLinkText;
+                    model.FooterLinkText = _comunityDetail.FooterLinkText;
+                    model.ImageUrl = _comunityDetail.ImageUrl;
+                    model.HeaderLogoUrl = _comunityDetail.HeaderLogo;
                 }
                 else
                 {
@@ -111,6 +113,9 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 openOfficeHours.OTime = _openOfficeHour[0].OTime;
                 openOfficeHours.OTitle = _openOfficeHour[0].OTitle;
                 openOfficeHours.Id = _openOfficeHour[0].Id;
+                openOfficeHours.OFrequency = _openOfficeHour[0].OFrequency;
+                openOfficeHours.OTimeDayName = _openOfficeHour[0].OTimeDayName;
+                openOfficeHours.OFromDate = _openOfficeHour[0].OFromDate;
             }
             model.OpenOfficeHours = openOfficeHours;
                 return model;

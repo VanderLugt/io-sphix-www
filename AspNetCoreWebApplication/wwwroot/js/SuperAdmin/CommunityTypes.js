@@ -9,9 +9,12 @@ function AddUpdate() {
     }
     // Get the files
     var _file = $("#txtFile")[0].files[0];
-    //var fileSize = file1.size; // in bytes
+    var _logoFile = $("#txtLogoFile")[0].files[0];
+   // var fileSize = _logoFile.size; // in bytes
+   // console.log(fileSize);
     var formData = new FormData();
     formData.append("File", _file);
+    formData.append("logoFile", _logoFile);
 
     formData.append("Id", $('#hdnId').val());
     formData.append("Name", $('#txtName').val());

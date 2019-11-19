@@ -10,6 +10,23 @@ namespace Sphix.ViewModels.CommunityGroupsFroentEnd
         public string Name { get; set; }
         public string Color { get; set; }
         private string imageUrl = string.Empty;
+        private string headerLogoUrl = string.Empty;
+        public string HeaderLogoUrl
+        {
+            get
+            {
+                if (headerLogoUrl == null)
+                {
+                    return headerLogoUrl;
+                }
+                else
+                {
+                    return UMessagesInfo.AWSPublicURL + headerLogoUrl;
+                }
+
+            }
+            set { headerLogoUrl = value; }
+        }
         public string ImageUrl
         {
             get

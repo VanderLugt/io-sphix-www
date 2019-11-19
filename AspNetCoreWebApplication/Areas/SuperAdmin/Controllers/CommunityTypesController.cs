@@ -31,9 +31,9 @@ namespace AspNetCoreWebApplication.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RequestSizeLimit(500000000)]
-        public async Task<JsonResult> SaveCommunityType(CommunityTypeViewModel model, IFormFile File)
+        public async Task<JsonResult> SaveCommunityType(CommunityTypeViewModel model, IFormFile File,IFormFile logoFile)
         {
-            return Json(await _communitiesService.SaveAsync(model, File));
+            return Json(await _communitiesService.SaveAsync(model, File,logoFile));
             //return null;
         }
         public async Task<IActionResult> CommunitiesGroupsList(CustomeSearchFilter model)

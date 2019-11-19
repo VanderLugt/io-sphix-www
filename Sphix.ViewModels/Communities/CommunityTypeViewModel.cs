@@ -22,6 +22,23 @@ namespace Sphix.ViewModels.Communities
             }
             set { imageUrl = value; }
         }
+        private string headerLogoUrl = string.Empty;
+        public string HeaderLogoUrl
+        {
+            get
+            {
+                if (headerLogoUrl == null)
+                {
+                    return headerLogoUrl;
+                }
+                else
+                {
+                    return UMessagesInfo.AWSPublicURL + headerLogoUrl;
+                }
+
+            }
+            set { headerLogoUrl = value; }
+        }
         public string Description { get; set; }
         public string CommunityUrl { get; set; }
         public string FooterLinkText { get; set; }
