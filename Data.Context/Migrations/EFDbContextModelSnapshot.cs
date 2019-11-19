@@ -184,6 +184,9 @@ namespace Data.Context.Migrations
                     b.Property<string>("FooterLinkText")
                         .HasMaxLength(200);
 
+                    b.Property<string>("HeaderLogo")
+                        .HasMaxLength(200);
+
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(200);
 

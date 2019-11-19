@@ -27,28 +27,42 @@ namespace Sphix.Service.Communities
             _context = context;
             _awsS3Bucket = awsS3Bucket;
         }
-        public async Task<BaseModel> SaveAsync(CommunityTypeViewModel model, IFormFile articleShareDocument)
+        public async Task<BaseModel> SaveAsync(CommunityTypeViewModel model, IFormFile backgroundImage, IFormFile headerLogo)
         {
-          
             try
             {
                 //save with attcahed doc
-                string articeDocUrl = string.Empty;
-                string articleFolderPath = "CommunityTypes/" + DateTime.Now.Year.ToString();
-                string articleFileName = string.Empty;
-                if (articleShareDocument != null && articleShareDocument.Length > 0)
+                string backgroundImageUrl = string.Empty;
+                string backgroundImageName = string.Empty;
+                string headerLogoUrl = string.Empty;
+                string headerName = string.Empty;
+
+                string _folderPath = "CommunityTypes/" + DateTime.Now.Year.ToString();
+               
+                if (backgroundImage != null && backgroundImage.Length > 0)
                 {
-                    articleFileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(articleShareDocument.FileName);
-                    articeDocUrl = articleFolderPath + "/" + articleFileName;
-                    //model.ImageUrl = articeDocUrl;
+                    backgroundImageName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(backgroundImage.FileName);
+                    backgroundImageUrl = _folderPath + "/" + backgroundImageName;
+                    //model.ImageUrl = backgroundImageUrl;
+                }
+                if (headerLogo != null && headerLogo.Length > 0)
+                {
+                    headerName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(headerLogo.FileName);
+                    headerLogoUrl = _folderPath + "/" + headerName;
+                    //model.ImageUrl = backgroundImageUrl;
                 }
                 if (model.Id == 0)
                 {
                     CommunityDataModel communityData = new CommunityDataModel();
-                    if (articleShareDocument != null && articleShareDocument.Length > 0)
+                    if (backgroundImage != null && backgroundImage.Length > 0)
                     {
-                        await _awsS3Bucket.UploadFileAsync(articleFolderPath, articleShareDocument, articleFileName);
-                        communityData.ImageUrl = articeDocUrl;
+                        await _awsS3Bucket.UploadFileAsync(_folderPath, backgroundImage, backgroundImageName);
+                        communityData.ImageUrl = backgroundImageUrl;
+                    }
+                    if (headerLogo != null && headerLogo.Length > 0)
+                    {
+                        await _awsS3Bucket.UploadFileAsync(_folderPath, headerLogo, headerName);
+                        communityData.HeaderLogo = headerLogoUrl;
                     }
                     communityData.Name = model.Name;
                     communityData.Description = model.Description;
@@ -63,12 +77,18 @@ namespace Sphix.Service.Communities
                 else
                 {
                     CommunityDataModel communityData = await _unitOfWork.CommunityRepository.GetByID(Convert.ToInt32(model.Id));
-                    if (articleShareDocument != null && articleShareDocument.Length > 0)
+                    if (backgroundImage != null && backgroundImage.Length > 0)
                     {
                         //first delete old file
                         await _awsS3Bucket.DeleteFileAsync(communityData.ImageUrl);
-                        await _awsS3Bucket.UploadFileAsync(articleFolderPath, articleShareDocument, articleFileName);
-                        communityData.ImageUrl = articeDocUrl;
+                        await _awsS3Bucket.UploadFileAsync(_folderPath, backgroundImage, backgroundImageName);
+                        communityData.ImageUrl = backgroundImageUrl;
+                    }
+                    if (headerLogo != null && headerLogo.Length > 0)
+                    {
+                        await _awsS3Bucket.DeleteFileAsync(communityData.HeaderLogo);
+                        await _awsS3Bucket.UploadFileAsync(_folderPath, headerLogo, headerName);
+                        communityData.HeaderLogo = headerLogoUrl;
                     }
                     communityData.Name = model.Name;
                     communityData.Description = model.Description;
@@ -176,6 +196,8 @@ namespace Sphix.Service.Communities
                 model.CommunityUrl = _result.CommunityUrl;
                 model.FooterLinkText = _result.FooterLinkText;
                 model.DisplayIndex = _result.DisplayIndex;
+                model.HeaderLogoUrl = _result.HeaderLogo;
+                
             }
            
             return model;

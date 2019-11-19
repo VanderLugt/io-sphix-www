@@ -14,6 +14,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Order</th>
                     <th>Is Active?</th>
                     <th>Action</th>
                 </tr>
@@ -87,6 +88,7 @@
                     "columns": [
                         { "data": "id", "name": "id", "autoWidth": true },
                         { "data": "name", "name": "name", "autoWidth": true },
+                        { "data": "displayIndex", "name": "displayIndex", "autoWidth": true },
                         { "data": "isLive", "name": "isLive", "autoWidth": true },
                         {
                             "render": function (data, type, full, meta) {

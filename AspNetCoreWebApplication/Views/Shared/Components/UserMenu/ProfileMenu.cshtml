@@ -29,11 +29,14 @@
                     <ul>
                         <li><a asp-controller="Dashboard" asp-action="Index"><i class="fas fa-user-circle"></i> My Account</a> </li>
                         <li><a href="#" onclick="LoadLeftSection('/Dashboard/CommunityAssociations')"><i class="fas fa-address-card"></i> Community Associations</a></li>
-                        
+
                         @if (User.IsInRole("admin"))
                         {
                             <li><a asp-controller="ManageCommunityGroups" asp-action="Add"><i class="fas fa-users"></i> Create Community Group</a></li>
                             <li><a asp-controller="ManageCommunityGroups" asp-action="Index"><i class="far fa-list-alt"></i> My Community Groups</a></li>
+                            <li >
+                                <a asp-area="SuperAdmin" asp-controller="Dashboard" asp-action="Index" target="_blank"><i class="fas fa-crown"></i> Admin Section</a>
+                            </li>
                         }
                         <li><a asp-controller="Logout" asp-action="Index"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>

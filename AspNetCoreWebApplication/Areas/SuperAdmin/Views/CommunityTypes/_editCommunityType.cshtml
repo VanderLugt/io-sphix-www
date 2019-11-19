@@ -2,6 +2,7 @@
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-12">
+                <p>Name</p>
                 <input type="text" class="form-control" value="@Model.Name" placeholder="community name (max 200 characters)" id="txtName" message="name is a required field." required />
             </div>
         </div>
@@ -9,20 +10,23 @@
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-12">
-                <input type="text" class="form-control" value="@Model.FooterLinkText" placeholder="footer link text (max 200 characters)" id="txtFooterLinkText" message="footer link text is a required field." required />
+                <p>Sub text</p>
+                <input type="text" class="form-control" value="@Model.FooterLinkText" placeholder="sub text (max 200 characters)" id="txtFooterLinkText" message="footer link text is a required field." required />
             </div>
         </div>
     </div>
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-12">
-                <input type="number"  class="form-control" value="@Model.DisplayIndex" placeholder="display index" id="txtDisplayIndex"  />
+                <p>Diplay Order</p>
+                <input type="number" class="form-control" value="@Model.DisplayIndex" placeholder="display index" id="txtDisplayIndex" />
             </div>
         </div>
     </div>
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-12">
+                <p>URL</p>
                 <input type="text" class="form-control" value="@Model.CommunityUrl" placeholder="community url (200 characters)" readonly id="txtCommunityUrl" />
             </div>
         </div>
@@ -30,17 +34,27 @@
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-12">
+                <p>Detail</p>
                 <textarea class="form-control" style="height:100px" placeholder="Description" id="txtDescription">@Model.Description</textarea>
             </div>
         </div>
     </div>
     <div class="form-group mb-4">
         <div class="row">
+            <div class="col-md-4">
+                Backgroud color
+            </div>
+            <div class="col-md-8  jumbotron" style="background-color:@Model.Color">
+                <input id="txtColor" type="text" class="form-control" value="rgb(255, 128, 0)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-4">
+        <div class="row">
             <div class="col-md-4 p-white-color">
-                <p style="color:#000;">Card Image</p>
+                <p style="color:#000;">Card Background image</p>
             </div>
             <div class="col-md-8 p-white-color">
-                @*<p>Upload short video clip up to 2 mins</p>*@
                 <input type="file" id="txtFile">
             </div>
         </div>
@@ -49,6 +63,24 @@
         <div class="row">
             <div class="col-md-12">
                 <img src="@Model.ImageUrl" width="300" />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group mb-4">
+        <div class="row">
+            <div class="col-md-4 p-white-color">
+                <p style="color:#000;">Header Logo</p>
+            </div>
+            <div class="col-md-8 p-white-color">
+                <input type="file" id="txtLogoFile">
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-4">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="@Model.HeaderLogoUrl" style="background-color:@Model.Color;" width="150" />
             </div>
         </div>
     </div>
@@ -63,16 +95,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group mb-4">
-        <div class="row">
-            <div class="col-md-4">
-                Backgroud color
-            </div>
-            <div class="col-md-8  jumbotron" style="background-color:@Model.Color">
-                <input id="txtColor" type="text"  class="form-control" value="rgb(255, 128, 0)" />
-            </div>
-        </div>
-    </div>
+
 
 </div>
 <input type="hidden" id="hdnId" value="@Model.Id" />

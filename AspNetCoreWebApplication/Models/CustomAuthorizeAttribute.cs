@@ -22,6 +22,7 @@ namespace AspNetCoreWebApplication.Models
             communytyType.Add("4", "philanthropy-and-relationships");
             communytyType.Add("5", "philosophy-and-religion");
             communytyType.Add("6", "politics-and-government");
+           
             //   _someFilterParameter = someFilterParameter;
         }
 
@@ -58,7 +59,12 @@ namespace AspNetCoreWebApplication.Models
                 }
                 return;
             }
-           
+
+            if (!string.IsNullOrEmpty(area) && area.ToLower()== "superadmin" && !user.IsInRole("admin"))
+            {
+                context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+                return;
+            }
             // you can also use registered services
             //var someService = context.HttpContext.RequestServices.GetService<IRoleService>();
 

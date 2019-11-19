@@ -10,5 +10,6 @@
         public long CommunityGroupsId { get; set; }
         public int MaxAttendees { get; set; }
         public int TotalJoinedMembers { get; set; }
+        public string Picture { get; set; }
     }
 }

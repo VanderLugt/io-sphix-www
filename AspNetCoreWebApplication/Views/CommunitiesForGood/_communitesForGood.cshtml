@@ -24,60 +24,58 @@
     }
     
 </style>
-<div class="d-flex justify-content-center align-items-center mb-4 mt-4">
-    <div class="row">
-        <div class="" style="margin-top:0px;">
-            <div class="form-group mb-4 " style="padding: 0 29px">
-                <div class="row">
+<div>
+   
+            <div class="form-group mb-4" style="padding: 0">
+                <div class="row form-row">
                     @if (Model.Count() > 0) 
                     {
                         foreach (var item in Model)
                         {
                             <div class="col-lg-4 col-md-6 col-sm-12" >
-                                <div class="community-main-body">
-                                    <div class="community-category" style="background-color:@item.Color">@item.Name</div>
-                                    @*<div class="row">
-            <div class="col-md-12  p-white-color">
-                <p>@item.Description </p>
-            </div>
-        </div>*@
-                                    <div class="community-desc">
-                                        <div class="col-md-12 community-image">
-                                            <p style="color:#ffffff; margin:0px;">@item.Description </p>
-                                            @*<img src="@item.ImageUrl" />*@
-                                        </div>
-                                    </div> 
-                                    <div class="community-icons">
-                                        <div class="float-left">
-                                            <a href="#" onclick="ShowDetail(@item.CommunityGroupId,'@item.CommunityGroupURL')" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
-                                        </div>
-                                        <div class="float-right navigation-icon">
-                                            @if (item.IsAlreadyJoined == false)
-                                            {
-                                                <a href="#" onclick="JoinCommunity(@item.Id,'@item.CommunityUrl');" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
-                                            }
-                                            else
-                                            {
-                                                if (item.CommunityGroupURL != null)
+                                <div class="community-main-body" >
+                                    <div class="community-category" style="background-color:@item.Color">
+                                        <div class="row form-row align-items-center">
+                                            <div class="col-3">
+                                                <img src="@item.HeaderLogoUrl" style="width:60px !important;min-height:60px !important" />
+                                            </div>
+                                            <div class="col-9">
+                                                @if (item.CommunityGroupURL != null)
                                                 {
-                                                    @*<a href="#" onclick="JoinCommunity(@item.Id,'@item.CommunityUrl');" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>*@
-                                                    <a href="CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>
+                                                <a href="CommunityGroup/@item.CommunityGroupURL" title="@item.Description" style="color:#fff;" class="card-top-text">
+                                                    @item.Description
+                                                </a>
+                                                <a href="CommunityGroups/@item.CommunityUrl" style="color:#fff;" class="card-top-text">@item.FooterLinkText</a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="CommunityGroups/@item.CommunityUrl" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="groups list"></i></a>
+                                                 <a href="CommunityGroups/@item.CommunityUrl" style="color:#fff;" class="card-top-text">@item.FooterLinkText</a>
                                                 }
-
-                                            }
-
+                                            </div>
+                                        </div>
+                                        </div>
+                                   
+                                        <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:156px;background-image:url(@item.ImageUrl)">
+                                           
+                                        </div>
+                                 
+                                   
+                                    @*<div class="communit-title">@item.Description</div>*@
+                                <div class="community-category-bottom" style="background-color:@item.Color">
+                                    <div class="row form-row">
+                                        <div class="col-4">
+                                            <a href="#" onclick="ShowDetail(@item.CommunityGroupId,'@item.CommunityGroupURL')" style="font-size:14px;color:#fff;margin-left:2px;">More info</a>
+                                            
+                                        </div>
+                                        <div class="col-5">
+                                            <a href="CommunityGroups/@item.CommunityUrl" style="font-size:14px;color:#fff;">More groups</a>
+                                        </div>
+                                        <div class="col-3"><i class="far fa-heart" style="color:#fff;"></i></div>
+                                    </div>
+                                            
                                         </div>
                                     </div>
-                                    @*<div class="communit-title">@item.Description</div>*@
-                                    <div class="community-category-bottom" style="background-color:@item.Color">
-                                        <a href="CommunityGroups/@item.CommunityUrl" style="font-size:16px;color:#fff;margin-right:5px;">&nbsp;More @item.FooterLinkText@*<i class="fas fa-arrow-alt-circle-right"></i>*@ </a>
-                                    </div>
                                 </div>
-                            </div>
                         }
                     }
                     else
@@ -86,8 +84,7 @@
                     }
                 </div>
             </div>
-        </div>
-    </div>
+        
 </div>
 <input type="hidden" id="hdnCommuntyId" />
 <input type="hidden" id="hdnCommuntyUrl" />
@@ -126,8 +123,8 @@
 
 <style>
     .community-main-body {
-        margin-bottom: 30px;
-        background-image: url('../img/backdrop/1.png');
+        margin-bottom: 10px;
+        /*background-image: url('../img/backdrop/1.png');*/
         background-size: cover;
         min-height: 250px;
         padding: 0px;
@@ -166,11 +163,27 @@
     .community-category-bottom {
         margin: 0px 0px 0px 0;
         text-align: center;
-        padding:10px 0;
-        position: absolute;
+        padding:10px 5px;
+        position: relative;
         width: 100%;
-        bottom: 0px;
+        left:0;
+        bottom: 0;
         /*background-color: #4D0B0A;*/
+    }
+    .card-top-text {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
+        text-align: left;
+        font-size: 12px;
+    }
+
+    @@media only screen and (max-width: 479px) {
+        .bg-right-section .community-main-body {
+            padding: 0 0;
+        }
     }
 </style>
 <script src="~/js/User/JoinUserCommunityGroup.js"></script>
