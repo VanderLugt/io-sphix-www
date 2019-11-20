@@ -27,54 +27,58 @@
 <div>
    
             <div class="form-group mb-4" style="padding: 0">
-                <div class="row form-row">
+                <div class="row form-custom">
                     @if (Model.Count() > 0) 
                     {
                         foreach (var item in Model)
                         {
                             <div class="col-lg-4 col-md-6 col-sm-12" >
-                                <div class="community-main-body" >
-                                    <div class="community-category" style="background-color:@item.Color">
-                                        <div class="row form-row align-items-center">
-                                            <div class="col-3">
-                                                <img src="@item.HeaderLogoUrl" style="width:60px !important;min-height:60px !important" />
-                                            </div>
-                                            <div class="col-9">
-                                                @if (item.CommunityGroupURL != null)
-                                                {
-                                                <a href="CommunityGroup/@item.CommunityGroupURL" title="@item.Description" style="color:#fff;" class="card-top-text">
-                                                    @item.Description
-                                                </a>
-                                                <a href="CommunityGroups/@item.CommunityUrl" style="color:#fff;" class="card-top-text">@item.FooterLinkText</a>
-                                                }
-                                                else
-                                                {
-                                                 <a href="CommunityGroups/@item.CommunityUrl" style="color:#fff;" class="card-top-text">@item.FooterLinkText</a>
-                                                }
+                                <div class="community-main-body">
+                                    <a href="CommunityGroup/@item.CommunityGroupURL"  title="@item.Description">
+                                        <div class="community-category" style="background-color:@item.Color">
+                                            <div class="row form-row align-items-center">
+                                                <div class="col-3">
+                                                    <img src="@item.HeaderLogoUrl" style="width:60px !important;min-height:60px !important" />
+                                                </div>
+                                                <div class="col-9">
+                                                    @if (item.CommunityGroupURL != null)
+                                                    {
+                                                        <p title="@item.Description" style="color:#fff;" class="card-top-text">
+                                                            @item.Description
+                                                        </p>
+                                                        <p style="color:#fff;" class="card-top-text">@item.FooterLinkText</p>
+                                                        @*<a href="CommunityGroups/@item.CommunityUrl" style="color:#fff;" class="card-top-text">@item.FooterLinkText</a>*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <p style="color:#fff;" class="card-top-text">@item.FooterLinkText</p>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                        </div>
-                                   
+                                    </a>
+                                    <a href="CommunityGroup/@item.CommunityGroupURL">
                                         <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:156px;background-image:url(@item.ImageUrl)">
-                                           
+
                                         </div>
-                                 
-                                   
-                                    @*<div class="communit-title">@item.Description</div>*@
-                                <div class="community-category-bottom" style="background-color:@item.Color">
-                                    <div class="row form-row">
-                                        <div class="col-4">
-                                            <a href="#" onclick="ShowDetail(@item.CommunityGroupId,'@item.CommunityGroupURL')" style="font-size:14px;color:#fff;margin-left:2px;">More info</a>
-                                            
+                                        </a>
+
+
+                                        @*<div class="communit-title">@item.Description</div>*@
+                                        <div class="community-category-bottom" style="background-color:@item.Color">
+                                            <div class="row form-row">
+                                                <div class="col-4">
+                                                    <a href="#" onclick="ShowDetail(@item.CommunityGroupId,'@item.CommunityGroupURL')" style="font-size:14px;color:#fff;margin-left:2px;">More info</a>
+
+                                                </div>
+                                                <div class="col-5">
+                                                    <a href="CommunityGroups/@item.CommunityUrl" style="font-size:14px;color:#fff;">More groups</a>
+                                                </div>
+                                                <div class="col-3"><i class="far fa-heart" style="color:#fff;"></i></div>
+                                            </div>
+
                                         </div>
-                                        <div class="col-5">
-                                            <a href="CommunityGroups/@item.CommunityUrl" style="font-size:14px;color:#fff;">More groups</a>
-                                        </div>
-                                        <div class="col-3"><i class="far fa-heart" style="color:#fff;"></i></div>
-                                    </div>
-                                            
-                                        </div>
-                                    </div>
+                                </div>
                                 </div>
                         }
                     }
@@ -122,8 +126,12 @@
 </fieldset>
 
 <style>
+    .community-main-body a {
+        text-decoration: none;
+    }
     .community-main-body {
         margin-bottom: 10px;
+        margin-top: 10px;
         /*background-image: url('../img/backdrop/1.png');*/
         background-size: cover;
         min-height: 250px;
@@ -178,8 +186,21 @@
         display: block;
         text-align: left;
         font-size: 12px;
+            margin-bottom: 2px;
     }
-
+    .form-custom {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+    .form-custom>.col,
+    .form-custom>[class*=col-] {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
     @@media only screen and (max-width: 479px) {
         .bg-right-section .community-main-body {
             padding: 0 0;

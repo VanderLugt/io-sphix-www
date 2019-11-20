@@ -7,6 +7,7 @@ namespace Sphix.ViewModels.UserCommunities
         public long Id { get; set; }
         public long CommunityGroupId { get; set; }
         public string OTime { get; set; }
+        public string OTitle { get; set; }
         public string OTimeZone { get; set; }
         public int MaxAttendees { get; set; }
         public string OFromDate { get; set; }

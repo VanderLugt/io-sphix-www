@@ -22,22 +22,25 @@
             <div class="row">
                 <div class="col-md-12">
                     Name
-                    <input type="text" id="txtName" class="form-control" value="@Model.Name" placeholder="community name (max 200 characters)"  message="name is a required field." required />
+                    <input type="text" id="txtName" class="form-control" value="@Model.Name" placeholder="community name (max 200 characters)" message="name is a required field." required />
                 </div>
             </div>
         </div>
-
         <div class="form-group mb-4">
             <div class="row">
                 <div class="col-md-4 p-white-color">
-                    <p style="color:#000;">Is Active</p>
+                    <p style="color:#000;">Is Active?</p>
+                    <input type="checkbox" id="chkCheckBox" checked="@Model.IsActive" data-toggle="toggle"  data-onstyle="success"/>
                 </div>
-                <div class="col-md-8 p-white-color">
-                    <input type="checkbox" id="chkCheckBox" checked="@Model.IsActive" />
 
-                </div>
             </div>
         </div>
+      
 
     </div>
 <input type="hidden" id="hdnId" value="@Model.Id" />
+<script>
+    $(document).ready(function () {
+        $('#chkCheckBox').bootstrapToggle();
+    });
+</script>

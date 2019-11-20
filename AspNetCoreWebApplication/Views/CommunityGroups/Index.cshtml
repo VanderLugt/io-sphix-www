@@ -8,7 +8,7 @@
             
 
                     <div class="form-group mb-4">
-                        <div class="row form-row">
+                        <div class="row form-custom">
                             @{ 
                                
                                 @if (Model.Count() > 0)
@@ -17,51 +17,52 @@
                                     {
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="community-main-body">
-                                            <div class="community-category" style="background-color:@item.Color">
-                                                <div class="row form-row align-items-center">
-                                                    <div class="col-3">
-                                                        <img src="@item.HeaderLogoUrl" style="width:60px !important;min-height:60px !important">
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <a href="~/CommunityGroup/@item.CommunityGroupURL" title="@item.Title" style="color:#fff;" class="card-top-text">
-                                                            @item.Title
-                                                        </a>
-                                                        <p style="color:#fff;" class="card-top-text">@item.FooterLinkText</p>
+                                            <a href="~/CommunityGroup/@item.CommunityGroupURL" title="@item.Title">
+                                                <div class="community-category" style="background-color:@item.Color">
+                                                    <div class="row form-row align-items-center">
+                                                        <div class="col-3">
+                                                            <img src="@item.HeaderLogoUrl" style="width:60px !important;min-height:60px !important">
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <p title="@item.Title" style="color:#fff;" class="card-top-text">
+                                                                @item.Title
+                                                            </p>
+                                                            <p style="color:#fff;" class="card-top-text">@item.FooterLinkText</p>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </a>
+                                            <a href="~/CommunityGroup/@item.CommunityGroupURL" title="@item.Title">
+                                                <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:156px;background-image:url(@item.ImageUrl)">
 
-
-                                            </div>
-                                            <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:156px;background-image:url(@item.ImageUrl)">
-
-                                            </div>
-
-
-                                            @*<div class="community-icons">
-                                                <div class="float-left">
-                                                    <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL');" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
                                                 </div>
-                                                <div class="float-right navigation-icon">
-                                                    <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="community-category-bottom" style="background-color:@item.Color">
-                                                <a asp-controller="CommunitiesForGood" asp-action="Index" style="color:#fff;"> Back to Communities for Good</a>
-                                            </div>*@
+                                          </a>
 
-                                            <div class="community-category-bottom" style="background-color:@item.Color">
-                                                <div class="row form-row">
-                                                    <div class="col-4">
-                                                        <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL')" style="font-size:14px;color:#fff;margin-left:2px;">More info</a>
+                                                @*<div class="community-icons">
+                <div class="float-left">
+                    <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL');" title="More Info" style="background-color:@item.Color"><i class="fas fa-info-circle"></i></a>
+                </div>
+                <div class="float-right navigation-icon">
+                    <a href="~/CommunityGroup/@item.CommunityGroupURL" style="background-color:@item.Color"><i class="fas fa-location-arrow" title="Join Now"></i></a>
+                </div>
+            </div>
+            <div class="community-category-bottom" style="background-color:@item.Color">
+                <a asp-controller="CommunitiesForGood" asp-action="Index" style="color:#fff;"> Back to Communities for Good</a>
+            </div>*@
 
+                                                <div class="community-category-bottom" style="background-color:@item.Color">
+                                                    <div class="row form-row">
+                                                        <div class="col-4">
+                                                            <a href="#" onclick="ShowDetail(@item.Id,'@item.CommunityGroupURL')" style="font-size:14px;color:#fff;margin-left:2px;">More info</a>
+
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <a href="~/CommunityGroup/@item.CommunityGroupURL" style="font-size:14px;color:#fff;">Read more</a>
+                                                        </div>
+                                                        <div class="col-3"><i class="far fa-heart" style="color:#fff;"></i></div>
                                                     </div>
-                                                    <div class="col-5">
-                                                        <a href="~/CommunityGroup/@item.CommunityGroupURL" style="font-size:14px;color:#fff;">Read more</a>
-                                                    </div>
-                                                    <div class="col-3"><i class="far fa-heart" style="color:#fff;"></i></div>
-                                                </div>
 
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>
                                 }
@@ -149,6 +150,7 @@
 
     .community-main-body {
         margin-bottom: 10px;
+        margin-top: 10px;
         /*background-image: url('../img/backdrop/1.png');*/
         background-size: cover;
         min-height: 250px;
@@ -156,7 +158,9 @@
         position: relative;
         background-position: center center;
     }
-
+     .community-main-body a {
+        text-decoration: none;
+    }
     .community-main-body img {
         width: 100%;
         min-height: 183px;
@@ -197,13 +201,28 @@
     }
 
     .card-top-text {
-        width: 100%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        display: block;
-        text-align: left;
-        font-size: 12px;
+            width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 2px;
+    }
+
+    .form-custom {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+    .form-custom>.col,
+    .form-custom>[class*=col-] {
+        padding-right: 10px;
+        padding-left: 10px;
     }
 
     @@media only screen and (max-width: 479px) {
