@@ -55,7 +55,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                     User = user,
                     CommunityGroups = communityGroupsData,
                     OTitle = model.OTitle,
-                    OName = model.OName,
+                    OName = model.OTitle,
                     ODescription = model.ODescription,
                     OFrequency = model.OFrequency,
                     OFromDate = model.OFromDate, // setDateFromDayName(model.OTimeDayName, model.OFromDate),
@@ -89,7 +89,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
             {
                 var openOfficeHoursModel = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.GetByID(model.Id);
                 openOfficeHoursModel.OTitle = model.OTitle;
-                openOfficeHoursModel.OName = model.OName;
+                openOfficeHoursModel.OName = model.OTitle;
                 openOfficeHoursModel.ODescription = model.ODescription;
                 openOfficeHoursModel.OFrequency = model.OFrequency;
                 if (openOfficeHoursModel.OTimeDayName.ToLower().Trim() != model.OTimeDayName.ToLower().Trim())

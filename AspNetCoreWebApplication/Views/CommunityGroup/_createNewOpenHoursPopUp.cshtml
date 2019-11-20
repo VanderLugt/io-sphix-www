@@ -20,26 +20,32 @@
                                             <p><u>What time will this begin</u></p>
                                             <div class="row">
                                                 <div class="col-md-3"><input type="radio" name="radioTimeZone" value="PST" /> @Model.OTime PST</div>
-                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="CST"/> @Model.OTime CST</div>
-                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="HST"/> @Model.OTime HST</div>
-                                                <div class="col-md-3"><input type="radio" name="radioTimeZone"value="EST"/> @Model.OTime EST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="CST" /> @Model.OTime CST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="HST" /> @Model.OTime HST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="EST" /> @Model.OTime EST</div>
                                             </div>
-                                            <p><u>Roles and Responsibilities</u></p>
-                                            <div>
-                                                <input type="checkbox" onclick="checkCreateOpenHoursTable(this);"  />
-                                                By checking this box, I certify that understand my role, responsibilities, and best practices for leading this discussion.
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    What is the topic of the conversation
+                                                    <input type="text" id="txtOpenHoursConversation" class="text-bottom-border" maxlength="50" placeholder="50 characters"  message="the topic of the conversation is a required field." required />
+                                                </div>
+                                                </div>
+                                                <p><u>Roles and Responsibilities</u></p>
+                                                <div>
+                                                    <input type="checkbox" onclick="checkCreateOpenHoursTable(this);" />
+                                                    By checking this box, I certify that understand my role, responsibilities, and best practices for leading this discussion.
+                                                </div>
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <input type="button" class="btn btn-primary" disabled="disabled" onclick="AddOpenOfficeHours(@Model.Id);" id="btnSubmitCreateOpneHoursTable" value="SUBMIT" />
+                                                </div>
                                             </div>
-                                            <div class="float-right">
-                                                <button type="button" class="btn btn-warning" data-dismiss="modal">
-                                                    Close
-                                                </button>
-                                                <input type="button" class="btn btn-primary" disabled="disabled" onclick="AddOpenOfficeHours(@Model.Id);" id="btnSubmitCreateOpneHoursTable" value="SUBMIT" />
+                                            <div id="toAbout" class="tab-pane">
+                                                <p>“Peer-to-Peer networking allows to you connect with other group members of the group to ask questions or to provide helpful feedback to other members. To understand how this work, think of this link a digital room. By Clicking on “create new”, you are adding a table to the room with empty chairs, and asking for members of this community to join you through an RSVP system. The integrated web conferencing solution will connect all of you together at the designated staring time for the group. Alternatively, you can join an existing table that some one has created by clicking on the RSVP button. Etiquette for group meetings is such that the person who creates the group is the person who will start off and lead meeting. At the end, please reserve enough time for 5 minute feedback session on the good, the not so good, and needs improvement. The leader will be responsible for asking the group feedback. At the conclusion of the meeting, the leader will be receive a notification button that will provide the option to continue the same discussion group another week.”</p>
                                             </div>
                                         </div>
-                                        <div id="toAbout" class="tab-pane">
-                                            <p >“Peer-to-Peer networking allows to you connect with other group members of the group to ask questions or to provide helpful feedback to other members. To understand how this work, think of this link a digital room. By Clicking on “create new”, you are adding a table to the room with empty chairs, and asking for members of this community to join you through an RSVP system. The integrated web conferencing solution will connect all of you together at the designated staring time for the group. Alternatively, you can join an existing table that some one has created by clicking on the RSVP button. Etiquette for group meetings is such that the person who creates the group is the person who will start off and lead meeting. At the end, please reserve enough time for 5 minute feedback session on the good, the not so good, and needs improvement. The leader will be responsible for asking the group feedback. At the conclusion of the meeting, the leader will be receive a notification button that will provide the option to continue the same discussion group another week.”</p>
-                                        </div>
-                                    </div>
                                 </div>
 
                             </div>
@@ -52,6 +58,35 @@
         </div>
     </div>
 </fieldset>
+<style>
+    +50
+/* do not group these rules */
+*::-webkit-input-placeholder {
+    color: #fff;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: #fff;
+    opacity: 1;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: #fff;
+    opacity: 1;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff;
+}
+*::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #fff;
+}
+*::placeholder {
+    /* modern browser */
+    color: #fff;
+}
+</style>
 <script>
     function checkCreateOpenHoursTable(_this) {
         if (_this.checked) {

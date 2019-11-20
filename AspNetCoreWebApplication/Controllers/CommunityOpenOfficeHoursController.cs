@@ -114,6 +114,10 @@ namespace AspNetCoreWebApplication.Controllers
         }
         public async Task<IActionResult> AddOpenOfficeHours(OpenOfficeHoursViewModel model, long OpenHoursId)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(new BaseModel { Status=false,Messsage=UMessagesInfo.Error});
+            }
             var openHoursModel = await _openOfficeHoursService.getOpenHoursAsync(OpenHoursId);
 
             model.UserId = _claimAccessor.UserId;
@@ -135,9 +139,9 @@ namespace AspNetCoreWebApplication.Controllers
             }
 
             model.OToDate = model.OFromDate;
-            model.OName = openHoursModel.OName;
+          //  model.OName = openHoursModel.OName;
             model.OTime = openHoursModel.OTime;
-            model.OTitle = openHoursModel.OTitle;
+            //model.OTitle = openHoursModel.OTitle;
             model.WhoCanAttend = openHoursModel.WhoCanAttend;
             model.OTimeDayName = openHoursModel.OTimeDayName;
             model.IsFirstMeeting = false;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sphix.ViewModels.UserCommunities
 {
@@ -7,6 +8,7 @@ namespace Sphix.ViewModels.UserCommunities
         public long Id { get; set; }
         public long UserId { get; set; }
         public long CommunityGroupId { get; set; }
+        [Required]
         public string OTitle { get; set; }
         public string OName { get; set; }
         public string ODescription { get; set; }

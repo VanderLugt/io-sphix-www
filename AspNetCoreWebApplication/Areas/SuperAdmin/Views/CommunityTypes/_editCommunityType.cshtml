@@ -87,27 +87,28 @@
     <div class="form-group mb-4">
         <div class="row">
             <div class="col-md-4 p-white-color">
-                <p style="color:#000;">Is Active</p>
+                <p style="color:#000;">Is Active?</p>
+                <input type="checkbox" id="chkCheckBox" checked="@Model.IsActive" data-toggle="toggle" data-onstyle="success" />
             </div>
-            <div class="col-md-8 p-white-color">
-                <input type="checkbox" id="chkCheckBox" checked="@Model.IsActive" />
-
-            </div>
+           
         </div>
     </div>
 
 
 </div>
+
 <input type="hidden" id="hdnId" value="@Model.Id" />
 <input type="hidden" id="hdnBackgroundColor" value="@Model.Color" />
 <script>
     $(document).ready(function () {
-      
+
         $('#txtColor').colorpicker();
         $('#txtColor').on('colorpickerChange', function (event) {
             //backgroundColor = event.color.toString();
             $('#hdnBackgroundColor').val(event.color.toString());
             $('.jumbotron').css('background-color', event.color.toString());
-      });
+        });
+
+        $('#chkCheckBox').bootstrapToggle();
     });
 </script>
