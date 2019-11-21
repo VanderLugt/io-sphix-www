@@ -24,13 +24,18 @@
                                                 <div class="col-md-3"><input type="radio" name="radioTimeZone" value="HST" /> @Model.OTime HST</div>
                                                 <div class="col-md-3"><input type="radio" name="radioTimeZone" value="EST" /> @Model.OTime EST</div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mt-3">
                                                 <div class="col-md-12">
                                                     What is the topic of the conversation
-                                                    <input type="text" id="txtOpenHoursConversation" class="text-bottom-border" maxlength="50" placeholder="50 characters"  message="the topic of the conversation is a required field." required />
+                                                    <input type="text" id="txtOpenHoursConversation" style="width:50%" class="text-bottom-border" maxlength="50" placeholder="50 characters"  message="the topic of the conversation is a required field." required />
                                                 </div>
                                                 </div>
-                                                <p><u>Roles and Responsibilities</u></p>
+                                               
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    Roles and Responsibilities
+                                                    </div>
+                                                </div>
                                                 <div>
                                                     <input type="checkbox" onclick="checkCreateOpenHoursTable(this);" />
                                                     By checking this box, I certify that understand my role, responsibilities, and best practices for leading this discussion.
