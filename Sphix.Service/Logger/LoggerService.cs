@@ -14,8 +14,17 @@ namespace Sphix.Service.Logger
         }
         public async Task<bool> AddAsync(LoggerDataModel model)
         {
-            await _unitOfWork.LoggerRepository.Insert(model);
-            return true;
+            try
+            {
+                await _unitOfWork.LoggerRepository.Insert(model);
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+
+            }
+           
         }
     }
 }
