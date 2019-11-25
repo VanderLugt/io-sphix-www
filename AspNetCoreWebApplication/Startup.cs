@@ -3,7 +3,11 @@ using AspNetCoreWebApplication.Models;
 using AWSS3.Utility;
 using CustomTwilioClient;
 using Data.Context;
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +25,7 @@ using Sphix.Service.Authorization.Login.ForgotPassword;
 using Sphix.Service.Authorization.SignUp.EmailVerification;
 using Sphix.Service.Communities;
 using Sphix.Service.Communities.ComunitySubTypes;
+using Sphix.Service.CronJob;
 using Sphix.Service.EmailInvitation;
 using Sphix.Service.Logger;
 using Sphix.Service.SendGridManager;
@@ -42,6 +47,7 @@ using Sphix.Service.UserCommunities.OpenOfficeHours;
 using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMail;
 using Sphix.Utility.DateTimeDifference;
 using System;
+using System.Security.Claims;
 
 namespace Sphix.Web
 {
@@ -55,7 +61,7 @@ namespace Sphix.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(o => o.AddPolicy("websitePolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
@@ -63,8 +69,18 @@ namespace Sphix.Web
             }));
             services.Configure<MvcOptions>(options =>
             {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
+                options.Filters.Add(new CorsAuthorizationFilterFactory("websitePolicy"));
             });
+
+            services.Configure<AuthorizationOptions>(options => {
+                options.AddPolicy("hangfireDashboardPolicy", policy => {
+                    // require the user to be authenticated
+                    policy.RequireAuthenticatedUser();
+                    // Maybe require a claim here, if you need that.
+                    policy.RequireClaim(ClaimTypes.Role, "admin");
+                });
+            });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -100,6 +116,28 @@ namespace Sphix.Web
             services.AddDbContext<EFDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //Set data connection for Hangfire  
+            //services.AddHangfire(
+            //     x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"))
+            // );
+            // follow steps from this link https://docs.hangfire.io/en/latest/getting-started/aspnet-core-applications.html
+            // Add Hangfire services.
+            services.AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true
+                }));
+            // Add the processing server as IHostedService
+            services.AddHangfireServer();
+
             services.AddScoped<IUDateTimeDifference, UDateTimeDifference>();
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddTransient<ITwilioVideoService, TwilioVideoService>();
@@ -129,6 +167,7 @@ namespace Sphix.Web
             services.AddScoped<IArticleCommentsService, ArticleCommentsService>();
             services.AddScoped<IEmailInvitationService, EmailInvitationService>();
             services.AddScoped<IComunitySubTypesService, ComunitySubTypesService>();
+            services.AddScoped<ICronJobsService, CronJobsService>();
             //send grid
             services.AddSingleton<IEmailSenderService, EmailSenderService>();
             services.AddSingleton<IAWSS3Bucket, AWSS3Bucket>();
@@ -194,6 +233,25 @@ namespace Sphix.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+
+            //app.UseHangfireDashboard();
+            app.UseHangfireDashboard(
+            pathMatch: "/cronjobs",
+            options: new DashboardOptions()
+            {
+                Authorization = new IDashboardAuthorizationFilter[] {
+                    new HangfireAuthorizationFilter("hangfireDashboardPolicy")
+                }
+            });
+            app.UseHangfireServer();
+            //TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
+            // cron jobs setup
+            //RecurringJob.AddOrUpdate<ICronJobsService>(
+            //    cronJobs => cronJobs.MeetingsFollowUpMailSendAsync(), Cron.Weekly(DayOfWeek.Thursday,20), TimeZoneInfo.Utc);
+            RecurringJob.AddOrUpdate<ICronJobsService>(
+              cronJobs => cronJobs.MeetingsFollowUpMailSendAsync(), Cron.Hourly(), TimeZoneInfo.Utc);
+
+
             app.UseMvc(routes =>
             {
                 routes.MapAreaRoute(

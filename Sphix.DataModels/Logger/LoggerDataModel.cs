@@ -18,7 +18,7 @@ namespace Sphix.DataModels.Logger
         public string Source { get; set; }
         public string Message { get; set; }
         public string Detail { get; set; }
-        [MaxLength(10)]
+        [MaxLength(100)]
         public string ErrorCode { get; set; }
         public DateTime AddedDate { get; set; }
     }

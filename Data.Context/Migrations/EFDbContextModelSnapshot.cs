@@ -293,7 +293,7 @@ namespace Data.Context.Migrations
                     b.Property<string>("Detail");
 
                     b.Property<string>("ErrorCode")
-                        .HasMaxLength(10);
+                        .HasMaxLength(100);
 
                     b.Property<string>("Message");
 
