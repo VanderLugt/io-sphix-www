@@ -4,6 +4,6 @@ namespace Sphix.Service.CronJob
 {
   public interface ICronJobsService
     {
-        Task<bool> MeetingsFollowUpMailSendAsync();
+        Task<bool> ThursdayMeetingFollowUpMails();
     }
 }
