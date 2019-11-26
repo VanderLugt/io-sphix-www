@@ -869,6 +869,8 @@ namespace Data.Context.Migrations
 
                     b.Property<long?>("LiveEventId");
 
+                    b.Property<string>("Note");
+
                     b.Property<string>("TimeZone");
 
                     b.Property<long?>("UserId");
@@ -892,6 +894,9 @@ namespace Data.Context.Migrations
 
                     b.Property<DateTime>("JoinDateTime");
 
+                    b.Property<string>("Note")
+                        .HasMaxLength(500);
+
                     b.Property<long?>("OpenOfficeHoursId");
 
                     b.Property<string>("TimeZone");
@@ -905,6 +910,30 @@ namespace Data.Context.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserJoinCommunityOpenHourMeetings");
+                });
+
+            modelBuilder.Entity("Sphix.DataModels.UserCommunitiesGroups.OpenOfficeHoursMeetingsStatusDataModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<long>("MeetingId");
+
+                    b.Property<string>("MeetingStatus")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserCommunityOpenOfficeHoursMeetingsStatus");
                 });
 
             modelBuilder.Entity("Sphix.DataModels.UserCommunitiesGroups.PublishCommunityGroupLink.UserCommunityGroupPublishLinksDataModel", b =>
@@ -1089,6 +1118,29 @@ namespace Data.Context.Migrations
                     b.HasIndex("EventsId");
 
                     b.ToTable("UserEventComments");
+                });
+
+            modelBuilder.Entity("Sphix.DataModels.VToken.TokensDataModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Token")
+                        .HasMaxLength(200);
+
+                    b.Property<long>("TokenForId");
+
+                    b.Property<string>("TokenForTableName")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("TokenUsedOn");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VerificationTokens");
                 });
 
             modelBuilder.Entity("Sphix.DataModels.Authorization.EmailVerificationDataModel", b =>

@@ -11,7 +11,7 @@ namespace Sphix.DataModels.UserCommunities
         public CommunityGroupsDataModel()
         {
 
-            AddedDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
         }
         [Key]

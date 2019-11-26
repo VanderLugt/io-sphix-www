@@ -10,8 +10,8 @@ namespace Sphix.DataModels.Authorization
       
         public PhoneVerificationDataModel()
         {
-            AddedDate = DateTime.Now;
-            VerificationDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
+            VerificationDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

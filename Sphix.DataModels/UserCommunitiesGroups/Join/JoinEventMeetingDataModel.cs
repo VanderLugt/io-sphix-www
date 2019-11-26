@@ -13,7 +13,7 @@ namespace Sphix.DataModels.UserCommunitiesGroups.Join
         {
             LiveEvent = new CommunityLiveEvents();
             User = new UsersLoginDataModel();
-            JoinDateTime = DateTime.Now;
+            JoinDateTime = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -23,5 +23,6 @@ namespace Sphix.DataModels.UserCommunitiesGroups.Join
         public DateTime JoinDateTime { get; set; }
         public bool IsJoined { get; set; }
         public string TimeZone { get; set; }
+        public string Note { get; set; }
     }
 }

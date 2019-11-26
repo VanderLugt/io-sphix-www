@@ -129,7 +129,7 @@ namespace Sphix.Service.UserCommunities
             }
             
             dataModel.IsActive = true;
-            dataModel.AddedDate = DateTime.Now;
+            dataModel.AddedDate = DateTime.UtcNow;
             await _unitOfWork.UserCommunityArticlesRepository.Update(dataModel);
             return new BaseModel { Status = true, Id = dataModel.Id, Messsage = UMessagesInfo.RecordSaved };
         }

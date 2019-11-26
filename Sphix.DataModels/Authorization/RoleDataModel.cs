@@ -9,8 +9,8 @@ namespace Sphix.DataModels.Authorization
     {
         public RoleDataModel()
         {
-            AddedDate = DateTime.Now;
-            ModifiedDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
+            ModifiedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

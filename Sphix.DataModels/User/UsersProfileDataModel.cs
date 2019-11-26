@@ -9,7 +9,7 @@ namespace Sphix.DataModels.User
     {
         public UsersProfileDataModel()
         {
-            this.ModifiedDate = DateTime.Now;
+            this.ModifiedDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
         }
         [Key]

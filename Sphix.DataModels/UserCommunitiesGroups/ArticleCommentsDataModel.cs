@@ -14,7 +14,7 @@ namespace Sphix.DataModels.UserCommunitiesGroups
         {
             this.CommentedBy = new UsersLoginDataModel();
             this.Article = new CommunityArticles();
-            CommentedDate = DateTime.Now;
+            CommentedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

@@ -10,8 +10,8 @@ namespace Sphix.DataModels.Authorization
     {
         public EmailVerificationDataModel()
         {
-            AddedDate = DateTime.Now;
-           // VerificationDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
+           // VerificationDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
         }
         [Key]

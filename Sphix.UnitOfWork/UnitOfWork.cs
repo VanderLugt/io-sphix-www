@@ -9,6 +9,7 @@ using Sphix.DataModels.UserCommunities;
 using Sphix.DataModels.UserCommunitiesGroups;
 using Sphix.DataModels.UserCommunitiesGroups.Join;
 using Sphix.DataModels.UserCommunitiesGroups.PublishCommunityGroupLink;
+using Sphix.DataModels.VToken;
 using Sphix.GenericRepository;
 using System;
 
@@ -31,6 +32,16 @@ namespace Sphix.UnitOfWorks
                 if (this.roleRepository == null)
                     this.roleRepository = new GenericRepository<RoleDataModel>(_context);
                 return roleRepository;
+            }
+        }
+        private GenericRepository<TokensDataModel> verificationTokensRepository;
+        public GenericRepository<TokensDataModel> VerificationTokensRepository
+        {
+            get
+            {
+                if (this.verificationTokensRepository == null)
+                    this.verificationTokensRepository = new GenericRepository<TokensDataModel>(_context);
+                return verificationTokensRepository;
             }
         }
         #region User verification repository
@@ -200,6 +211,16 @@ namespace Sphix.UnitOfWorks
                 if (this.communityOpenOfficeHoursRepository == null)
                     this.communityOpenOfficeHoursRepository = new GenericRepository<CommunityOpenOfficeHours>(_context);
                 return communityOpenOfficeHoursRepository;
+            }
+        }
+        private GenericRepository<OpenOfficeHoursMeetingsStatusDataModel> openOfficeHoursMeetingsStatusRepository;
+        public GenericRepository<OpenOfficeHoursMeetingsStatusDataModel> OpenOfficeHoursMeetingsStatusRepository
+        {
+            get
+            {
+                if (this.openOfficeHoursMeetingsStatusRepository == null)
+                    this.openOfficeHoursMeetingsStatusRepository = new GenericRepository<OpenOfficeHoursMeetingsStatusDataModel>(_context);
+                return openOfficeHoursMeetingsStatusRepository;
             }
         }
         private GenericRepository<CommunityLiveEvents> communityLiveEventsRepository;

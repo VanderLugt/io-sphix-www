@@ -11,7 +11,7 @@ namespace Sphix.DataModels.UserCommunities
         public CommunityOpenOfficeHours()
         {
 
-            AddedDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
             this.CommunityGroups = new CommunityGroupsDataModel();
         }
@@ -50,6 +50,7 @@ namespace Sphix.DataModels.UserCommunities
         public long LastSessionId { get; set; }
         public bool IsMeetingTokenUsed { get; set; }
         public bool AddHours { get; set; }
+        
     }
    
 }

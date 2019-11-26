@@ -9,7 +9,7 @@ namespace Sphix.DataModels.UserCommunitiesGroups.PublishCommunityGroupLink
     {
         public UserCommunityGroupPublishLinksDataModel()
         {
-            CreatedDate = DateTime.Now;
+            CreatedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

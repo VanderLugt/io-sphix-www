@@ -111,7 +111,7 @@ namespace Sphix.Service.UserCommunities.ArticleComments
                     {
                         userArticleCommentsModel.IsDeletedMessage = true;
                         userArticleCommentsModel.DeletedBy = model.UserId;
-                        userArticleCommentsModel.MessageDeletedDate = DateTime.Now;
+                        userArticleCommentsModel.MessageDeletedDate = DateTime.UtcNow;
                         await _unitOfWork.ArticleCommentsRepository.Update(userArticleCommentsModel);
                         return new BaseModel { Status = true, Messsage = UMessagesInfo.RecordDeleted };
                     }

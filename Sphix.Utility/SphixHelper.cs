@@ -8,7 +8,7 @@ namespace Sphix.Utility
     {
         public static DateTime setDateFromDayName(string dayName, DateTime date)
         {
-            DateTime todayDate = DateTime.Now;
+            DateTime todayDate = DateTime.UtcNow;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);

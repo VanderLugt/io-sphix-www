@@ -94,7 +94,7 @@ namespace Sphix.Service.Authorization.Login.ForgotPassword
                 {
                     //_forgotPasswordDetail.IsRequestHasUsed = true;
                     //_forgotPasswordDetail.IsRequestToRestPassword = false;
-                    //_forgotPasswordDetail.VerificationDate = DateTime.Now;
+                    //_forgotPasswordDetail.VerificationDate = DateTime.UtcNow;
                     // await _unitOfWork.RestPasswordLinkRepository.Update(_forgotPasswordDetail);
                     return await _userService.GetUserShortProfileById(_forgotPasswordDetail.User.Id);
                 }

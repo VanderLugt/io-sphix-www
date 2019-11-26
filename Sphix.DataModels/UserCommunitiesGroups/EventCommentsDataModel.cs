@@ -13,7 +13,7 @@ namespace Sphix.DataModels.UserCommunitiesGroups
         {
             this.CommentedBy = new UsersLoginDataModel();
             this.Events = new CommunityLiveEvents();
-            CommentedDate = DateTime.Now;
+            CommentedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

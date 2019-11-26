@@ -42,7 +42,7 @@ namespace Sphix.Service.User
             userProfile.Phone = model.PhoneNumber;
             //userProfile.ProfileLink = model.ProfileLink;
             userProfile.UpdatedBy = model.LogedInUserId;
-            userProfile.ModifiedDate = DateTime.Now;
+            userProfile.ModifiedDate = DateTime.UtcNow;
             //update user detail
             await _unitOfWork.UserProfileRepository.Update(userProfile);
 
@@ -157,7 +157,7 @@ namespace Sphix.Service.User
                     {
                         _forgotPasswordDetail.IsRequestHasUsed = true;
                         _forgotPasswordDetail.IsRequestToRestPassword = false;
-                        _forgotPasswordDetail.VerificationDate = DateTime.Now;
+                        _forgotPasswordDetail.VerificationDate = DateTime.UtcNow;
                         await _unitOfWork.RestPasswordLinkRepository.Update(_forgotPasswordDetail);
                         return new UserShortProfileViewModel { Status = true, Messsage = UMessagesInfo.ResetPasswordSuccessfully };
                     }

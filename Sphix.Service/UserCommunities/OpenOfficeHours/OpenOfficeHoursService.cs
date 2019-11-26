@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Sphix.DataModels.User;
 using Sphix.DataModels.UserCommunities;
+using Sphix.DataModels.UserCommunitiesGroups;
+using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursMeetingsStatus;
 using Sphix.UnitOfWorks;
 using Sphix.Utility;
 using Sphix.ViewModels;
@@ -15,10 +17,13 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
     {
         private UnitOfWork _unitOfWork;
         private readonly EFDbContext _context;
-        public OpenOfficeHoursService(EFDbContext context)
+        private readonly IOpenOfficeHoursMeetingsStatusService _openOfficeHoursMeetingsStatusService;
+        public OpenOfficeHoursService(EFDbContext context
+            , IOpenOfficeHoursMeetingsStatusService openOfficeHoursMeetingsStatusService)
         {
             _unitOfWork = new UnitOfWork(context);
             _context = context;
+            _openOfficeHoursMeetingsStatusService = openOfficeHoursMeetingsStatusService;
         }
         public async Task<CommunityOpenOfficeHours> getOpenHoursAsync(long Id)
         {
@@ -73,6 +78,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                     
                 };
                 await _unitOfWork.UserCommunityOpenOfficeHoursRepository.Insert(dataModel);
+                
                 if (model.AddHours)
                 {
                    await _context.LoadStoredProc("AddHoursInOpenOfficeHours")
@@ -83,6 +89,16 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                        });
 
                 }
+                //add meeting status 
+                await _openOfficeHoursMeetingsStatusService.SaveAsync(new OpenOfficeHoursMeetingsStatusDataModel
+                {
+                    
+                    MeetingId = dataModel.Id,
+                    MeetingStatus = "open",
+                    CreatedBy = model.UserId,
+                    CreatedOn = DateTime.UtcNow,
+                    Note="Open"
+                });
                 return new BaseModel { Status = true, Id = dataModel.Id, Messsage = UMessagesInfo.RecordSaved };
             }
             else
@@ -142,7 +158,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
         }
         private DateTime setDateFromDayName(string dayName, DateTime date)
         {
-            DateTime todayDate = DateTime.Now;
+            DateTime todayDate = DateTime.UtcNow;
             var days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                           "Saturday", "Sunday" };
             int _dayIndex = Array.IndexOf(days, dayName);

@@ -34,7 +34,7 @@ namespace Sphix.Service.UserCommunities.JoinCommunityEventMeeting
                 joinEventMeeting.LiveEvent = await _unitOfWork.UserCommunityLiveEventsRepository.GetByID(model.OpenOfficeHoursId);
                 joinEventMeeting.User = await _unitOfWork.UserLoginRepository.GetByID(model.UserId);
                 joinEventMeeting.IsJoined = true;
-                joinEventMeeting.JoinDateTime = DateTime.Now;
+                joinEventMeeting.JoinDateTime = DateTime.UtcNow;
                 joinEventMeeting.TimeZone = model.TimeZone;
                 await _unitOfWork.JoinEventMeetingRepository.Insert(joinEventMeeting);
                 return new BaseModel { Id = joinEventMeeting.Id, Status = true, Messsage = UMessagesInfo.RecordSaved,Data=joinEventMeeting.LiveEvent.EFromDate.ToShortDateString()+" at"+joinEventMeeting.LiveEvent.ETime+" "+joinEventMeeting.LiveEvent.ETimeZone };

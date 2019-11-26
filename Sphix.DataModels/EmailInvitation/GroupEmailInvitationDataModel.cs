@@ -11,7 +11,7 @@ namespace Sphix.DataModels.EmailInvitation
     {
         public GroupEmailInvitationDataModel()
         {
-            LastUpdate = DateTime.Now;
+            LastUpdate = DateTime.UtcNow;
             SentByUser = new UsersLoginDataModel();
             CommunityGroup = new CommunityGroupsDataModel();
         }

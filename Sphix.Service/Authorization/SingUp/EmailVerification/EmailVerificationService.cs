@@ -113,7 +113,7 @@ namespace Sphix.Service.Authorization.SignUp.EmailVerification
                     {
                         //update verification in database
                         item.IsVerified = true;
-                        item.VerificationDate = DateTime.Now;
+                        item.VerificationDate = DateTime.UtcNow;
                         await _unitOfWork.EmailVerificatioRepository.Update(item);
                         return await _userService.GetUserShortProfileById(item.User.Id);
                     }

@@ -50,7 +50,7 @@ namespace AspNetCoreWebApplication.Controllers
                     model.MaxAttendees =  openHoursModel.MaxAttendees;
                     model.ODescription = openHoursModel.ODescription;
                     model.OFrequency = openHoursModel.OFrequency;
-                    TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
+                    TimeSpan difference = DateTime.UtcNow.Date - openHoursModel.OFromDate.Date;
                     if (difference.Days > 7)
                     {
                         model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);
@@ -124,7 +124,7 @@ namespace AspNetCoreWebApplication.Controllers
             model.MaxAttendees = openHoursModel.MaxAttendees;
             model.ODescription = openHoursModel.ODescription;
             model.OFrequency = openHoursModel.OFrequency;
-            TimeSpan difference = DateTime.Now.Date - openHoursModel.OFromDate.Date;
+            TimeSpan difference = DateTime.UtcNow.Date - openHoursModel.OFromDate.Date;
             if (difference.Days>7)
             {
                 model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, DateTime.Now.Date);

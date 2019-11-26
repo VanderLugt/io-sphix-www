@@ -397,7 +397,7 @@ namespace Sphix.Service.UserCommunities
                 //communityGroupModel.IsActive = true;
                 //communityGroupModel.IsPublish = true;
                 communityGroupModel.IsPublicGroup = model.IsPublicGroup;
-                communityGroupModel.AddedDate = DateTime.Now;
+                communityGroupModel.AddedDate = DateTime.UtcNow;
                 communityGroupModel.CommunityId = model.OgranizationsId;
                 await _unitOfWork.UserCommunityGroupsRepository.Update(communityGroupModel);
                 //if group is not public then data will save in relation tables
