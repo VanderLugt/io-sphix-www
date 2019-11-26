@@ -11,7 +11,8 @@ namespace Sphix.Service.CronJob
         {
             _loggerService = loggerService;
         }
-        public async Task<bool> MeetingsFollowUpMailSendAsync()
+
+        public async Task<bool> ThursdayMeetingFollowUpMails()
         {
             await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel {
                 AddedDate=DateTime.UtcNow,

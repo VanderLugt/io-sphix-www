@@ -17,7 +17,7 @@ namespace AspNetCoreWebApplication.Controllers
         public async Task<IActionResult> Index(string Id)
         {
           
-                if (Id.Length > 0)
+                if (!string.IsNullOrEmpty(Id))
                 {
                     string[] idArray = Id.Split('-');
                     Int64 communityGroupId = Int64.Parse(idArray[idArray.Length - 1]);
