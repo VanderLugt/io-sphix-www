@@ -9,7 +9,7 @@ namespace Sphix.DataModels.Logger
     {
         public LoggerDataModel()
         {
-            AddedDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

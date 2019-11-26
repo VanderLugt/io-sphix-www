@@ -13,7 +13,7 @@ namespace Sphix.DataModels.UserCommunities
         public CommunityLiveEvents()
         {
 
-            AddedDate = DateTime.Now;
+            AddedDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
             this.CommunityGroups = new CommunityGroupsDataModel();
         }

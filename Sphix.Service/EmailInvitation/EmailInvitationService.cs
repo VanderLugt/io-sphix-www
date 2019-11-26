@@ -39,7 +39,7 @@ namespace Sphix.Service.EmailInvitation
             GroupEmailInvitationDataModel uModel = new GroupEmailInvitationDataModel() {
                  IsAccpeted=false,
                  CommunityGroup= groupMoodel,
-                 LastUpdate= DateTime.Now,
+                 LastUpdate= DateTime.UtcNow,
                  ReSend=0,
                  SentByUser=await _unitOfWork.UserLoginRepository.GetByID(model.SentByUser),
                  SentOn=DateTime.Now,
@@ -68,9 +68,9 @@ namespace Sphix.Service.EmailInvitation
                 };
                 await _joinCommunityGroup.JoinCommunityGroupAsync(joinCommunityModel);
                 model.IsAccpeted = true;
-                model.LastUpdate = DateTime.Now;
+                model.LastUpdate = DateTime.UtcNow;
                 model.SentTo = UserId;
-                model.AcceptedOn = DateTime.Now;
+                model.AcceptedOn = DateTime.UtcNow;
 
              await  _unitOfWork.GroupEmailInvitationRepository.Update(model);
             }

@@ -82,7 +82,7 @@ namespace Sphix.Service.Authorization
                     IsCertifyTAndC=model.IsCertifyTAndC,
                     IsFinanciallyActive=model.IsFinanciallyActive,
                     IsKickstartarActive=model.IsKickstartarActive,
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTime.UtcNow,
                     ProfileLink=profileLink
                 };
                 var profileData = await _unitOfWork.UserProfileRepository.Insert(usersProfileData);

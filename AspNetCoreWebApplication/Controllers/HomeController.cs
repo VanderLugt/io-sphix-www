@@ -15,6 +15,7 @@ using Sphix.Service.Authorization.Login;
 using Sphix.Service.Authorization.Login.ForgotPassword;
 using Sphix.Service.Authorization.SignUp.EmailVerification;
 using Sphix.Service.Communities;
+using Sphix.Service.CronJob;
 using Sphix.Utility;
 using Sphix.ViewModels;
 using Sphix.ViewModels.User;
@@ -29,10 +30,12 @@ namespace Sphix.Web.Controllers
         private readonly IEmailVerificationService _emailVerificationService;
         private readonly ILoginService _loginService;
         private readonly IForgotPasswordService _forgotPasswordService;
+        private readonly ICronJobsService _cronJobsService;
         public HomeController(ICommunitiesService communitiesService,ISignUpService SignUpService,
             IHostingEnvironment env, IEmailVerificationService emailVerificationService,
             ILoginService loginService,
-            IForgotPasswordService forgotPasswordService
+            IForgotPasswordService forgotPasswordService,
+            ICronJobsService cronJobsService
            )
         {
             _communitiesService = communitiesService;
@@ -41,6 +44,7 @@ namespace Sphix.Web.Controllers
             _env = env;
             _loginService = loginService;
             _forgotPasswordService = forgotPasswordService;
+            _cronJobsService = cronJobsService;
         }
         public async Task<IActionResult> Index(string returnUrl="")
         {
@@ -53,6 +57,7 @@ namespace Sphix.Web.Controllers
             //     channel: "sms");
             //if(verification.Status=="Pending")
             //{ }
+           await _cronJobsService.ThursdayMeetingFollowUpMails();
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "CommunitiesForGood");

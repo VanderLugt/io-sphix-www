@@ -1,5 +1,5 @@
 ﻿function deleteArticleComment(_Id) {
-    var result = confirm("Are you sure you want to delete this message?");
+    var result = confirm("Are you sure, you want to delete this message?");
     if (result === false) {
         return;
     }

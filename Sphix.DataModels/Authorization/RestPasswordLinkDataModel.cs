@@ -10,7 +10,7 @@ namespace Sphix.DataModels.Authorization
     {
         public RestPasswordLinkDataModel()
         {
-            CreatedDate = DateTime.Now;
+            CreatedDate = DateTime.UtcNow;
             this.User = new UsersLoginDataModel();
         }
         [Key]

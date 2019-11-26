@@ -9,6 +9,7 @@ using Sphix.DataModels.UserCommunities;
 using Sphix.DataModels.UserCommunitiesGroups;
 using Sphix.DataModels.UserCommunitiesGroups.Join;
 using Sphix.DataModels.UserCommunitiesGroups.PublishCommunityGroupLink;
+using Sphix.DataModels.VToken;
 
 namespace Data.Context
 {
@@ -23,6 +24,7 @@ namespace Data.Context
         public DbSet<LoggerDataModel> loggerManager { get; set; }
         public DbSet<RoleDataModel> rolesMaster { get; set; }
         public DbSet<CountriesDataModel> countriesMaster { get; set; }
+        public DbSet<TokensDataModel> verificationTokens { get; set; }
 
         #region communities DBSet
         public DbSet<CommunityDataModel> communities { get; set; }
@@ -47,6 +49,7 @@ namespace Data.Context
         #region UserCommunitiesGroups
         public DbSet<CommunityGroupsDataModel> userCommunityGroups { get; set; }
         public DbSet<CommunityOpenOfficeHours> userCommunityOpenOfficeHours { get; set; }
+        public DbSet<OpenOfficeHoursMeetingsStatusDataModel> openOfficeHoursMeetingsStatus { get; set; }
         public DbSet<CommunityLiveEvents> userCommunityLiveEvents { get; set; }
         public DbSet<UserArticleCommentsDataModel> eventsComments { get; set; }
         public DbSet<CommunityArticles> userCommunityArticles { get; set; }

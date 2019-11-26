@@ -35,7 +35,7 @@ namespace Sphix.Service.UserCommunities.JoinCommunityOpenHoursMeeting
                 joinOpenHoursMeeting.OpenOfficeHours = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.GetByID(model.OpenOfficeHoursId);
                 joinOpenHoursMeeting.User = await _unitOfWork.UserLoginRepository.GetByID(model.UserId);
                 joinOpenHoursMeeting.IsJoined = true;
-                joinOpenHoursMeeting.JoinDateTime = DateTime.Now;
+                joinOpenHoursMeeting.JoinDateTime = DateTime.UtcNow;
                 joinOpenHoursMeeting.TimeZone = model.TimeZone;
                 await _unitOfWork.JoinOpenHoursMeetingRepository.Insert(joinOpenHoursMeeting);
                 return new BaseModel { Id = joinOpenHoursMeeting.Id, Status = true, Messsage = UMessagesInfo.RecordSaved,Data = joinOpenHoursMeeting.OpenOfficeHours.OFromDate.ToShortDateString()+" at "+joinOpenHoursMeeting.OpenOfficeHours.OTime +" "+ joinOpenHoursMeeting.OpenOfficeHours.OTimeZone };

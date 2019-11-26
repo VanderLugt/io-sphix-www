@@ -10,6 +10,7 @@ namespace Sphix.Service.Settings
         public string SuperAdminEmail { get; set; }
         //developer team email address
         public string DevEmail { get; set; }
+        public string SiteUrl { get; set; }
     }
     
 }

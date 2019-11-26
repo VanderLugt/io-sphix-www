@@ -110,7 +110,7 @@ namespace Sphix.Service.UserCommunities.EventComments
                     {
                         uModle.IsDeletedMessage = true;
                         uModle.DeletedBy = model.UserId;
-                        uModle.MessageDeletedDate = DateTime.Now;
+                        uModle.MessageDeletedDate = DateTime.UtcNow;
                         await _unitOfWork.EventCommentsRepository.Update(uModle);
                         return new BaseModel { Status = true, Messsage = UMessagesInfo.RecordDeleted };
                     }

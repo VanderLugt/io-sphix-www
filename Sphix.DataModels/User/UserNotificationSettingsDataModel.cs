@@ -10,7 +10,7 @@ namespace Sphix.DataModels.User
         public UserNotificationSettingsDataModel()
         {
             this.User = new UsersLoginDataModel();
-            ModifiedDate = DateTime.Now;
+            ModifiedDate = DateTime.UtcNow;
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

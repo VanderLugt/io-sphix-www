@@ -9,7 +9,7 @@ namespace Sphix.DataModels.User
     {
         public UsersLoginDataModel()
         {
-            LastLoginDateTime = DateTime.Now;
+            LastLoginDateTime = DateTime.UtcNow;
         }
         [Key]
         public long Id { get; set; }

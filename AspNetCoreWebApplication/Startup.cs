@@ -44,6 +44,7 @@ using Sphix.Service.UserCommunities.JoinCommunityEventMeeting;
 using Sphix.Service.UserCommunities.JoinCommunityGroup;
 using Sphix.Service.UserCommunities.JoinCommunityOpenHoursMeeting;
 using Sphix.Service.UserCommunities.OpenOfficeHours;
+using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursMeetingsStatus;
 using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMail;
 using Sphix.Utility.DateTimeDifference;
 using System;
@@ -157,6 +158,7 @@ namespace Sphix.Web
 
             services.AddScoped<ICommunityGroupsService, CommunityGroupsService>();
             services.AddScoped<IOpenOfficeHoursService, OpenOfficeHoursService>();
+            services.AddScoped<IOpenOfficeHoursMeetingsStatusService, OpenOfficeHoursMeetingsStatusService>();
             services.AddScoped<IOpenHoursMailService, OpenHoursMailService>();
             services.AddScoped<ICommunityGroupEventService, CommunityGroupEventService>();
             services.AddScoped<IEventCommentsService, EventCommentsService>(); 

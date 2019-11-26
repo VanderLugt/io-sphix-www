@@ -1,5 +1,5 @@
 ﻿function DeleteCommunityGroup(id) {
-    if (confirm("Are you sure you want to delete...?")) {
+    if (confirm("Are you sure, you want to delete...?")) {
         $.ajax({
             type: 'POST',
             data: { Id: id },

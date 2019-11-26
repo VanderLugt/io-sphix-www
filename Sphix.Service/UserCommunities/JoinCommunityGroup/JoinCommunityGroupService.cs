@@ -30,7 +30,7 @@ namespace Sphix.Service.UserCommunities.JoinCommunityGroup
                     {
                         joinCommunityGroupData.User = await _unitOfWork.UserLoginRepository.GetByID(model.UserId);
                         joinCommunityGroupData.IsJoined = true;
-                        joinCommunityGroupData.JoinDateTime = DateTime.Now;
+                        joinCommunityGroupData.JoinDateTime = DateTime.UtcNow;
                         await _unitOfWork.JoinCommunityGroupRepository.Insert(joinCommunityGroupData);
                     }
                     else
