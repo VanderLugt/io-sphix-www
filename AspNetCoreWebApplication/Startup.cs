@@ -248,8 +248,8 @@ namespace Sphix.Web
             app.UseHangfireServer();
             //TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
             // cron jobs setup
-            //RecurringJob.AddOrUpdate<ICronJobsService>(
-            //    cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Thursday, 20), TimeZoneInfo.Utc);
+            RecurringJob.AddOrUpdate<ICronJobsService>(
+                cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Thursday, 20), TimeZoneInfo.Utc);
             //RecurringJob.AddOrUpdate<ICronJobsService>(
             //  cronJobs => cronJobs.MeetingsFollowUpMailSendAsync(), Cron.Hourly(), TimeZoneInfo.Utc);
 

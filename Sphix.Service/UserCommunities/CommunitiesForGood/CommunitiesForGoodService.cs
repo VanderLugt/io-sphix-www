@@ -4,6 +4,7 @@ using Sphix.UnitOfWorks;
 using Sphix.ViewModels;
 using Sphix.ViewModels.CommunityGroupsFroentEnd;
 using Sphix.ViewModels.UserCommunities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,9 +98,11 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 }
             }
             OpenOfficeHoursViewModel openOfficeHours = new OpenOfficeHoursViewModel();
-            var _openOfficeHour = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.FindAllBy(c => c.CommunityGroups.Id == Id && c.IsFirstMeeting==true);
-            if (_openOfficeHour != null && _openOfficeHour.Count != 0)
+           // var _openOfficeHour = await _unitOfWork.UserCommunityOpenOfficeHoursRepository.FindAllBy(c => c.CommunityGroups.Id == Id );
+            var _openOfficeHourData =await getOpenOfficeHoursTables(Id, "");
+            if (_openOfficeHourData != null && _openOfficeHourData.Count != 0)
             {
+              var  _openOfficeHour = _openOfficeHourData.Where(c => c.HasExpired != true).ToList();
                 var _resultOpenHoursMeeting = await _unitOfWork.JoinOpenHoursMeetingRepository.FindAllBy(c => c.User.Id == model.UserId && c.OpenOfficeHours.Id == _openOfficeHour[0].Id);
                 if (_resultOpenHoursMeeting != null && _resultOpenHoursMeeting.Count != 0)
                 {
@@ -110,12 +113,13 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 {
                     openOfficeHours.OTimeZone = _openOfficeHour[0].OTimeZone;
                 }
+                
                 openOfficeHours.OTime = _openOfficeHour[0].OTime;
                 openOfficeHours.OTitle = _openOfficeHour[0].OTitle;
                 openOfficeHours.Id = _openOfficeHour[0].Id;
                 openOfficeHours.OFrequency = _openOfficeHour[0].OFrequency;
                 openOfficeHours.OTimeDayName = _openOfficeHour[0].OTimeDayName;
-                openOfficeHours.OFromDate = _openOfficeHour[0].OFromDate;
+                openOfficeHours.OFromDate = Convert.ToDateTime( _openOfficeHour[0].OFromDate);
             }
             model.OpenOfficeHours = openOfficeHours;
                 return model;
