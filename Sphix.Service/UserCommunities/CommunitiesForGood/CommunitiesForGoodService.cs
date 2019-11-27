@@ -102,7 +102,13 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
             var _openOfficeHourData =await getOpenOfficeHoursTables(Id, "");
             if (_openOfficeHourData != null && _openOfficeHourData.Count != 0)
             {
-              var  _openOfficeHour = _openOfficeHourData.Where(c => c.HasExpired != true).ToList();
+                List< OpenOfficeHoursTables>  _openOfficeHour = _openOfficeHourData.Where(c => c.HasExpired != true).ToList();
+                long _groupId = 0;
+                if (_openOfficeHour.Count() == 0)
+                {
+                    _openOfficeHour = _openOfficeHourData.ToList();
+                }
+               
                 var _resultOpenHoursMeeting = await _unitOfWork.JoinOpenHoursMeetingRepository.FindAllBy(c => c.User.Id == model.UserId && c.OpenOfficeHours.Id == _openOfficeHour[0].Id);
                 if (_resultOpenHoursMeeting != null && _resultOpenHoursMeeting.Count != 0)
                 {
