@@ -13,5 +13,7 @@ namespace Sphix.ViewModels.UserCommunities
         public string OFromDate { get; set; }
         public int BookedSeats { get; set; }
         public bool HasExpired { get; set; }
+        public string OFrequency { get; set; }
+        public string OTimeDayName { get; set; }
     }
 }
