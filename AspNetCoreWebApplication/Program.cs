@@ -19,5 +19,6 @@ namespace Sphix.Web
                      options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(120);
                  })
                 .UseStartup<Startup>();
+                //.UseSetting("https_port", "443");
     }
 }
