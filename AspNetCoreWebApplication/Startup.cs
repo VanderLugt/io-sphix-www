@@ -117,27 +117,7 @@ namespace Sphix.Web
             services.AddDbContext<EFDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //Set data connection for Hangfire  
-            services.AddHangfire(
-                 x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"))
-             );
-            // follow steps from this link https://docs.hangfire.io/en/latest/getting-started/aspnet-core-applications.html
-            // Add Hangfire services.
-            //services.AddHangfire(configuration => configuration
-            //    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-            //    .UseSimpleAssemblyNameTypeSerializer()
-            //    .UseRecommendedSerializerSettings()
-            //    .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
-            //    {
-            //        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            //        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            //        QueuePollInterval = TimeSpan.Zero,
-            //        UseRecommendedIsolationLevel = true,
-            //        UsePageLocksOnDequeue = true,
-            //        DisableGlobalLocks = true
-            //    }));
-            // Add the processing server as IHostedService
-            //services.AddHangfireServer();
+           
 
             services.AddScoped<IUDateTimeDifference, UDateTimeDifference>();
             services.AddScoped<ILoggerService, LoggerService>();
@@ -169,7 +149,7 @@ namespace Sphix.Web
             services.AddScoped<IArticleCommentsService, ArticleCommentsService>();
             services.AddScoped<IEmailInvitationService, EmailInvitationService>();
             services.AddScoped<IComunitySubTypesService, ComunitySubTypesService>();
-            services.AddScoped<ICronJobsService, CronJobsService>();
+           
             //send grid
             services.AddSingleton<IEmailSenderService, EmailSenderService>();
             services.AddSingleton<IAWSS3Bucket, AWSS3Bucket>();
@@ -177,9 +157,30 @@ namespace Sphix.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<ClaimAccessor, ClaimAccessor>();
 
-            
             // services.AddSingleton(Configuration.GetSection("TwilioAuthOptions").Get<TwilioAuthOptions>());
 
+            //Set data connection for Hangfire  
+            //services.AddHangfire(
+            //     x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"))
+            // );
+            // follow steps from this link https://docs.hangfire.io/en/latest/getting-started/aspnet-core-applications.html
+            // Add Hangfire services.
+            services.AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true
+                }));
+            // Add the processing server as IHostedService
+            services.AddHangfireServer();
+            services.AddScoped<ICronJobsService, CronJobsService>();
             //--< set uploadsize large files >----
             services.Configure<FormOptions>(options =>
 
@@ -217,16 +218,7 @@ namespace Sphix.Web
                .AddRewrite(@"CommunityGroups/philanthropy-and-relationships", "/CommunityGroups/Index?id=5&title=Philanthropy And Relationships", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/philosophy-and-religion", "/CommunityGroups/Index?id=6&title=Philosophy And Religion", skipRemainingRules: true)
                .AddRewrite(@"CommunityGroups/politics-and-government", "/CommunityGroups/Index?id=2&title=Politics And Government", skipRemainingRules: true)
-               /*
-               .AddRewrite(@"MoreGroups/academia-and-research", "/MoreCommunityGroups/Index?id=1&title=Academia And Research", skipRemainingRules: true)
-               .AddRewrite(@"MoreGroups/businesses-and-organizations", "/MoreCommunityGroups/Index?id=3&title=Businesses And Organizations", skipRemainingRules: true)
-               .AddRewrite(@"MoreGroups/data-tech-and-info-systems", "/MoreCommunityGroups/Index?id=4&title=DataTech And InfoSystems", skipRemainingRules: true)
-               .AddRewrite(@"MoreGroups/philanthropy-and-relationships", "/MoreCommunityGroups/Index?id=5&title=Philanthropy And Relationships", skipRemainingRules: true)
-               .AddRewrite(@"MoreGroups/philosophy-and-religion", "/MoreCommunityGroups/Index?id=6&title=Philosophy And Religion", skipRemainingRules: true)
-               .AddRewrite(@"MoreGroups/politics-and-government", "/MoreCommunityGroups/Index?id=2&title=Politics And Government", skipRemainingRules: true)
-               */
                .AddRewrite(@"CommunityGroup/(.*)", "CommunityGroup/Index?Id=$1", skipRemainingRules: false)
-               //.AddRewrite(@"CommunityGroups/(.*)", "/CommunityGroups/Index?id=$1", skipRemainingRules: false)
                ;
             app.UseRewriter(options);
             //app.Run(context => context.Response.WriteAsync($"Rewritten or Redirected Url: {context.Request.Path + context.Request.QueryString}"));
