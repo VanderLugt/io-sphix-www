@@ -124,22 +124,10 @@ namespace Sphix.Service.CronJob
                         Message = "Called at " + DateTime.UtcNow.ToString(),
                         Source = "Hangfire",
                     });
-                    return true;
-                }
-                else
-                {
-                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
-                    {
-                        AddedDate = DateTime.UtcNow,
-                        ErrorCode = "Hangfire",
-                        Detail = "I called but time was not same",
-                        Message = "Called at " + DateTime.UtcNow.ToString(),
-                        Source = "Hangfire",
-                    });
-                    return true;
+                   
                 }
 
-             
+              return true;
 
                
             }
