@@ -174,16 +174,11 @@ $("#BackToStep1").click(function () {
     $('html, body').animate({
         scrollTop: $("#formSinup1").offset().top
     }, 1200);
-    //$('#formSinup1').show();
-    //$('#formSinup2').hide();
 });
 $("#BackToStep2").click(function () {
     $('html, body').animate({
         scrollTop: $("#formSinup2").offset().top
     }, 1200);
-    //$('#formSinup1').hide();
-    //$('#formSinup2').show();
-    //$('#formSinup3').hide();
 });
 $("#BackToStep3").click(function () {
 
