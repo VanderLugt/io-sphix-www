@@ -41,86 +41,107 @@ namespace Sphix.Service.CronJob
         {
             try
             {
-                await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                DateTime now = DateTime.UtcNow;
+                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Thursday)
                 {
-                    AddedDate = DateTime.UtcNow,
-                    ErrorCode = "Hangfire",
-                    Detail = "Start",
-                    Message = "Called at " + DateTime.UtcNow.ToString(),
-                    Source = "Hangfire",
-                });
-                IList<FollowUpMeetingMailsDetail> list = new List<FollowUpMeetingMailsDetail>();
-                await _context.LoadStoredProc("GetWeeklyFollowUpMeetingMails")
-                            .ExecuteStoredProcAsync((handler) =>
-                            {
-                                list = handler.ReadToList<FollowUpMeetingMailsDetail>();
-                            });
-                if (list != null)
-                {
-                    if (list.Count != 0)
+                    //it is between 8 and 9pm on Thursday
+                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
                     {
-                        var pathToFile = _env.ContentRootPath
-                                  + "\\wwwroot"
-                                 + Path.DirectorySeparatorChar.ToString()
-                                 + "Templates"
-                                 + Path.DirectorySeparatorChar.ToString()
-                                 + "EmailTemplates"
-                                 + Path.DirectorySeparatorChar.ToString()
-                                 + "Thursday_Follow_Up_Mail.html";
-                        string HtmlBody = string.Empty;
-                        using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                        AddedDate = DateTime.UtcNow,
+                        ErrorCode = "Hangfire",
+                        Detail = "Start",
+                        Message = "Called at " + DateTime.UtcNow.ToString(),
+                        Source = "Hangfire",
+                    });
+                    IList<FollowUpMeetingMailsDetail> list = new List<FollowUpMeetingMailsDetail>();
+                    await _context.LoadStoredProc("GetWeeklyFollowUpMeetingMails")
+                                .ExecuteStoredProcAsync((handler) =>
+                                {
+                                    list = handler.ReadToList<FollowUpMeetingMailsDetail>();
+                                });
+                    if (list != null)
+                    {
+                        if (list.Count != 0)
                         {
-                            HtmlBody = SourceReader.ReadToEnd();
-                        }
-                        TokensDataModel tokenModel;
-                        foreach (var item in list)
-                        {
-                            tokenModel = new TokensDataModel();
-                            string token = Guid.NewGuid().ToString().Replace("-", "");
-                            tokenModel.Token = token;
-                            tokenModel.TokenForId = item.Id;
-                            tokenModel.TokenForTableName = "UserCommunityOpenOfficeHours";
-                            tokenModel.CreatedOn = DateTime.UtcNow;
-                            await _unitOfWork.VerificationTokensRepository.Insert(tokenModel);
-
-                            if (tokenModel.Id != 0) {
-
-                                string meedagebody = string.Empty;
-                                meedagebody = HtmlBody;
-                                meedagebody = meedagebody.Replace("#Name", item.Name);
-                                meedagebody = meedagebody.Replace("#Link", _sphixConfiguration.SiteUrl + "Shx/CancelMeeting/" + token);
-                                meedagebody = meedagebody.Replace("#Footer", UMessagesInfo.MailFooter);
-                                await _emailSender.SendEmailAsync(
-                                    "Follow Up for next meeting",
-                                    meedagebody,
-                                    item.Email,
-                                    _sphixConfiguration.SupportEmail,
-                                    UMessagesInfo.SphixSupport
-                                    );
+                            var pathToFile = _env.ContentRootPath
+                                      + "\\wwwroot"
+                                     + Path.DirectorySeparatorChar.ToString()
+                                     + "Templates"
+                                     + Path.DirectorySeparatorChar.ToString()
+                                     + "EmailTemplates"
+                                     + Path.DirectorySeparatorChar.ToString()
+                                     + "Thursday_Follow_Up_Mail.html";
+                            string HtmlBody = string.Empty;
+                            using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                            {
+                                HtmlBody = SourceReader.ReadToEnd();
                             }
+                            TokensDataModel tokenModel;
+                            foreach (var item in list)
+                            {
+                                tokenModel = new TokensDataModel();
+                                string token = Guid.NewGuid().ToString().Replace("-", "");
+                                tokenModel.Token = token;
+                                tokenModel.TokenForId = item.Id;
+                                tokenModel.TokenForTableName = "UserCommunityOpenOfficeHours";
+                                tokenModel.CreatedOn = DateTime.UtcNow;
+                                await _unitOfWork.VerificationTokensRepository.Insert(tokenModel);
+
+                                if (tokenModel.Id != 0)
+                                {
+
+                                    string meedagebody = string.Empty;
+                                    meedagebody = HtmlBody;
+                                    meedagebody = meedagebody.Replace("#Name", item.Name);
+                                    meedagebody = meedagebody.Replace("#Link", _sphixConfiguration.SiteUrl + "Shx/CancelMeeting/" + token);
+                                    meedagebody = meedagebody.Replace("#Footer", UMessagesInfo.MailFooter);
+                                    await _emailSender.SendEmailAsync(
+                                        "Follow Up for next meeting",
+                                        meedagebody,
+                                        item.Email,
+                                        _sphixConfiguration.SupportEmail,
+                                        UMessagesInfo.SphixSupport
+                                        );
+                                }
 
 
+                            }
+                            await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                            {
+                                AddedDate = DateTime.UtcNow,
+                                ErrorCode = "Hangfire",
+                                Detail = "send mails",
+                                Message = "Called at " + DateTime.UtcNow.ToString(),
+                                Source = "Hangfire",
+                            });
                         }
-                        await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
-                        {
-                            AddedDate = DateTime.UtcNow,
-                            ErrorCode = "Hangfire",
-                            Detail = "send mails",
-                            Message = "Called at " + DateTime.UtcNow.ToString(),
-                            Source = "Hangfire",
-                        });
                     }
+                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                    {
+                        AddedDate = DateTime.UtcNow,
+                        ErrorCode = "Hangfire",
+                        Detail = "End call",
+                        Message = "Called at " + DateTime.UtcNow.ToString(),
+                        Source = "Hangfire",
+                    });
+                    return true;
                 }
-                await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                else
                 {
-                    AddedDate = DateTime.UtcNow,
-                    ErrorCode = "Hangfire",
-                    Detail = "End call",
-                    Message = "Called at " + DateTime.UtcNow.ToString(),
-                    Source = "Hangfire",
-                });
+                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                    {
+                        AddedDate = DateTime.UtcNow,
+                        ErrorCode = "Hangfire",
+                        Detail = "I called but time was not same",
+                        Message = "Called at " + DateTime.UtcNow.ToString(),
+                        Source = "Hangfire",
+                    });
+                    return true;
+                }
 
-                return true;
+             
+
+               
             }
             catch (Exception ex) 
             {
