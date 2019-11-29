@@ -101,13 +101,14 @@ namespace Sphix.Service.CronJob
                                     meedagebody = meedagebody.Replace("#Link", _sphixConfiguration.SiteUrl + "Shx/CancelMeeting/" + token);
                                     meedagebody = meedagebody.Replace("#Footer", UMessagesInfo.MailFooter);
 
-                                    await _emailSender.SendEmailAsync(
+                                  var _result=await _emailSender.SendEmailAsync(
                                         "Follow Up for next meeting",
                                         meedagebody,
                                         item.Email,
                                         _sphixConfiguration.SupportEmail,
                                         UMessagesInfo.SphixSupport
                                         );
+                                    
                                 }
 
 

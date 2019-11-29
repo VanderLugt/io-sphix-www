@@ -305,6 +305,45 @@ namespace Data.Context.Migrations
                     b.ToTable("LoggerManager");
                 });
 
+            modelBuilder.Entity("Sphix.DataModels.Logger.MailSentBoxDataModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FromEMailId")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsRead");
+
+                    b.Property<string>("Message");
+
+                    b.Property<string>("MessageType")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("ReadDateTime");
+
+                    b.Property<long>("SentBy");
+
+                    b.Property<DateTime>("SentDateTime");
+
+                    b.Property<long>("SentForId");
+
+                    b.Property<string>("SentForTableName")
+                        .HasMaxLength(100);
+
+                    b.Property<long>("SentToUserId");
+
+                    b.Property<string>("Subject")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ToEMailId")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MailSentBox");
+                });
+
             modelBuilder.Entity("Sphix.DataModels.User.UserAssociationsDataModel", b =>
                 {
                     b.Property<long>("Id")

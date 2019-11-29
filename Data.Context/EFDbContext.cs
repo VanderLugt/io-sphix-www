@@ -25,7 +25,7 @@ namespace Data.Context
         public DbSet<RoleDataModel> rolesMaster { get; set; }
         public DbSet<CountriesDataModel> countriesMaster { get; set; }
         public DbSet<TokensDataModel> verificationTokens { get; set; }
-
+        public DbSet<MailSentBoxDataModel> mailSentBoxes { get; set; }
         #region communities DBSet
         public DbSet<CommunityDataModel> communities { get; set; }
         public DbSet<CommunityCatgoryDataModel> communityCatgories { get; set; }
