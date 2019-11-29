@@ -47,6 +47,17 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-top:10%;">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <b style="color:#fff;">Would you like to join this community group?</b>
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-success" onclick="JoinCommunityGroup();">
+                                                Yes
+                                            </button>
+                                        </div>
+                                    </div>
+                                  
                                     <ul class="nav nav-tabs" style="margin-top:20px;">
                                         <li><a class="classTabMenu">Invite a friend: </a></li>
                                         <li><a data-toggle="tab" class="classTabMenu active show" href="#toGroup">To This Group</a></li>
@@ -65,9 +76,9 @@
                                             </div>
                                         </div>
                                         @*<div id="toSphix" class="tab-pane">
-                                            <input type="text" id="txtInviteToSphixEmails" onkeyup="InviteToSphixWordCount();" class="form-control" placeholder="Email Address" />
-                                            <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToSphixEmail" value="SEND" />
-                                        </div>*@
+                <input type="text" id="txtInviteToSphixEmails" onkeyup="InviteToSphixWordCount();" class="form-control" placeholder="Email Address" />
+                <input type="button" class="btn btn-primary float-right" disabled="disabled" id="btnInviteToSphixEmail" value="SEND" />
+            </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -97,6 +108,7 @@ else
     <partial name="~/Views/Shared/_NoData.cshtml" />
 }
 <input type="hidden" id="hdnCommunityGroupId" value="@ViewBag.CId" />
+<input type="hidden" id="hdnCommuntyGroupUrl" value="@Model.GroupUrl-@ViewBag.CId" />
 <partial name="_openHoursDetailPopUp.cshtml" />
 <partial name="_registerOpenOfficeHoursMeetingPopUp.cshtml" />
 <partial name="_singleEventPopUp.cshtml" />

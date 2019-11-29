@@ -9,6 +9,7 @@ namespace Sphix.ViewModels.CommunityGroupsFroentEnd
         public string Description { get; set; }
         public long UserId { get; set; }
         private string videoUrl = string.Empty;
+        public string GroupUrl { get; set; }
         public string VideoUrl {
             get {
                 if (string.IsNullOrEmpty(videoUrl))
