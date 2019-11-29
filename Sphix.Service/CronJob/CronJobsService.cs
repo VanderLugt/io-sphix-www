@@ -47,7 +47,7 @@ namespace Sphix.Service.CronJob
             try
             {
                 DateTime now = DateTime.UtcNow;
-                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Friday)
+                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Sunday)
                 {
                     //it is between 8 and 9pm on Thursday
                     await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
