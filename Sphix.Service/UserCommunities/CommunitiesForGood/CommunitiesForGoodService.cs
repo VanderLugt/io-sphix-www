@@ -88,6 +88,7 @@ namespace Sphix.Service.UserCommunities.CommunitiesForGood
                 }
                 model.Description = _result[0].Description;
                 model.VideoUrl = _result[0].DescriptionVideoUrl;
+                model.GroupUrl = _result[0].CommunityGroupURL;
                 //set posted user detail
                 model.UserId = _result[0].User.Id;
                 model.EmailAddress = _result[0].User.UserName;

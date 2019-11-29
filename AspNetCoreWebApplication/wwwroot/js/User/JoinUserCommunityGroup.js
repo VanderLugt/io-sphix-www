@@ -50,7 +50,7 @@ function JoinCommunityGroup() {
                     text: data.messsage,
                     type: "success"
                 }).then(function () {
-                    window.location = "CommunityGroup/" + $('#hdnCommuntyGroupUrl').val();
+                    window.location = "../CommunityGroup/" + $('#hdnCommuntyGroupUrl').val();
                 });
             }
             else {

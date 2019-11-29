@@ -108,7 +108,7 @@ else
     <partial name="~/Views/Shared/_NoData.cshtml" />
 }
 <input type="hidden" id="hdnCommunityGroupId" value="@ViewBag.CId" />
-<input type="hidden" id="hdnCommuntyGroupUrl" value="@Model.CommunityUrl" />
+<input type="hidden" id="hdnCommuntyGroupUrl" value="@Model.GroupUrl-@ViewBag.CId" />
 <partial name="_openHoursDetailPopUp.cshtml" />
 <partial name="_registerOpenOfficeHoursMeetingPopUp.cshtml" />
 <partial name="_singleEventPopUp.cshtml" />
