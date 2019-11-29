@@ -10,6 +10,7 @@ using Sphix.ViewModels.Communities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sphix.Service.CronJob
@@ -22,6 +23,8 @@ namespace Sphix.Service.CronJob
         private readonly IEmailSenderService _emailSender;
         private readonly EFDbContext _context;
         private UnitOfWork _unitOfWork;
+        //Instantiate a Singleton of the Semaphore with a value of 1. This means that only 1 thread can be granted access at a time.
+        static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
         public CronJobsService(ILoggerService loggerService
             , IHostingEnvironment env
             , IEmailSenderService emailSender
@@ -39,10 +42,12 @@ namespace Sphix.Service.CronJob
 
         public async Task<bool> ThursdayMeetingFollowUpMails()
         {
+            //Asynchronously wait to enter the Semaphore. If no-one has been granted access to the Semaphore, code execution will proceed, otherwise this thread waits here until the semaphore is released 
+            await semaphoreSlim.WaitAsync();
             try
             {
                 DateTime now = DateTime.UtcNow;
-                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Thursday)
+                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Friday)
                 {
                     //it is between 8 and 9pm on Thursday
                     await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
@@ -95,6 +100,7 @@ namespace Sphix.Service.CronJob
                                     meedagebody = meedagebody.Replace("#Name", item.Name);
                                     meedagebody = meedagebody.Replace("#Link", _sphixConfiguration.SiteUrl + "Shx/CancelMeeting/" + token);
                                     meedagebody = meedagebody.Replace("#Footer", UMessagesInfo.MailFooter);
+
                                     await _emailSender.SendEmailAsync(
                                         "Follow Up for next meeting",
                                         meedagebody,
@@ -143,6 +149,13 @@ namespace Sphix.Service.CronJob
                     Source = "Hangfire",
                 });
                 return false;
+            }
+            finally
+            {
+                //When the task is ready, release the semaphore. It is vital to ALWAYS release the semaphore when we are ready, or else we will end up with a Semaphore that is forever locked.
+                //This is why it is important to do the Release within a try...finally clause; program execution may crash or take a different path, this way you are guaranteed execution
+                semaphoreSlim.Release();
+               
             }
         }
     }

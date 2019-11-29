@@ -179,7 +179,7 @@ namespace Sphix.Web
                     DisableGlobalLocks = true
                 }));
             // Add the processing server as IHostedService
-            services.AddHangfireServer();
+            //services.AddHangfireServer();
             services.AddScoped<ICronJobsService, CronJobsService>();
             //--< set uploadsize large files >----
             services.Configure<FormOptions>(options =>
@@ -241,9 +241,9 @@ namespace Sphix.Web
             //TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
             // cron jobs setup
             RecurringJob.AddOrUpdate<ICronJobsService>(
-                cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Thursday, 20), TimeZoneInfo.Utc);
+            cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Friday, 20), TimeZoneInfo.Utc);
             //RecurringJob.AddOrUpdate<ICronJobsService>(
-            //  cronJobs => cronJobs.MeetingsFollowUpMailSendAsync(), Cron.Hourly(), TimeZoneInfo.Utc);
+            //  cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Minutely(), TimeZoneInfo.Utc);
 
 
             app.UseMvc(routes =>
