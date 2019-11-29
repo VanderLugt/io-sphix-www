@@ -66,7 +66,7 @@ namespace Sphix.Service.Authorization.Login.ForgotPassword
                            userData.UserName
                            );
 
-                    await _emailSender.SendEmailAsync(
+                        var _result=  await _emailSender.SendEmailAsync(
                                UMessagesInfo.ResetPasswordSubject,
                                messageBody,
                                userData.UserName,

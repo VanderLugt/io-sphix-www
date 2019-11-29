@@ -44,6 +44,16 @@ namespace Sphix.UnitOfWorks
                 return verificationTokensRepository;
             }
         }
+        private GenericRepository<MailSentBoxDataModel> mailSentBoxRepository;
+        public GenericRepository<MailSentBoxDataModel> MailSentBoxRepository
+        {
+            get
+            {
+                if (this.mailSentBoxRepository == null)
+                    this.mailSentBoxRepository = new GenericRepository<MailSentBoxDataModel>(_context);
+                return mailSentBoxRepository;
+            }
+        }
         #region User verification repository
         private GenericRepository<RestPasswordLinkDataModel> restPasswordLinkRepository;
         public GenericRepository<RestPasswordLinkDataModel> RestPasswordLinkRepository
