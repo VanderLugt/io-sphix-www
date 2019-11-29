@@ -94,7 +94,6 @@ namespace Sphix.Service.CronJob
 
                                 if (tokenModel.Id != 0)
                                 {
-
                                     string meedagebody = string.Empty;
                                     meedagebody = HtmlBody;
                                     meedagebody = meedagebody.Replace("#Name", item.Name);
