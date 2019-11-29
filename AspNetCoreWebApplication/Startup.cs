@@ -241,7 +241,7 @@ namespace Sphix.Web
             //TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
             // cron jobs setup
             RecurringJob.AddOrUpdate<ICronJobsService>(
-            cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Friday, 20), TimeZoneInfo.Utc);
+            cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Sunday, 20), TimeZoneInfo.Utc);
             //RecurringJob.AddOrUpdate<ICronJobsService>(
             //  cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Minutely(), TimeZoneInfo.Utc);
 
