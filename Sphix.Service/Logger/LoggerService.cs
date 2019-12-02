@@ -19,7 +19,7 @@ namespace Sphix.Service.Logger
                 await _unitOfWork.LoggerRepository.Insert(model);
                 return true;
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 return false;
 

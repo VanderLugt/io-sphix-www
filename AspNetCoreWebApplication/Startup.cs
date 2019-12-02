@@ -28,6 +28,7 @@ using Sphix.Service.Communities.ComunitySubTypes;
 using Sphix.Service.CronJob;
 using Sphix.Service.EmailInvitation;
 using Sphix.Service.Logger;
+using Sphix.Service.MailBox;
 using Sphix.Service.SendGridManager;
 //using CustomTwilioClient.
 using Sphix.Service.Settings;
@@ -118,7 +119,7 @@ namespace Sphix.Web
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
            
-
+            services.AddScoped<IMailBoxService,MailBoxService>();
             services.AddScoped<IUDateTimeDifference, UDateTimeDifference>();
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddTransient<ITwilioVideoService, TwilioVideoService>();
@@ -241,7 +242,10 @@ namespace Sphix.Web
             //TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
             // cron jobs setup
             RecurringJob.AddOrUpdate<ICronJobsService>(
-            cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Monday, 8), TimeZoneInfo.Utc);
+            cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Thursday, 20), TimeZoneInfo.Utc);
+
+            RecurringJob.AddOrUpdate<ICronJobsService>(
+            cronJobs => cronJobs.WednesdayRemindersMails(), Cron.Weekly(DayOfWeek.Monday, 15), TimeZoneInfo.Utc);
             //RecurringJob.AddOrUpdate<ICronJobsService>(
             //  cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Minutely(), TimeZoneInfo.Utc);
 

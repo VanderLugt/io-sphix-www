@@ -307,13 +307,16 @@ namespace Data.Context.Migrations
 
             modelBuilder.Entity("Sphix.DataModels.Logger.MailSentBoxDataModel", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FromEMailId")
                         .HasMaxLength(100);
 
                     b.Property<bool>("IsRead");
+
+                    b.Property<bool>("IsSent");
 
                     b.Property<string>("Message");
 
