@@ -47,7 +47,7 @@ namespace Sphix.Service.CronJob
             try
             {
                 DateTime now = DateTime.UtcNow;
-                if ((now.Hour >= 20 && now.Hour <= 21) && now.DayOfWeek == DayOfWeek.Sunday)
+                if ((now.Hour >= 8 && now.Hour <= 9) && now.DayOfWeek == DayOfWeek.Monday)
                 {
                     //it is between 8 and 9pm on Thursday
                     await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
@@ -107,29 +107,22 @@ namespace Sphix.Service.CronJob
                                         _sphixConfiguration.SupportEmail,
                                         UMessagesInfo.SphixSupport
                                         );
-                                    
+                                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
+                                    {
+                                        AddedDate = DateTime.UtcNow,
+                                        ErrorCode = "Hangfire",
+                                        Detail = _result.StatusCode +" email sent to "+ item.Email,
+                                        Message = "Called at " + DateTime.UtcNow.ToString(),
+                                        Source = "Hangfire",
+                                    });
                                 }
-
+                                
 
                             }
-                            await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
-                            {
-                                AddedDate = DateTime.UtcNow,
-                                ErrorCode = "Hangfire",
-                                Detail = "send mails",
-                                Message = "Called at " + DateTime.UtcNow.ToString(),
-                                Source = "Hangfire",
-                            });
+                            
                         }
                     }
-                    await _loggerService.AddAsync(new DataModels.Logger.LoggerDataModel
-                    {
-                        AddedDate = DateTime.UtcNow,
-                        ErrorCode = "Hangfire",
-                        Detail = "End call",
-                        Message = "Called at " + DateTime.UtcNow.ToString(),
-                        Source = "Hangfire",
-                    });
+                  
                    
                 }
 
