@@ -13,7 +13,7 @@ namespace Sphix.DataModels.Logger
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public long SentForId { get; set; }
         [MaxLength(100)]
         public string SentForTableName { get; set; }
