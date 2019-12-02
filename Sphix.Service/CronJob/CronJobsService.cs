@@ -166,7 +166,7 @@ namespace Sphix.Service.CronJob
             try
             {
                 DateTime now = DateTime.UtcNow;
-                if ((now.Hour >= 11 && now.Hour <= 12) && now.DayOfWeek == DayOfWeek.Monday)
+                if ((now.Hour >= 15 && now.Hour <= 16) && now.DayOfWeek == DayOfWeek.Monday)
                 {
                     //it is between 8 and 9pm on Thursday
                     IList<WednesdayReminderViewModel> list = new List<WednesdayReminderViewModel>();
