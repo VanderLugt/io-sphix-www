@@ -245,7 +245,7 @@ namespace Sphix.Web
             cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Weekly(DayOfWeek.Thursday, 20), TimeZoneInfo.Utc);
 
             RecurringJob.AddOrUpdate<ICronJobsService>(
-            cronJobs => cronJobs.WednesdayRemindersMails(), Cron.Weekly(DayOfWeek.Monday, 15), TimeZoneInfo.Utc);
+            cronJobs => cronJobs.WednesdayRemindersMails(), Cron.Weekly(DayOfWeek.Tuesday, 15), TimeZoneInfo.Utc);
             //RecurringJob.AddOrUpdate<ICronJobsService>(
             //  cronJobs => cronJobs.ThursdayMeetingFollowUpMails(), Cron.Minutely(), TimeZoneInfo.Utc);
 

@@ -166,7 +166,7 @@ namespace Sphix.Service.CronJob
             try
             {
                 DateTime now = DateTime.UtcNow;
-                if ((now.Hour >= 15 && now.Hour <= 16) && now.DayOfWeek == DayOfWeek.Monday)
+                if ((now.Hour >= 15 && now.Hour <= 16) && now.DayOfWeek == DayOfWeek.Tuesday)
                 {
                     //it is between 8 and 9pm on Thursday
                     IList<WednesdayReminderViewModel> list = new List<WednesdayReminderViewModel>();
@@ -198,7 +198,7 @@ namespace Sphix.Service.CronJob
                             {
                                 meedagebody =new StringBuilder(HtmlBody);
                                 meedagebody = meedagebody.Replace("#Name", item.Name);
-                                meedagebody = meedagebody.Replace("#Link",item.CommunityGroupURL+"-"+item.Id.ToString());
+                                meedagebody = meedagebody.Replace("#Link", UMessagesInfo.WebSiteUrl + item.CommunityGroupURL+"-"+item.Id.ToString());
                                 meedagebody = meedagebody.Replace("#Title", item.Title);
                                 meedagebody = meedagebody.Replace("#Footer", UMessagesInfo.MailFooter);
                                 mailSentBox = new MailSentBoxDataModel

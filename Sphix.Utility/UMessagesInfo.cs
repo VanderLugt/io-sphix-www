@@ -11,10 +11,11 @@ namespace Sphix.Utility
             timeZone.Add("HST", "HST");
             timeZone.Add("EST", "EST");
         }
-        public static string MailFooter = @"<p><h5>Thanks and Regards Sphix Support</h5></p>
-                        <p><a href ='http://ww2.sphix.io/' target='_blank'>ww2.sphix.io</a></p>";
+        public static string MailFooter = @"<p><h5>Thanks and Regards Sphix Support</h5><br />
+                        <a href ='http://ww2.sphix.io/' target='_blank'>ww2.sphix.io</a></p>";
 
         public static string AWSPublicURL = "https://io-sphix-www.s3-us-west-1.amazonaws.com/";
+        public static string WebSiteUrl = "http://beta.app.sphix.io/";
         public static string Error = "Somthing went wrong. Please try later!";
         public static string UserNameExist = "The username {0} is already exists. Please use a different username.";
         public static string RecordExist = "This record is already exist!";
