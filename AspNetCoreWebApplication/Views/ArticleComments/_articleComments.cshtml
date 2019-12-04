@@ -1,18 +1,4 @@
-﻿@*@model IEnumerable<Sphix.DataModels.UserCommunitiesGroups.UserArticleCommentsDataModel>
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>@item.CommentText</li>
-            <div>
-                <i class="fa fa-comment-alt"></i><input type="button" class="replycomment" onclick="addAticleCommentBox(this,@item.Id);" value="Reply">
-            </div>
-            <div id="@item.Id">
-                @Html.Partial("_articleComments",Model.Where(c=>c.ParentId==item.Id))
-            </div>
-        }
-    </ul>*@
-
-@model IEnumerable<Sphix.DataModels.UserCommunitiesGroups.UserArticleCommentsDataModel>
+﻿@model IEnumerable<Sphix.DataModels.UserCommunitiesGroups.UserArticleCommentsDataModel>
 <ul>
     @foreach (var item in Model)
     {
