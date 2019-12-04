@@ -215,7 +215,7 @@ namespace Sphix.Service.CronJob
                                     IsRead = false
                                 };
 
-                            var _status =    await _mailBoxService.SaveAsync(mailSentBox);
+                            var _status =await _mailBoxService.SaveAsync(mailSentBox);
                                 if (_status.Status)
                                 {
                                     var _result = await _emailSender.SendEmailAsync(
