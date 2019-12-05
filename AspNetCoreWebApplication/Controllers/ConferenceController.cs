@@ -20,6 +20,6 @@ namespace AspNetCoreWebApplication.Controllers
         }
         [HttpGet("token")]
         public IActionResult GetToken()
-             => new JsonResult(new { token = _twilioVideoService.GetTwilioJwtToken("user1") });
+             => new JsonResult(new { token = _twilioVideoService.GetTwilioJwtToken("TestRoom1") });
     }
 }
