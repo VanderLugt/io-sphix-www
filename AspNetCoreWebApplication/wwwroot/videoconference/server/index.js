@@ -1,4 +1,7 @@
 'use strict';
+const https = require("https"),
+  fs = require("fs");
+
 
 /**
  * Load Twilio configuration from .env config file - the following environment
@@ -75,10 +78,14 @@ app.get('/token', function(request, response) {
     token: token.toJwt()
   });
 });
-
+const options = {
+  key: fs.readFileSync(path.join(__dirname, "../server.key")),
+  cert: fs.readFileSync(path.join(__dirname, "../server.cert"))
+};
 // Create http server and run it.
-var server = http.createServer(app);
-var port = process.env.PORT || 3000;
-server.listen(port, function() {
-  console.log('Express server running on *:' + port);
-});
+//var server = http.createServer(app);
+var port = process.env.PORT || 3023;
+//server.listen(port, function() {
+//  console.log('Express server running on *:' + port);
+//});
+https.createServer(options, app).listen(port);
