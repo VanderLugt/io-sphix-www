@@ -26,7 +26,7 @@ namespace AspNetCoreWebApplication.Controllers
                         IsFullDay = true,
                         Id = i,
                         Start = DateTime.Now.AddDays(i),
-                        Subject = "Event detais" + i.ToString(),
+                        Subject = "Event detailss" + i.ToString(),
                         ThemeColor = "green"
                     });
                     evnts.Add(new EventList
