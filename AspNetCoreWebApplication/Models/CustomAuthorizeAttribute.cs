@@ -30,11 +30,13 @@ namespace AspNetCoreWebApplication.Models
         {
             var user = context.HttpContext.User;
             var routeValues = context.RouteData.Values;
+            
             controller = (string)routeValues["controller"];
             action = (string)routeValues["action"];
             area = (string)routeValues["area"];
             if (!user.Identity.IsAuthenticated)
             {
+               
                 // it isn't needed to set unauthorized result 
                 // as the base class already requires the user to be authenticated
                 // this also makes redirect to a login page work properly
@@ -59,12 +61,13 @@ namespace AspNetCoreWebApplication.Models
                 }
                 return;
             }
-
-            if (!string.IsNullOrEmpty(area) && area.ToLower()== "superadmin" && !user.IsInRole("admin"))
+             if  (!string.IsNullOrEmpty(area) && area.ToLower() == "superadmin" && !user.IsInRole("admin"))
             {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
                 return;
             }
+           
+           
             // you can also use registered services
             //var someService = context.HttpContext.RequestServices.GetService<IRoleService>();
 

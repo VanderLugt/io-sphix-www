@@ -14,11 +14,11 @@ namespace AspNetCoreWebApplication.Controllers
         }
         public IActionResult Index()
         {
-            string roomId = _twilioVideoService.CreateVideoRoom("TestRoom1", 2, "https://ww2.sphix.io");
+            //string roomId = _twilioVideoService.CreateVideoRoom("TestRoom1", 2, "https://ww2.sphix.io");
            // ViewBag.TwilioToken= _twilioVideoService.GetTwilioJwtToken("user1");
             return View();
         }
-        [HttpGet("token")]
+        [HttpGet("GetToken")]
         public IActionResult GetToken()
              => new JsonResult(new { token = _twilioVideoService.GetTwilioJwtToken("TestRoom1") });
     }
