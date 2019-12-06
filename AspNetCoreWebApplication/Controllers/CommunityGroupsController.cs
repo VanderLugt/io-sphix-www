@@ -34,10 +34,6 @@ namespace AspNetCoreWebApplication.Controllers
                 SearchValue = ""
             };
             return View(await _communitiesForGoodService.getCommunitiesByCategoryIdAsync(searchFilter));
-        
-
         }
-       
-       
     }
 }

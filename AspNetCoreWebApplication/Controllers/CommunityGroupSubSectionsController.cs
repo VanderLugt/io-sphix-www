@@ -36,7 +36,7 @@ namespace AspNetCoreWebApplication.Controllers
             , IUserCommunitiesService userCommunitiesService
             , IHostingEnvironment env
             , ICommunityGroupEmailService communityGroupEmailService
-              , IOpenHoursMailService openHoursMailService
+            , IOpenHoursMailService openHoursMailService
          )
         {
             _env = env;
