@@ -50,6 +50,7 @@ using Sphix.Service.UserCommunities.OpenOfficeHours.OpenOfficeHoursThanksMail;
 using Sphix.Utility.DateTimeDifference;
 using System;
 using System.Security.Claims;
+using Twilio;
 
 namespace Sphix.Web
 {
@@ -113,7 +114,7 @@ namespace Sphix.Web
             services.Configure<PasswordSettings>(Configuration.GetSection("PasswordSettings"));
             var accountSid = Configuration["Twilio:AccountSID"];
             var authToken = Configuration["Twilio:AuthToken"];
-            //TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(accountSid, authToken);
             //Set database connection string from appsetings.json
             services.AddDbContext<EFDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
