@@ -1,5 +1,5 @@
 ﻿function PublishCommuntyGroup(IsPublish) {
-    if (confirm("Are you sure you want to edit ...?")) {
+    if (confirm("Are you sure, you want to edit this ...?")) {
         $.ajax({
             type: 'POST',
             data: { Id: $('#hdnCommunityGrooupId').val(), IsPublish: IsPublish },

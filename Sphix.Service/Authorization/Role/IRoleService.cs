@@ -1,4 +1,5 @@
-﻿using Sphix.ViewModels;
+﻿using Sphix.DataModels.Authorization;
+using Sphix.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Sphix.Service.Authorization
         Task<BaseModel> SaveAsync(RoleViewModel model);
         Task<BaseModel> Delete(long Id);
         Task<IList<RoleViewModel>> GetList(SearchFilter model);
+        Task<IList<RoleDataModel>> GetActiveRoles();
     }
 }

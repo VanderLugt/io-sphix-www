@@ -24,11 +24,13 @@ namespace Sphix.Service.User
         private UnitOfWork _unitOfWork;
         private readonly PasswordSettings _settings;
         private readonly IAWSS3Bucket _awsS3Bucket;
+        private readonly EFDbContext _context;
         public UserService(EFDbContext context, IOptions<PasswordSettings> settings, IAWSS3Bucket awsS3Bucket)
         {
             _unitOfWork = new UnitOfWork(context);
             _settings = settings.Value;
             _awsS3Bucket = awsS3Bucket;
+            _context = context;
         }
         public async Task<UserProfileViewModel> UpdateProfileAsync(UserProfileViewModel model)
         {
@@ -186,5 +188,36 @@ namespace Sphix.Service.User
                 return false;
             }
         }
+        #region
+        public async Task<IList<AdminUsersList>> GetAdminUsersListAsync(CustomeSearchFilter model)
+        {
+            IList<AdminUsersList> list = new List<AdminUsersList>();
+            await _context.LoadStoredProc("GetAdminUsersList")
+                       .WithSqlParam("Start", model.PageNumber)
+                       .WithSqlParam("PageLimit", model.PageLimit)
+                       .WithSqlParam("OrderBy", model.OrderBy)
+                       .WithSqlParam("SearchValue", model.SearchValue)
+                       .ExecuteStoredProcAsync((handler) =>
+                       {
+                           list = handler.ReadToList<AdminUsersList>();
+                           // do something with your results.
+                       });
+            return list;
+        }
+        public async Task<BaseModel> UpdateUserRoleAsync(long RoleId,long UserId)
+        {
+            BaseModel result = new BaseModel();
+            var userRole = await _unitOfWork.UsersRolesRepository.FindAllBy(c => c.User.Id == UserId);
+            var _query = _unitOfWork.UsersRolesRepository.FindAllByQuery(c => c.User.Id == UserId);
+            var _roles = await _query.Include("Role").FirstOrDefaultAsync();
+            if (_roles != null)
+            {
+                _roles.Role = await _unitOfWork.RoleRepository.GetByID(RoleId);
+                await _unitOfWork.UsersRolesRepository.Update(_roles);
+            }
+
+            return new BaseModel { Status = true,Messsage=UMessagesInfo.RecordSaved };
+        }
+        #endregion
     }
 }
