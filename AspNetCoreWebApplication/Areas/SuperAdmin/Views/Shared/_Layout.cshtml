@@ -40,20 +40,27 @@
                     <div class="sidebar-sticky" id="navbarCollapse">
                         <ul class="nav flex-column">
                             @*<li>
-                                    <button class="navbar-toggler" id="toggle-button" type="button"  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                </li>*@
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="SuperAdmin" asp-controller="UsersCommunityGroups" asp-action="Index">
-                                    <i class="fas fa-users"></i>
-                                    <label class="label">Community Groups</label>
-                                </a>
-                            </li>
+            <button class="navbar-toggler" id="toggle-button" type="button"  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        </li>*@
+                           
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="SuperAdmin" asp-controller="CommunityTypes" asp-action="Index">
                                     <i class="far fa-list-alt"></i>
                                     <label class="label">Community Types</label>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="SuperAdmin" asp-controller="SiteMembers" asp-action="Index">
+                                    <i class="fas fa-users"></i>
+                                    <label class="label">Site Members</label>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="SuperAdmin" asp-controller="UsersCommunityGroups" asp-action="Index">
+                                    <i class="fas fa-layer-group"></i>
+                                    <label class="label">Community Groups</label>
                                 </a>
                             </li>
                         </ul>

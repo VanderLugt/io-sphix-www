@@ -70,6 +70,11 @@ namespace Sphix.Service.Authorization
                      });
             return list;
         }
+        public async Task<IList<RoleDataModel>> GetActiveRoles()
+        {
+            return await _unitOfWork.RoleRepository.FindAllBy(c => c.IsActive == true);
+        }
+
         #region private functions
         private async Task<BaseModel> Insert(RoleDataModel model)
         {

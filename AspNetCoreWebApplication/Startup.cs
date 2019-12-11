@@ -114,7 +114,7 @@ namespace Sphix.Web
             services.Configure<PasswordSettings>(Configuration.GetSection("PasswordSettings"));
             var accountSid = Configuration["Twilio:AccountSID"];
             var authToken = Configuration["Twilio:AuthToken"];
-            TwilioClient.Init(accountSid, authToken);
+            //TwilioClient.Init(accountSid, authToken);
             //Set database connection string from appsetings.json
             services.AddDbContext<EFDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -229,7 +229,7 @@ namespace Sphix.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-
+         
             //app.UseHangfireDashboard();
             app.UseHangfireDashboard(
             pathMatch: "/cronjobs",

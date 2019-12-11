@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "Site Members";
+}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Site Members</h1>
+</div>
+
+<div class="dashboard-task-block">
+    <div class="table-responsive">
+        <table id="tblDataTableList" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User Name</th>
+                    <th>Full Name</th>
+                    <th>Role</th>
+                    <th>Is Active?</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div>
+    <fieldset>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" tabindex="-2" id="divUserRoleModel"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 id="divEditRoleModelTitle"> Update role</h2>
+
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="divReviewCommunityGroup">
+                                    Loading....
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+@section Scripts {
+    
+    <script>
+    var usersDataTable;
+
+        $(document).ready(function () {
+            function fill_CommunityGroupsdatatable(IsPublish = '') {
+                usersDataTable = $("#tblDataTableList").DataTable({
+                    "processing": false, // for show progress bar
+                    "serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "language": {
+                        searchPlaceholder: "Email Address"
+                          },
+                    "orderMulti": false, // for disable multiple column at once
+                    "pageLength": 100,
+                    //"lengthMenu": [10, 25, 50],
+                    "ajax": {
+                        "url": "/SuperAdmin/SiteMembers/List",
+                        "type": "POST",
+                        "datatype": "json",
+                        "data": { "IsPublish": IsPublish }
+                    },
+                    "columnDefs":
+                        [{
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false,
+                            /* true or false */
+                        }],
+                    "columns": [
+                        { "data": "id", "name": "id", "autoWidth": true },
+                        { "data": "userName", "name": "userName", "autoWidth": true },
+                        { "data": "fullName", "name": "fullName", "autoWidth": true },
+                        { "data": "roleName", "name": "roleName", "autoWidth": true },
+                        { "data": "isActive", "name": "isActive", "autoWidth": true },
+                        {
+                            "render": function (data, type, full, meta) {
+                                return "<a href='#' class='btn btn-warning btn-sm' onclick='EditRole(this)'; ><i class='fas fa-user-secret'></i> Edit Role</a> ";
+                                //<a class='btn btn-info btn-sm' href='#'><i class='fas fa-id-card'></i> View Profile</a>
+                            }, 'orderable': false
+                        },
+                    ]
+
+                });
+
+               // $('#tblDataTableList_filter').append(' <a href="#" class="btn btn-success btn-sm" onclick="Edit(0);" title="add new community type"><i class="fas fa-plus-circle"></i> Add</a>');
+            }
+            fill_CommunityGroupsdatatable();
+
+
+
+            $('#drpStatus').on('change', function () {
+                //alert(this.value);
+                $('#tblCommunitiesList').DataTable().destroy();
+                fill_CommunityGroupsdatatable(this.value);
+            });
+
+        });
+
+    function EditRole(Id) {
+          var data_row = usersDataTable.row( $(Id).parents('tr') ).data();
+        //console.log(JSON.stringify(data_row));
+            $('#divEditRoleModelTitle').html('User name is ' + data_row.userName + '<br/> Role : ' + data_row.roleName);
+            $("#divReviewCommunityGroup").html('Loading..');
+            $("#divReviewCommunityGroup").load('/SuperAdmin/SiteMembers/EditRole?Id=' + data_row.id);
+            $('#divUserRoleModel').modal('toggle');
+        }
+
+    </script>
+}
