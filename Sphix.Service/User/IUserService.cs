@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Sphix.ViewModels;
 using Sphix.ViewModels.User;
 using System.Collections.Generic;
