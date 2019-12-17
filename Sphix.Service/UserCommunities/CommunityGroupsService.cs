@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Sphix.DataModels.User;
 using Sphix.DataModels.UserCommunities;
 using Sphix.DataModels.UserCommunitiesGroups;
+using Sphix.Service.Logger;
 using Sphix.Service.UserCommunities.OpenOfficeHours;
 using Sphix.UnitOfWorks;
 using Sphix.Utility;
@@ -24,14 +25,18 @@ namespace Sphix.Service.UserCommunities
         private readonly IAWSS3Bucket _awsS3Bucket;
         private readonly EFDbContext _context;
         private readonly IOpenOfficeHoursService _openOfficeHoursService;
+        private readonly ILoggerService _logger; 
         public CommunityGroupsService(EFDbContext context
             , IAWSS3Bucket awsS3Bucket
-            ,IOpenOfficeHoursService openOfficeHoursService)
+            ,IOpenOfficeHoursService openOfficeHoursService
+            , ILoggerService logger
+            )
         {
            _unitOfWork = new UnitOfWork(context);
             _context = context;
            _awsS3Bucket = awsS3Bucket;
             _openOfficeHoursService = openOfficeHoursService;
+            _logger = logger;
         }
         public async Task<IList<CommunityGroupsListViewModel>> getCommunitiesGroupsList(SearchFilter model)
         {
@@ -204,6 +209,14 @@ namespace Sphix.Service.UserCommunities
             }
             catch (Exception ex)
             {
+                System.Diagnostics.StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                await _logger.AddAsync(new DataModels.Logger.LoggerDataModel {
+                    AddedDate=DateTime.UtcNow,
+                    Detail= trace.GetFrame(0).GetMethod().ReflectedType.FullName,
+                    Message=ex.Message,
+                    ErrorCode="Service",
+                    Source= "CommunityGroupsService"
+                });
                 return new BaseModel { Status = false, Messsage = UMessagesInfo.Error };
             }
         }

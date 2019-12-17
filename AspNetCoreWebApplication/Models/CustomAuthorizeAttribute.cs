@@ -61,7 +61,7 @@ namespace AspNetCoreWebApplication.Models
                 }
                 return;
             }
-             if  (!string.IsNullOrEmpty(area) && area.ToLower() == "superadmin" && !user.IsInRole("admin"))
+            if  (!string.IsNullOrEmpty(area) && area.ToLower() == "superadmin" && !user.IsInRole("admin"))
             {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
                 return;

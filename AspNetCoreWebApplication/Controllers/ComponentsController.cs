@@ -8,7 +8,6 @@ namespace AspNetCoreWebApplication.Controllers
     [ViewComponent(Name = "UserMenu")]
     public class ComponentsController : ViewComponent
     {
-    
         private readonly IUserService _userService;
         private ClaimAccessor _claimAccessor;
         public ComponentsController(IUserService userService, ClaimAccessor claimAccessor)
