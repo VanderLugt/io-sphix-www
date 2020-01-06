@@ -36,6 +36,10 @@ namespace AspNetCoreWebApplication.Controllers
         }
         public IActionResult Index(string token)
         {
+            if ((this._verificationToken ?? "").ToLower() != (token ?? "").ToLower())
+            {
+                return RedirectToAction("Error");
+            }
             SendGridSignupRequestModel model = new SendGridSignupRequestModel();
             model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
             {
@@ -98,6 +102,15 @@ namespace AspNetCoreWebApplication.Controllers
                 model.Message = "Some error occured during request. Please try again later !";
             }
             return View("Views/SendGridSignup/Index.cshtml", model);
+        }
+        public IActionResult Error()
+        {
+            ViewBag.Message = "Invalid token!";
+            return View();
+        }
+        public IActionResult Test()
+        {
+            return View();
         }
     }
 }
