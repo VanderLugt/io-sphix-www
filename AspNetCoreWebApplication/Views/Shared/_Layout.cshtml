@@ -22,7 +22,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <header class="black-header">
-0                <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+                0                <nav class="navbar navbar-expand-md navbar-dark fixed-top">
                     <div class="container">
                         <div class="pull-left">
                             @await Component.InvokeAsync("UserMenu")
@@ -41,20 +41,20 @@
                     </nav>*@
             </header>
         }
-    <div class="main-body">
-        <div class="row" style="margin:0px;">
-            <div class="col-lg-4 col-md-4 col-sm-12 bg-left-section" id="mainLeftSection" >
-                <div class="bg-left-block-inner" id="divLeftSection">
-                    
+        <div class="main-body">
+            <div class="row" style="margin:0px;">
+                <div class="col-lg-4 col-md-4 col-sm-12 bg-left-section" id="mainLeftSection">
+                    <div class="bg-left-block-inner" id="divLeftSection">
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 bg-right-section" id="mainRightSection">
-                <div class="body-content">
-                    @RenderBody()
+                <div class="col-lg-8 col-md-8 col-sm-12 bg-right-section" id="mainRightSection">
+                    <div class="body-content">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div id="wait" style=" display:none;width:150px;border:0px solid black;position:absolute;top:50%;left:50%;padding:2px;z-index:9999;"><img src="~/img/loading.gif" width="100" height="100" /></div>
     @*<footer>
@@ -84,18 +84,20 @@
 
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
-    
+
     <style>
         .note-popover .popover-content, .panel-heading.note-toolbar {
             background: #ea9c0c !important;
         }
-      .dropdown:hover .dropdown-menu {
-        display: block;
-        margin-top: -8px;
-     }
-      .modal-backdrop{
-          z-index:0;
-      }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: -8px;
+        }
+
+        .modal-backdrop {
+            z-index: 0;
+        }
     </style>
     <script src="~/js/validator.js"></script>
     <script src="~/js/site.js"></script>
@@ -117,47 +119,47 @@
 
             });
         </script>
-        <script> 
+        <script>
             $(document).ready(function () {
                 //$('#mainLeftSection').hide();
                 $(document).ajaxStart(function () {
                     $("#wait").css("display", "block");
                 });
                 $(document).ajaxComplete(function () {
-                    $("#wait").css("display", "none"); 
+                    $("#wait").css("display", "none");
 
                     var divRightHeight = $('.body-content').height();
                     var divLeftHeight = $('#mainLeftSection').height();
-                    console.log('Right : '+ (divRightHeight) + 'px left : ' +(divLeftHeight) + 'px');
+                    console.log('Right : ' + (divRightHeight) + 'px left : ' + (divLeftHeight) + 'px');
                     if (divRightHeight != divLeftHeight) {
                         if (divRightHeight > divLeftHeight) {
-                           // 
+                            //
                             //  if (divRightHeight <=  898) {
                             //      $('#mainLeftSection').css('height', (divRightHeight) + 'px')
                             //}
                             //else {
                             //      $('#mainLeftSection').css('height', (divRightHeight) + 'px')
                             //}
-                             $('#mainLeftSection').css('height', (divRightHeight) + 'px')
-                           
+                            $('#mainLeftSection').css('height', (divRightHeight) + 'px')
+
                         }
                         else {
-                             //$('#divContainer').css('height', divLeftHeight + 'px')
-                            $('#divContainer').css('height', (divLeftHeight+(divLeftHeight-divRightHeight)-1) + 'px')
-                            
+                            //$('#divContainer').css('height', divLeftHeight + 'px')
+                            $('#divContainer').css('height', (divLeftHeight + (divLeftHeight - divRightHeight) - 1) + 'px')
+
                         }
                     }
-               
+
                 });
             });
 
-        //     var divHeight = $('.body-content').height();
-        //alert(divHeight);
-        //console.log(divHeight + 'px');
-           
+                        //     var divHeight = $('.body-content').height();
+                        //alert(divHeight);
+                        //console.log(divHeight + 'px');
+
         </script>
     }
-
+    
     @RenderSection("Scripts", required: false)
 
 </body>
