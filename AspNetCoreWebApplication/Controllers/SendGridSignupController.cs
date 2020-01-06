@@ -63,7 +63,7 @@ namespace AspNetCoreWebApplication.Controllers
                 contact.Add("postal_code", "string (optional)");
                 contact.Add("state_province_region", "string (optional)");
                 JObject custom_fields = new JObject();
-                custom_fields.Add("e2_T", DateTime.Now.ToString());
+                custom_fields.Add("e3_T", Convert.ToString(model.CommunityId));
                 contact.Add("custom_fields", custom_fields);
                 contactArray.Add(contact);
 
@@ -83,12 +83,20 @@ namespace AspNetCoreWebApplication.Controllers
                 {
                     var result = streamReader.ReadToEnd();
                 }
+                model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
+                {
+                    Text = x.Text,
+                    Value = Convert.ToString(x.Value)
+                }).ToList();
+                model.IsSuccess = true;
+                model.Message = "Form submitted successfully !";
             }
             catch (Exception ex)
             {
-                
+                model.IsSuccess = false;
+                model.Message = "Some error occured during request. Please try again later !";
             }
-            return View(model);
+            return View("Views/SendGridSignup/Index.cshtml", model);
         }
     }
 }

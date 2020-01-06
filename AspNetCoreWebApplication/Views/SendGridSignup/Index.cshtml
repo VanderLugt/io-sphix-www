@@ -1,39 +1,53 @@
 ﻿@model AspNetCoreWebApplication.Models.SendGridSignupRequestModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-<h4>Send Grid Signup Request</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CommunityId" class="control-label"></label>
-                <select asp-for="CommunityId"
-                        class="form-control"
-                        asp-items="@(new SelectList(@Model.Communities,"Value", "Text"))">
-                </select>
-                <span asp-validation-for="CommunityId" class="text-danger"></span>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="~/wwwroot/wwwroot/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/wwwroot/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/wwwroot/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="container">
+    <h4>Send Grid Signup Request</h4>
+    <hr />
+    @if (Model.Message != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <span asp-validation-for="Message" class="@(Model.IsSuccess?"text-success":"text-danger")">@(Model.Message)</span>
             </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailId" class="control-label"></label>
-                <input asp-for="EmailId" class="form-control" />
-                <span asp-validation-for="EmailId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Index" method="post">
+                <div class="form-group">
+                    <label asp-for="CommunityId" class="control-label"></label>
+                    <select asp-for="CommunityId"
+                            class="form-control"
+                            asp-items="@(new SelectList(@Model.Communities,"Value", "Text"))">
+                    </select>
+                    <span asp-validation-for="CommunityId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailId" class="control-label"></label>
+                    <input asp-for="EmailId" class="form-control" />
+                    <span asp-validation-for="EmailId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
