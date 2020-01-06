@@ -23,6 +23,7 @@ namespace AspNetCoreWebApplication.Controllers
         private readonly ICommunitiesService _communitiesService;
         private readonly string _sendGridBaseAddress = "https://api.sendgrid.com";
         private readonly string _sendGridRequestKey = "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";
+        private readonly string _verificationToken = "5aa1117e-4c53-458d-94fd-14f4b0589961";
         //CommunitiesService : ICommunitiesService
 
         public SendGridSignupController(ClaimAccessor claimAccessor
@@ -33,7 +34,7 @@ namespace AspNetCoreWebApplication.Controllers
             _claimAccessor = claimAccessor;
             _communitiesService = communitiesService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string token)
         {
             SendGridSignupRequestModel model = new SendGridSignupRequestModel();
             model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
