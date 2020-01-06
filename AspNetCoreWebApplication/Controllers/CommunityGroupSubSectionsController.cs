@@ -29,7 +29,7 @@ namespace AspNetCoreWebApplication.Controllers
         private readonly ICommunityGroupEmailService _communityGroupEmailService;
         private readonly IOpenHoursMailService _openHoursMailService;
         public CommunityGroupSubSectionsController(ClaimAccessor claimAccessor
-            ,ICommunitiesForGoodService communitiesForGoodService
+            , ICommunitiesForGoodService communitiesForGoodService
             , IJoinCommunityGroupService joinCommunityGroupService
             , IJoinCommunityOpenHoursMeetingService joinCommunityOpenHoursMeetingService
             , IJoinCommunityEventMeetingService joinCommunityEventMeetingService

@@ -57,7 +57,6 @@ namespace AspNetCoreWebApplication.Controllers
         public async Task<IActionResult> AddCommunityGroupSteps()
         {
             ViewBag.Communities = await _communitiesService.GetActiveCommunities();
-           
             return PartialView("_addCommunityGroupSteps");
         }
         public async Task<JsonResult> getCommunityDetail(long Id)

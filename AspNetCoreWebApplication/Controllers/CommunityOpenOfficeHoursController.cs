@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using AspNetCoreWebApplication.Models;
-using CustomTwilioClient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Sphix.Service.UserCommunities.OpenOfficeHours;
@@ -103,7 +102,6 @@ namespace AspNetCoreWebApplication.Controllers
                       await  _openHoursMailService.SendMailOnCreateNewTableAsync(model.UserId, token, callbackUrl, HtmlBody, model.OFromDate.ToShortDateString() +" at "+model.OTime+" "+model.OTimeZone);
                         //send thanks mail
                     }
-
                 }
                 else
                 {
