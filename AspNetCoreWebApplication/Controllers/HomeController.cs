@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using SendGrid;
 using Sphix.Service.Authorization;
 using Sphix.Service.Authorization.Login;
 using Sphix.Service.Authorization.Login.ForgotPassword;
 using Sphix.Service.Authorization.SignUp.EmailVerification;
 using Sphix.Service.Communities;
-using Sphix.Service.CronJob;
 using Sphix.Utility;
 using Sphix.ViewModels;
 using Sphix.ViewModels.User;
@@ -45,6 +45,7 @@ namespace Sphix.Web.Controllers
         }
         public async Task<IActionResult> Index(string returnUrl="")
         {
+          
             //  var room1 = RoomResource.Fetch(pathSid: "RM87993f8e419e87639462efaa9f1bf2ae");
 
             //Console.WriteLine(room.Sid);
@@ -54,13 +55,96 @@ namespace Sphix.Web.Controllers
             //     channel: "sms");
             //if(verification.Status=="Pending")
             //{ }
-         
+
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "CommunitiesForGood");
             }
             ViewBag.Communities =  await _communitiesService.GetActiveCommunities();
             return View();
+        }
+        private async Task<Boolean> sendRequest()
+        {
+
+            var client = new SendGridClient("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");
+            string data = @"{
+  'list_ids': [
+    '7dffea4a-82c6-41a9-a009-a8ba79bf0fa8'
+  ],
+  'contacts': [
+    {
+      'address_line_1': 'string (optional)',
+      'address_line_2': 'string (optional)',
+ 'alternate_emails': [
+        'test@gmail.com'
+      ],
+      'city': 'string (optional)',
+      'country': 'string (optional)',
+      'email': 'test@gmail.com',
+      'first_name': 'string (optional)',
+      'last_name': 'string (optional)',
+      'postal_code': 'string (optional)',
+      'state_province_region': 'string (optional)',
+      'custom_fields': 
+      {
+       
+      }
+    
+    }
+  ]
+}";
+
+            Object json = JsonConvert.DeserializeObject<Object>(data);
+            var response = await client.RequestAsync(method: SendGridClient.Method.PUT, urlPath: "marketing/contacts", requestBody: data);
+            Console.WriteLine(response.StatusCode);
+            //Console.WriteLine(response.Body.ReadAsStringAsync().Result);
+            string _result = response.Body.ReadAsStringAsync().Result;
+            Console.WriteLine(response.Headers.ToString());
+            Console.ReadLine();
+
+            //var client = new HttpClient();
+            //var parameters = new Dictionary<string, string> { { "application/json", "{\"list_ids\":[\"7dffea4a-82c6-41a9-a009-a8ba79bf0fa8\"],\"contacts\":[{\"address_line_1\":\"string (optional)\",\"address_line_2\":\"string (optional)\",\"alternate_emails\":[\"test@gmail.com\"],\"city\":\"string (optional)\",\"country\":\"string (optional)\",\"email\":\"test@gmail.com\",\"first_name\":\"string (optional)\",\"last_name\":\"string (optional)\",\"postal_code\":\"string (optional)\",\"state_province_region\":\"string (optional)\",\"custom_fields\":{}}]}" } };
+            //var encodedContent = new FormUrlEncodedContent(parameters);
+            //var httpRequestMessage = new HttpRequestMessage
+            //{
+            //    Method = HttpMethod.Put,
+            //    RequestUri = new Uri("https://api.sendgrid.com/v3/marketing/contacts"),
+            //    Headers = {
+            //    { HttpRequestHeader.Authorization.ToString(), "Bearer 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" },
+            //    { HttpRequestHeader.ContentType.ToString(), "application/json" }
+            //},
+            //    Content = new StringContent(JsonConvert.SerializeObject(encodedContent))
+            //};
+
+            //var response = await client.SendAsync(httpRequestMessage);
+            return true;
+            //using (HttpClient client = new HttpClient())
+            //{
+            //    client.DefaultRequestHeaders.Add("Content-Type", "application/json");
+            //    client.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+            //    //parametrai (PARAMS of your call)
+            //    var parameters = new Dictionary<string, string> { { "application/json", "[{\"email\":\"example@example.com\",\"first_name\":\"test\",\"last_name\":\"User\",\"age\":25}]" } };
+                
+            //    //Uzkoduojama URL'ui 
+            //    var encodedContent = new FormUrlEncodedContent(parameters);
+            //    try
+            //    {
+            //        //Post http callas.
+            //        HttpResponseMessage response = client.PostAsync("https://api.sendgrid.com/v3/contactdb/recipients", encodedContent).Result;
+            //        //nesekmes atveju error..
+            //        response.EnsureSuccessStatusCode();
+            //        //responsas to string
+            //        string responseBody = response.Content.ReadAsStringAsync().Result;
+
+            //        atsakas = responseBody;
+
+            //    }
+            //    catch (HttpRequestException e)
+            //    {
+            //        Console.WriteLine("\nException Caught!");
+            //        Console.WriteLine("Message :{0} ", e.Message);
+            //    }
+            //}
         }
       
         [HttpPost]

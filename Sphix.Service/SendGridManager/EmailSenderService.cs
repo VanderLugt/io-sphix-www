@@ -19,6 +19,7 @@ namespace Sphix.Service.SendGridManager
         internal Task<Response> Execute(string apiKey, string subject, string message, string toEmail,string fromEmail,string fromName)
         {
             var client = new SendGridClient(apiKey);
+
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress(fromEmail, fromName),
