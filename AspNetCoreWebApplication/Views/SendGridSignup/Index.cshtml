@@ -19,7 +19,11 @@
     }
     <input type="hidden" value="@Model.DevMessage" />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
+            <p>
+                We are currently hard at work on finalizing the platform and getting it ready for release.  Sign up below to begin receiving our monthly newsletter that will include platform updates as well as the list of community groups as they are released.
+            </p>
+            <hr />
             <form asp-action="Index" method="post">
                 <div class="form-group">
                     <label asp-for="CommunityId" class="control-label"></label>
@@ -35,6 +39,11 @@
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="EmailId" class="control-label"></label>
                     <input asp-for="EmailId" class="form-control" />
                     <span asp-validation-for="EmailId" class="text-danger"></span>
@@ -43,6 +52,13 @@
                     <input type="submit" value="Sign up" class="btn btn-primary" />
                 </div>
             </form>
+            <hr />
+            <p>
+                Our initial aim and focus will be in building open, high quality engagement throughout academic and learning communities. We are currently looking for educators, researchers, and not for profit organizations, that would be interested in participating in our alpha testing period, beginning in Q1, 2020.
+            </p>
+            <p>
+                If you are interested in partnering with Sphix send us a note at Partnership@sphix.io
+            </p>
         </div>
     </div>
 </div>

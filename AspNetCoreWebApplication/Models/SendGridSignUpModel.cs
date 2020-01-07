@@ -13,7 +13,7 @@ namespace AspNetCoreWebApplication.Models
         public string Message { get; set; }
         public string DevMessage { get; set; }
     }
-    public class SendGridSignupRequestModel: ServerSideError
+    public class SendGridSignupRequestModel : ServerSideError
     {
         [Required]
         [Display(Name = "Community")]
@@ -22,7 +22,8 @@ namespace AspNetCoreWebApplication.Models
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        //public string LastName
+        [Display(Name = "Last Name (optional)")]
+        public string LastName { get; set; }
         [Display(Name = "Email address")]
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
