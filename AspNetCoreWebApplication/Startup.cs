@@ -64,6 +64,7 @@ namespace Sphix.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
             services.AddCors(o => o.AddPolicy("websitePolicy", builder =>
             {
                 builder.AllowAnyOrigin()
