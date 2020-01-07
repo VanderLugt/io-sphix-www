@@ -22,8 +22,9 @@ namespace AspNetCoreWebApplication.Controllers
         private readonly ICommunitiesForGoodService _communitiesForGoodService;
         private readonly ICommunitiesService _communitiesService;
         private readonly string _sendGridBaseAddress = "https://api.sendgrid.com";
-        private readonly string _sendGridRequestKey = "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";
-        private readonly string _verificationToken = "5aa1117e-4c53-458d-94fd-14f4b0589961";
+        //private readonly string _sendGridRequestKey = "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";
+        private readonly string _sendGridRequestKey = "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";
+        //private readonly string _verificationToken = "5aa1117e-4c53-458d-94fd-14f4b0589961";
         //CommunitiesService : ICommunitiesService
 
         public SendGridSignupController(ClaimAccessor claimAccessor
@@ -36,10 +37,10 @@ namespace AspNetCoreWebApplication.Controllers
         }
         public IActionResult Index(string token)
         {
-            if ((this._verificationToken ?? "").ToLower() != (token ?? "").ToLower())
-            {
-                return RedirectToAction("Error");
-            }
+            //if ((this._verificationToken ?? "").ToLower() != (token ?? "").ToLower())
+            //{
+            //    return RedirectToAction("Error");
+            //}
             SendGridSignupRequestModel model = new SendGridSignupRequestModel();
             model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
             {

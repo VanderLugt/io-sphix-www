@@ -9,8 +9,6 @@
 <script src="~/wwwroot/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="container">
-    <h4>Send Grid Signup Request</h4>
-    <hr />
     @if (Model.Message != null)
     {
         <div class="row">
@@ -41,7 +39,7 @@
                     <span asp-validation-for="EmailId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Sign up" class="btn btn-primary" />
                 </div>
             </form>
         </div>
