@@ -78,7 +78,14 @@ namespace AspNetCoreWebApplication.Controllers
                 contact.Add("custom_fields", custom_fields);
                 contactArray.Add(contact);
 
+                JArray list_ids = new JArray();
+                list_ids.Add("7dffea4a-82c6-41a9-a009-a8ba79bf0fa8");
+                //"list_ids": [
+                //  "7dffea4a-82c6-41a9-a009-a8ba79bf0fa8"
+                //],
+
                 JObject objectToSend = new JObject();
+                objectToSend.Add("list_ids", list_ids);
                 objectToSend.Add("contacts", contactArray);
 
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(_sendGridBaseAddress + "/v3/marketing/contacts");
