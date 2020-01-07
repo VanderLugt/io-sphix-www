@@ -71,7 +71,6 @@ namespace AspNetCoreWebApplication.Controllers
                 contact.Add("email", model.EmailId);
                 contact.Add("first_name", model.FirstName);
                 contact.Add("last_name", model.LastName);
-                contact.Add("last_name", "string (optional)");
                 contact.Add("postal_code", "string (optional)");
                 contact.Add("state_province_region", "string (optional)");
                 JObject custom_fields = new JObject();
