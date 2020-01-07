@@ -11,6 +11,7 @@ namespace AspNetCoreWebApplication.Models
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
+        public string DevMessage { get; set; }
     }
     public class SendGridSignupRequestModel: ServerSideError
     {

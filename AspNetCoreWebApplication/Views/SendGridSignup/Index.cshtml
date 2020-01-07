@@ -11,12 +11,13 @@
 <div class="container">
     @if (Model.Message != null)
     {
-        <div class="row">
-            <div class="col-md-12">
-                <span asp-validation-for="Message" class="@(Model.IsSuccess?"text-success":"text-danger")">@(Model.Message)</span>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span asp-validation-for="Message" class="@(Model.IsSuccess?"text-success":"text-danger")">@(Model.Message)</span>
         </div>
+    </div>
     }
+    <input type="hidden" value="@Model.DevMessage" />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Index" method="post">

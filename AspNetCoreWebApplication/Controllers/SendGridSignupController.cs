@@ -23,7 +23,7 @@ namespace AspNetCoreWebApplication.Controllers
         private readonly ICommunitiesService _communitiesService;
         private readonly string _sendGridBaseAddress = "https://api.sendgrid.com";
         //private readonly string _sendGridRequestKey = "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";
-        private readonly string _sendGridRequestKey = "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";
+        private readonly string _sendGridRequestKey = "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";
         //private readonly string _verificationToken = "5aa1117e-4c53-458d-94fd-14f4b0589961";
         //CommunitiesService : ICommunitiesService
 
@@ -54,6 +54,11 @@ namespace AspNetCoreWebApplication.Controllers
         {
             try
             {
+                model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
+                {
+                    Text = x.Text,
+                    Value = Convert.ToString(x.Value)
+                }).ToList();
                 JArray array = new JArray();
                 array.Add(model.EmailId);
                 JArray contactArray = new JArray();
@@ -69,7 +74,7 @@ namespace AspNetCoreWebApplication.Controllers
                 contact.Add("postal_code", "string (optional)");
                 contact.Add("state_province_region", "string (optional)");
                 JObject custom_fields = new JObject();
-                custom_fields.Add("e3_T", Convert.ToString(model.CommunityId));
+                custom_fields.Add("e2_T", Convert.ToString(model.CommunityId));
                 contact.Add("custom_fields", custom_fields);
                 contactArray.Add(contact);
 
@@ -89,11 +94,6 @@ namespace AspNetCoreWebApplication.Controllers
                 {
                     var result = streamReader.ReadToEnd();
                 }
-                model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
-                {
-                    Text = x.Text,
-                    Value = Convert.ToString(x.Value)
-                }).ToList();
                 model.IsSuccess = true;
                 model.Message = "Form submitted successfully !";
             }
@@ -101,6 +101,7 @@ namespace AspNetCoreWebApplication.Controllers
             {
                 model.IsSuccess = false;
                 model.Message = "Some error occured during request. Please try again later !";
+                model.DevMessage = ex.Message;
             }
             return View("Views/SendGridSignup/Index.cshtml", model);
         }
