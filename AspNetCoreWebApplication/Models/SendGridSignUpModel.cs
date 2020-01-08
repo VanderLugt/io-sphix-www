@@ -25,8 +25,8 @@ namespace AspNetCoreWebApplication.Models
         [Display(Name = "Last Name (optional)")]
         public string LastName { get; set; }
         [Display(Name = "Email address")]
-        [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Required(ErrorMessage = "The email address is required.")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string EmailId { get; set; }
     }
 }
