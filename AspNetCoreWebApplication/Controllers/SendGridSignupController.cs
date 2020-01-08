@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AspNetCoreWebApplication.Models;
@@ -37,10 +38,6 @@ namespace AspNetCoreWebApplication.Controllers
         }
         public IActionResult Index(string token)
         {
-            //if ((this._verificationToken ?? "").ToLower() != (token ?? "").ToLower())
-            //{
-            //    return RedirectToAction("Error");
-            //}
             SendGridSignupRequestModel model = new SendGridSignupRequestModel();
             model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
             {
@@ -54,11 +51,6 @@ namespace AspNetCoreWebApplication.Controllers
         {
             try
             {
-                model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
-                {
-                    Text = x.Text,
-                    Value = Convert.ToString(x.Value)
-                }).ToList();
                 JArray array = new JArray();
                 array.Add(model.EmailId);
                 JArray contactArray = new JArray();
@@ -98,6 +90,8 @@ namespace AspNetCoreWebApplication.Controllers
                 {
                     var result = streamReader.ReadToEnd();
                 }
+                ModelState.Clear();
+                ResetModel(model);
                 model.IsSuccess = true;
                 model.Message = "Form submitted successfully !";
             }
@@ -106,6 +100,14 @@ namespace AspNetCoreWebApplication.Controllers
                 model.IsSuccess = false;
                 model.Message = "Some error occured during request. Please try again later !";
                 model.DevMessage = ex.Message;
+            }
+            finally
+            {
+                model.Communities = Task.Run(() => _communitiesService.GetActiveCommunities()).Result.Select(x => new SelectListItem()
+                {
+                    Text = x.Text,
+                    Value = Convert.ToString(x.Value)
+                }).ToList();
             }
             return View("Views/SendGridSignup/Index.cshtml", model);
         }
@@ -117,6 +119,17 @@ namespace AspNetCoreWebApplication.Controllers
         public IActionResult Test()
         {
             return View();
+        }
+        private void ResetModel(SendGridSignupRequestModel model)
+        {
+            PropertyInfo[] properties = typeof(SendGridSignupRequestModel).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.PropertyType.Name == "String")
+                    property.SetValue(model, "");
+                if (property.PropertyType.Name.Contains("Int"))
+                    property.SetValue(model, 0);
+            }
         }
     }
 }
