@@ -786,6 +786,9 @@ namespace Data.Context.Migrations
 
                     b.Property<int>("MaxAttendees");
 
+                    b.Property<string>("MeetingOnParticularDay")
+                        .HasMaxLength(50);
+
                     b.Property<string>("NextMeetingToken")
                         .HasMaxLength(100);
 
@@ -820,6 +823,8 @@ namespace Data.Context.Migrations
 
                     b.Property<string>("WhoCanAttend")
                         .HasMaxLength(50);
+
+                    b.Property<int>("dayIndex");
 
                     b.HasKey("Id");
 

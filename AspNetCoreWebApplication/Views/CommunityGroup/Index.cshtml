@@ -24,8 +24,8 @@
                                         <div class="community-category">
                                             @if (Model.OpenOfficeHours != null)
                                             {
-                                                <span style="text-transform:capitalize">@Model.OpenOfficeHours.OFrequency</span><span>:</span> @Model.OpenOfficeHours.OTitle
-                                                <p style="margin-bottom: 0;">Next session:&nbsp;@Model.OpenOfficeHours.OFromDate.ToString("MMM dd")<span> @Html.Raw('@') </span> @Model.OpenOfficeHours.OTime</p>
+                                            <span style="text-transform:capitalize">Team Meetings: "@Model.OpenOfficeHours.OFrequency, @Model.OpenOfficeHours.OTimeDayName"</span> 
+                                            <p style="margin-bottom: 0;">Next session:&nbsp;@Model.OpenOfficeHours.OTimeDayName, @Model.OpenOfficeHours.OFromDate.ToString("MMM dd")@*<span> @Html.Raw('@') </span> @Model.OpenOfficeHours.OTime*@</p>
                                             }
                                         </div>
                                         <div class="community-image" style="background-repeat:no-repeat;background-size:cover;background-position: center;min-height:200px;background-image:url('../img/backdrop/open_office_hours_meeting.png')">
@@ -339,6 +339,14 @@ else
 
 
         });
+      $(document).ready(function () {
+             $('#txtOpenOfficeHoursTime').timepicker({
+                    icons: {
+                        up: "fas fa-angle-up",
+                        down: "fas fa-angle-down",
+                    }
+             });
+           });
     function goBack() {   
         window.location = document.referrer;
             }

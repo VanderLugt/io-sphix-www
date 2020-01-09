@@ -19,10 +19,22 @@
                                             <p>You are about to add a table to this week's office hours, once it is published, anyone who is a member of this group will be able to join. </p>
                                             <p><u>What time will this begin</u></p>
                                             <div class="row">
-                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="PST" /> @Model.OTime PST</div>
+                                                @*<div class="col-md-3"><input type="radio" name="radioTimeZone" value="PST" /> @Model.OTime PST</div>
                                                 <div class="col-md-3"><input type="radio" name="radioTimeZone" value="CST" /> @Model.OTime CST</div>
                                                 <div class="col-md-3"><input type="radio" name="radioTimeZone" value="HST" /> @Model.OTime HST</div>
-                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="EST" /> @Model.OTime EST</div>
+                                                <div class="col-md-3"><input type="radio" name="radioTimeZone" value="EST" /> @Model.OTime EST</div>*@
+                                                <div class="col-md-2 bootstrap-timepicker timepicker">
+                                                    <input type="text" class="form-control" id="txtOpenOfficeHoursTime" />
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <select class="form-control" id="drpTimeZone">
+                                                        <option timeZoneId="1" gmtAdjustment="PST" useDaylightTime="0" value="-12">PST</option>
+                                                        <option timeZoneId="2" gmtAdjustment="CST" useDaylightTime="0" value="-11">CST</option>
+                                                        <option timeZoneId="3" gmtAdjustment="HST" useDaylightTime="0" value="-10">HST</option>
+                                                        <option timeZoneId="4" gmtAdjustment="EST" useDaylightTime="1" value="-9">EST</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-12">
@@ -102,5 +114,5 @@
         }
         
     }
-  
+    
 </script>

@@ -26,5 +26,7 @@ namespace Sphix.ViewModels.UserCommunities
         public long LastSessionId { get; set; }
         public bool IsMeetingTokenUsed { get; set; }
         public bool AddHours { get; set; }
+        public string MeetingOnParticularDay { get; set; }
+        public int dayIndex { get; set; }
     }
 }

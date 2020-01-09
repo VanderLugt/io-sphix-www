@@ -136,9 +136,17 @@ namespace AspNetCoreWebApplication.Controllers
                 model.OFromDate = SphixHelper.setDateFromDayName(openHoursModel.OTimeDayName, openHoursModel.OFromDate);
             }
 
+            if (openHoursModel.OFrequency == "monthly")
+            {
+                model.OFromDate = SphixHelper.getDateOnMonthlyBase(openHoursModel.OTimeDayName, openHoursModel.dayIndex);
+            }
+            else if (openHoursModel.OFrequency == "quarterly")
+            {
+                model.OFromDate = SphixHelper.getDateOnQuarterlyBase(openHoursModel.OTimeDayName, openHoursModel.dayIndex);
+            }
             model.OToDate = model.OFromDate;
           //  model.OName = openHoursModel.OName;
-            model.OTime = openHoursModel.OTime;
+           // model.OTime = openHoursModel.OTime;
             //model.OTitle = openHoursModel.OTitle;
             model.WhoCanAttend = openHoursModel.WhoCanAttend;
             model.OTimeDayName = openHoursModel.OTimeDayName;
