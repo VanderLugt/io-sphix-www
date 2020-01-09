@@ -77,9 +77,10 @@ function JoinCommunityOpenHoursMeeting() {
         // ...
         return;
     }
+    var TimeZone = $('input[name=radioRegisterOpenOfficeHours]:checked').closest('tr').find('td:first').text().split(" ")[2];
     var dataModel = {
         OpenOfficeHoursId: $('input[name=radioRegisterOpenOfficeHours]:checked').val(),
-        TimeZone: $('#hdnTimeZone').val()
+        TimeZone
     };
     $.ajax({
         type: 'POST',

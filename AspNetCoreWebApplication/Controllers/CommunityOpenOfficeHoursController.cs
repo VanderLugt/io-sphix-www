@@ -142,6 +142,7 @@ namespace AspNetCoreWebApplication.Controllers
             //model.OTitle = openHoursModel.OTitle;
             model.WhoCanAttend = openHoursModel.WhoCanAttend;
             model.OTimeDayName = openHoursModel.OTimeDayName;
+
             model.IsFirstMeeting = false;
             string token = Guid.NewGuid().ToString().Replace("-", "");
             model.NextMeetingToken = token;
