@@ -28,20 +28,7 @@
             <textarea class="form-control" style="height:230px" placeholder="Description" id="txtOpenOfficeHoursDescription"></textarea>
         </div>
         <div class="col-md-7">
-            <div class="form-group mb-4">
-                <div class="row">
-                    <div class="col-md-5 p-white-color">
-                        <p> Frequency: <a href='#' class="atooltip" data-toggle="tooltip" title="The frequency for open office hours is how often people of the group should meet. Weekly meetings are recommended for most groups. If members have a quick question, they sign up for that week. After being paired with other members with similar interests, that member meets with them for that week, discusses her/his problem, and gets feedback. The person who created the new meeting will have the option of continuing the next week by re-inviting the same members of the group to the same time and meeting room, the following week. The frequency thus enables groups to naturally form and meet on a regular cadence that you establish through frequency"> <i class="fas fa-info-circle"></i></a></p>
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="drpOpenOfficeHoursFrequency">
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="quarterly">Quarterly</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+
             <div class="form-group mb-4" style="display:none">
                 <div class="row">
                     <div class="col-md-5 p-white-color">
@@ -61,7 +48,6 @@
                         <p> Day and time: <a href='#' class="atooltip" data-toggle="tooltip" title="The frequency for open office hours is how often people of the group should meet. Weekly meetings are recommended for most groups. If members have a quick question, they sign up for that week. After being paired with other members with similar interests, that member meets with them for that week, discusses her/his problem, and gets feedback. The person who created the new meeting will have the option of continuing the next week by re-inviting the same members of the group to the same time and meeting room, the following week. The frequency thus enables groups to naturally form and meet on a regular cadence that you establish through frequency."> <i class="fas fa-info-circle"></i></a></p>
                     </div>
                     <div class="col-md-7">
-                        @*<input type="text" class="form-control" id="txtOpenOfficeHoursTime" message="First name is a required field" required />*@
                         <a href="#" id="hrefOpenOfficeHoursTime" data-toggle="modal" data-target="#openOfficeHoursDateTimeModal">Set Time</a>
                     </div>
 
@@ -70,11 +56,36 @@
             <div class="form-group mb-4">
                 <div class="row">
                     <div class="col-md-5 p-white-color">
+                        <p> Frequency: <a href='#' class="atooltip" data-toggle="tooltip" title="The frequency for open office hours is how often people of the group should meet. Weekly meetings are recommended for most groups. If members have a quick question, they sign up for that week. After being paired with other members with similar interests, that member meets with them for that week, discusses her/his problem, and gets feedback. The person who created the new meeting will have the option of continuing the next week by re-inviting the same members of the group to the same time and meeting room, the following week. The frequency thus enables groups to naturally form and meet on a regular cadence that you establish through frequency"> <i class="fas fa-info-circle"></i></a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpOpenOfficeHoursFrequency">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4" id="divOtherOptions" style="display:none;">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
+                        <p> Select:</p>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="drpOther"></select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group mb-4" style="display:none">
+                <div class="row">
+                    <div class="col-md-5 p-white-color">
                         <p> Add hours: <a href='#' class="atooltip" data-toggle="tooltip" title="We often hear from members, that meeting for open office hours on a single time is challenging and they wish they had more flexibility. To provide your members additional flexibility, you can choose to enable members of this community to schedule office hours for 2 hrs before and 2 hours after, the time you have scheduled. For more info on office hours, how they work, and best practices see Office hours"> <i class="fas fa-info-circle"></i></a></p>
                     </div>
                     <div class="col-md-7">
                         <input type="checkbox" id="txtOpenOfficeAddhours" name="OpenOfficeAddhours" /><span style="color:#ffffff"> add hours</span>
-                        
+
                     </div>
 
                 </div>
@@ -90,9 +101,9 @@
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" id="drpOpenOfficeHoursMaxAttendees">
-                            <option value="4">4</option>
+                            @*<option value="4">4</option>*@
                             <option value="8">8</option>
-                            <option value="10">10</option>
+                            @*<option value="10">10</option>*@
                         </select>
                     </div>
                 </div>
@@ -239,13 +250,48 @@
             }
         });
 
+        
+            
+
     });
+
+     var dropdown = $('#drpOther');
+        $('#drpOpenOfficeHoursFrequency').change(function () {
+           
+            setOtherDropDownValues();
+
+        })
+
+        function setOtherDropDownValues() {
+             var _dayName = $('#drpOpenOfficeHoursDaysName').val();
+            dropdown.html('');
+            if ($('#drpOpenOfficeHoursFrequency').val() == 'monthly') {
+                $('#divOtherOptions').show();
+                dropdown.append($('<option></option>').attr('value', '1').text('1st ' + _dayName + ' of month'));
+                dropdown.append($('<option></option>').attr('value', '2').text('2nd ' + _dayName + ' of month'));
+                dropdown.append($('<option></option>').attr('value', '3').text('3rd ' + _dayName + ' of month'));
+                dropdown.append($('<option></option>').attr('value', '4').text('4th ' + _dayName + ' of month'));
+            }
+            else if ($('#drpOpenOfficeHoursFrequency').val() == 'quarterly') {
+                $('#divOtherOptions').show();
+                dropdown.append($('<option></option>').attr('value', '1').text('1st ' + _dayName + ' of quarter'));
+                dropdown.append($('<option></option>').attr('value', '2').text('2nd ' + _dayName + ' of quarter'));
+                dropdown.append($('<option></option>').attr('value', '3').text('3rd ' + _dayName + ' of quarter'));
+                dropdown.append($('<option></option>').attr('value', '4').text('4th ' + _dayName + ' of quarter'));
+            }
+            else {
+                $('#divOtherOptions').hide();
+            }
+        }
     function setOpenOfficeTime() {
         _openHoursDayName = $('#drpOpenOfficeHoursDaysName').val();
         _openHoursTime = $('#txtOpenOfficeHoursTime').val();
         _openHoursTimeZone = $('#drpTimeZone option:selected').attr('gmtAdjustment');
-
+        setOtherDropDownValues();
         $('#hrefOpenOfficeHoursTime').html($('#drpOpenOfficeHoursDaysName').val() + ', ' + $('#txtOpenOfficeHoursTime').val() + ' ' + $('#drpTimeZone option:selected').attr('gmtAdjustment'));
         $('#openOfficeHoursDateTimeModal').modal('toggle');
-    }
+        }
+
+
 </script>
+                                        

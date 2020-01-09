@@ -38,5 +38,63 @@ namespace Sphix.Utility
                   return date;
                 }
         }
+        public static DateTime getDateOnQuarterlyBase(string dayOfWeek, int dayIndex)
+        {
+            DateTime currentMonth = DateTime.UtcNow;
+            DateTime _date;
+
+            int _quarter=(currentMonth.Month + 2) / 3;
+
+            _date = new DateTime(currentMonth.Year, (_quarter* 3), 1);
+
+            _date = FindNext(getDayOfWeek(dayOfWeek), _date);
+            for (int i = 1; i < dayIndex; i++)
+            {
+                _date = FindNext(getDayOfWeek(dayOfWeek), _date.AddDays(i));
+            }
+            return _date;
+        }
+        public static DateTime getDateOnMonthlyBase(string dayOfWeek,int dayIndex)
+        {
+            DateTime currentMonth = DateTime.UtcNow;
+            var _date = new DateTime(currentMonth.Year, currentMonth.Month, 1);
+            
+            _date = FindNext(getDayOfWeek(dayOfWeek), _date);
+            //DayOfWeek
+            for (int i = 1; i < dayIndex; i++)
+            {
+                _date = FindNext(getDayOfWeek(dayOfWeek), _date.AddDays(i));
+            }
+            return _date;
+        }
+
+        private static DateTime FindNext(DayOfWeek dayOfWeek, DateTime after)
+        {
+            DateTime day = after;
+            while (day.DayOfWeek != dayOfWeek) day = day.AddDays(1);
+            return day;
+        }
+        public static  DayOfWeek getDayOfWeek(string dayName)
+        {
+            switch (dayName.ToLower())
+            {
+                case "monday":
+                    return DayOfWeek.Monday;
+                case "tuesday":
+                    return DayOfWeek.Thursday;
+                case "wednesday":
+                    return DayOfWeek.Wednesday;
+                case "thursday":
+                    return DayOfWeek.Thursday;
+                case "friday":
+                    return DayOfWeek.Friday;
+                case "saturday":
+                    return DayOfWeek.Saturday;
+                default:
+                     return DayOfWeek.Sunday;
+                    // etc boring ....
+            }
+         
+        }
     }
 }

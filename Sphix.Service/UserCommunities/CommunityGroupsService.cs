@@ -376,7 +376,18 @@ namespace Sphix.Service.UserCommunities
                 await SaveCommunityGroupsThemeAsync(model.ThemesId, user, communityGroupModel);
                 //SaveOpenHours
                 OpenOfficeHoursViewModel OpenOfficeHoursModel = JsonConvert.DeserializeObject<OpenOfficeHoursViewModel>(model.OpenOfficeHours);
-                OpenOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(OpenOfficeHoursModel.OTimeDayName, DateTime.Now.Date);
+                if (OpenOfficeHoursModel.OFrequency == "monthly")
+                {
+                    OpenOfficeHoursModel.OFromDate = SphixHelper.getDateOnMonthlyBase(OpenOfficeHoursModel.OTimeDayName, OpenOfficeHoursModel.dayIndex);
+                }
+                else if (OpenOfficeHoursModel.OFrequency == "quarterly")
+                {
+                    OpenOfficeHoursModel.OFromDate = SphixHelper.getDateOnQuarterlyBase(OpenOfficeHoursModel.OTimeDayName, OpenOfficeHoursModel.dayIndex);
+                }
+                 else
+                {
+                  OpenOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(OpenOfficeHoursModel.OTimeDayName, DateTime.Now.Date);
+                }
                 OpenOfficeHoursModel.OToDate = OpenOfficeHoursModel.OFromDate;
                 OpenOfficeHoursModel.IsFirstMeeting = true;
                 await _openOfficeHoursService.SaveOpenHoursAsync(OpenOfficeHoursModel, user, communityGroupModel);
@@ -413,7 +424,7 @@ namespace Sphix.Service.UserCommunities
                 communityGroupModel.AddedDate = DateTime.UtcNow;
                 communityGroupModel.CommunityId = model.OgranizationsId;
                 await _unitOfWork.UserCommunityGroupsRepository.Update(communityGroupModel);
-                //if group is not public then data will save in relation tables
+                //if group is not public then data will save in relation tables 5172-5268-6400-1206 0222
                 if (!model.IsPublicGroup)
                 {
                     //saving data in relation tables

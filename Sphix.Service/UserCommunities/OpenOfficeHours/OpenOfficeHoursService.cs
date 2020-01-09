@@ -74,11 +74,13 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                     IsFirstMeeting = model.IsFirstMeeting,
                     NextMeetingToken = model.NextMeetingToken,
                     LastSessionId=model.LastSessionId,
-                    AddHours=model.AddHours
+                    AddHours=model.AddHours,
+                    MeetingOnParticularDay=model.MeetingOnParticularDay,
+                    dayIndex=model.dayIndex
                     
                 };
                 await _unitOfWork.UserCommunityOpenOfficeHoursRepository.Insert(dataModel);
-                
+                /*
                 if (model.AddHours)
                 {
                    await _context.LoadStoredProc("AddHoursInOpenOfficeHours")
@@ -88,7 +90,7 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                            // do something with your results.
                        });
 
-                }
+                }*/
                 //add meeting status 
                 await _openOfficeHoursMeetingsStatusService.SaveAsync(new OpenOfficeHoursMeetingsStatusDataModel
                 {
@@ -110,7 +112,20 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                 openOfficeHoursModel.OFrequency = model.OFrequency;
                 if (openOfficeHoursModel.OTimeDayName.ToLower().Trim() != model.OTimeDayName.ToLower().Trim())
                 {
-                    openOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(model.OTimeDayName, DateTime.Now.Date);
+                    if (openOfficeHoursModel.OFrequency == "monthly")
+                    {
+                        openOfficeHoursModel.OFromDate = SphixHelper.getDateOnMonthlyBase(model.OTimeDayName, model.dayIndex);
+                    }
+                    else if (openOfficeHoursModel.OFrequency == "quarterly")
+                    {
+                        openOfficeHoursModel.OFromDate = SphixHelper.getDateOnQuarterlyBase(model.OTimeDayName, model.dayIndex);
+                    }
+                    else
+                    {
+                        openOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(model.OTimeDayName, DateTime.Now.Date);
+                    }
+
+                   // openOfficeHoursModel.OFromDate = SphixHelper.setDateFromDayName(model.OTimeDayName, DateTime.Now.Date);
                     openOfficeHoursModel.OToDate = openOfficeHoursModel.OFromDate;
                 }
                 else
@@ -123,6 +138,8 @@ namespace Sphix.Service.UserCommunities.OpenOfficeHours
                 openOfficeHoursModel.OTimeZone = model.OTimeZone;
                 openOfficeHoursModel.MaxAttendees = model.MaxAttendees;
                 openOfficeHoursModel.WhoCanAttend = model.WhoCanAttend;
+                openOfficeHoursModel.MeetingOnParticularDay = model.MeetingOnParticularDay;
+                openOfficeHoursModel.dayIndex = model.dayIndex;
                 openOfficeHoursModel.IsActive = true;
                 //openOfficeHoursModel.AddHours = model.AddHours;
                 //openOfficeHoursModel.IsFirstMeeting = model.IsFirstMeeting;

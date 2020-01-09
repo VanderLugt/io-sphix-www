@@ -1,15 +1,16 @@
 ﻿function AddOpenOfficeHours(OpenHoursId) {
    // alert(OpenHoursId);
-    var x;
-    x = $('input[name=radioTimeZone]:checked').val();
-    if (typeof x === "undefined") {
-        //alert('error');
-        swal("Sorry!", "Please select atleast one time. ", "warning");
-        // ...
-        return;
-    }
+    //var x;
+    //x = $('input[name=radioTimeZone]:checked').val();
+    //if (typeof x === "undefined") {
+    //    //alert('error');
+    //    swal("Sorry!", "Please select atleast one time. ", "warning");
+    //    // ...
+    //    return;
+    //}
     var dataModel = {
-        OTimeZone: $('input[name=radioTimeZone]:checked').val(),
+        OTime: $('#txtOpenOfficeHoursTime').val(),
+        OTimeZone: $('#drpTimeZone option:selected').attr('gmtAdjustment'),
         CommunityGroupId: $('#hdnCommunityGroupId').val(),
         OTitle: $('#txtOpenHoursConversation').val()
     };

@@ -117,7 +117,9 @@ function SaveCommunity() {
         "OTimeZone": _openHoursTimeZone,
         "MaxAttendees": $('#drpOpenOfficeHoursMaxAttendees').val(),
         "WhoCanAttend": $('#drpOpenOfficeHoursWhoCanAttend').val(),
-        "AddHours": $('#txtOpenOfficeAddhours').is(':checked')
+        "AddHours": $('#txtOpenOfficeAddhours').is(':checked'),
+        "MeetingOnParticularDay": $("#drpOther :selected").text(),
+        "dayIndex": $('#drpOther').val()
     };
     formData.append("OpenOfficeHours", JSON.stringify(OpenOfficeHours));
     //LiveEvent data
@@ -239,7 +241,9 @@ function EditCommunity() {
         "OTimeZone": _openHoursTimeZone,
         "MaxAttendees": $('#drpOpenOfficeHoursMaxAttendees').val(),
         "WhoCanAttend": $('#drpOpenOfficeHoursWhoCanAttend').val(),
-        "AddHours": $('#txtOpenOfficeAddhours').is(':checked')
+        "AddHours": $('#txtOpenOfficeAddhours').is(':checked'),
+        "MeetingOnParticularDay": $("#drpOther :selected").text(),
+        "dayIndex": $('#drpOther').val()
     };
     formData.append("OpenOfficeHours", JSON.stringify(OpenOfficeHours));
 
